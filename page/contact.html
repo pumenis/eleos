@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>contact - Eleos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/menus/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/footer.css">
+  <link rel="icon" href="/layouts/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/layouts/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/layouts/static/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/layouts/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/layouts/static/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/layouts/static/android-chrome-512x512.png">
+  <link rel="manifest" href="/layouts/static/site.webmanifest">
+</head>
+<body>
+<header>
+<h1>Eleos</h1>
+<nav><ul><li><a href="/">Home</a></li><li><a href="/page/translate.html">Translate</a></li><li><a href="/page/read.html">Read</a></li><li><a href="/page/contact.html">Contact</a></li></ul></nav></header><main><h2>საკონტაქტო ინფორმაცია</h2>
+    <p>აპლიკაციაში გადათარგმნილი ტექსტი მხოლოდ თქვენს ბრაუზერში
+    რჩება, ჩვენთვის გამოსაგზავნად ჩამოწერეთ თქვენი ბრაუზერის 
+    <button onclick="downloadJSON()">ლოკალური საცავის json</button> 
+    ფაილი და იმეილით გამოგვიგზავნეთ. დიდი მადლობა წინასწარ.
+    თქვენი ნათარგმნი უსასყიდლოდ გახდება ხელმისაწვდომი მთელი 
+    მსოფლიოსათვის წასაკითხად და გამოსაყენებლად ნებისმიერი სახით.
+    </p>
+    <p>თქვენ შეგიძლიათ ჩამოტვირთოთ ფაილი თითოეული წიგნისთვის
+    შესაბამისი წიგნის თავების ჩამონათვალის "content" გვერდიდან
+    ანდა ჩამოტვირთოთ თითოეული თავისთვის ფაილი თავისი გვერდიდან</p>
+<a href="mailto:naierchou@proton.me?subject=მთელი%20საიტის%20ნათარგმნი%20ლოკალური%20საცავი">
+   naierchou@proton.me</a>
+    <script>
+    function downloadJSON() {
+    	// Get all items from localStorage
+    	const storageData = {};
+    	for (let i = 0; i < localStorage.length; i++) {
+        	const key = localStorage.key(i);
+        	storageData[key] = localStorage.getItem(key);
+    	}
+
+    	// Convert to JSON string
+    	const jsonString = JSON.stringify(storageData, null, 2); // 2 spaces for indentation
+
+    	// Create blob and download
+    	const blob = new Blob([jsonString], { type: 'application/json' });
+    	const url = URL.createObjectURL(blob);
+
+    	// Create temporary anchor element
+    	const a = document.createElement('a');
+    	a.href = url;
+    	a.download = 'localStorage-backup.json'; // File name
+    	document.body.appendChild(a);
+    	
+    	// Trigger download
+    	a.click();
+    	
+    	// Clean up
+    	document.body.removeChild(a);
+    	URL.revokeObjectURL(url);
+    }
+    </script></main> <footer>
+    CC0; 2026 Eleos. Publick Domain Work: You Can Use These Materials In Any Way You Want.
+  </footer><script src="/menus/static/js/main.js"></script></body></html>
