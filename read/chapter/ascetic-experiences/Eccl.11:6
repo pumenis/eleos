@@ -47,8 +47,8 @@ html, body {
   overflow-y: auto;
 }
   </style>
-	<a href="/read/contents/ascetic-experiences.html">Аскетические опыты Том 1
-</a>
+	<a href="/read/contents/ascetic-experiences.html">შინაარსის ცხრილი</a><h1>ასკეტური გამოცდილებები ტომი 1
+</h1>
 	<h2>წასაკითხი ვებ აპლიკაცია - თავი Eccl</h2>
 	<div id="content">Command failed: exit status 1Error: in prepare, no such column: Eccl
   r_paragraph) AS rn   FROM words   WHERE chapter = Eccl ), datalist AS (   SELE
