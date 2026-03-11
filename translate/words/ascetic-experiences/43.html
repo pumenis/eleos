@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+ასკეტური გამოცდილებები ტომი 1 ფიქრი  სიკვდილის შესახებ
+ - Eleos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/menus/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/bible/static/css/style.css">
+  <link rel="icon" href="/layouts/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/layouts/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/layouts/static/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/layouts/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/layouts/static/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/layouts/static/android-chrome-512x512.png">
+  <link rel="manifest" href="/layouts/static/site.webmanifest">
+</head>
+<body>
+<header>
+<h1>Eleos</h1>
+<nav>
+<ul>
+<li><a href="/">home</a></li>
+<li><a href="/page/translate.html">translate</a></li>
+<li><a href="/page/read.html">read</a></li>
+<li><a href="/page/კითხვა.html">კითხვა</a></li>
+<li><a href="/page/bible.html">bible</a></li>
+<li><a href="/page/contact.html">contact</a></li>
+</ul>
+</nav></header><main>
+
+  <script defer src="/layouts/static/js/alpine.min.js"></script>
+	<a href="/translate/contents/ascetic-experiences.html">შინაარსის
+	ცხრილი</a><h1>ასკეტური გამოცდილებები ტომი 1</h1><h2>სათარგმნი ვებ აპლიკაცია 
+	- თავი 43</h2>
+	<p>აპლიკაციაში გადათარგმნილი ტექსტი მხოლოდ თქვენს ბრაუზერში
+    რჩება, ჩვენთვის გამოსაგზავნად ჩამოწერეთ თქვენი ბრაუზერის 
+    <button onclick="downloadJSON()">ლოკალური საცავის json</button> 
+    ფაილი მოცემული თავისათვის და იმეილით გამოგვიგზავნეთ.
+    დიდი მადლობა წინასწარ.
+    თქვენი ნათარგმნი უსასყიდლოდ გახდება ხელმისაწვდომი მთელი 
+    მსოფლიოსათვის წასაკითხად და გამოსაყენებლად ნებისმიერი სახით.
+    </p>
+    <p>თქვენ შეგიძლიათ ჩამოტვირთოთ ფაილი თითოეული წიგნისთვის
+    შესაბამისი წიგნის თავების ჩამონათვალის "content" გვერდიდან
+    ანდა ჩამოტვირთოთ მთელი საიტის მასშტაბით ფაილი საკონტაქტო გვერდიდან</p>
+<a href="mailto:naierchou@proton.me?subject=ascetic-experiences_თავი-43%20ნათარგმნი%20ლოკალური%20საცავი">
+   naierchou@proton.me</a>
+  <p>[ CTRL + ENTER ] - ჩაწერილი სიტყვისათვის სასვენი ნიშნების დამატება<br>
+     [ TAB ] - შემდეგ უჯრაზე გადასვლა<br>
+     [ SHIFT + TAB ] - წინა უჯრაზე გადასვლა</p>
+	
+<a href="/translate/words/ascetic-experiences/42.html">Previous</a>
+<div x-data="
+{
+  translations: [],
+  words: [],
+  current: 0,
+  normalizePunctuation(text, isPrefix) {
+    const replacements = isPrefix
+      ? { '&quot;': '„', '«': '„', '“': '„' }
+      : { '&quot;': '“', '»': '“', '”': '“' };
+
+    return Object.entries(replacements).reduce(
+      (acc, [target, replacement]) => acc.replace(target, replacement),
+      text
+    );
+  },
+  init(){
+    document.querySelectorAll('span[i]').forEach(span => {
+      const input = span.querySelector('input');
+      const key = span.getAttribute('i');
+      const lemma = span.getAttribute('l');
+        // Keydown event on the input inside the span
+      if (input) {
+      const listId = input?.getAttribute('list');
+	    let val = localStorage.getItem(listId);
+	    if (val){
+		    input.value = val
+	    }
+  input.addEventListener('keydown', event => {
+
+    const isAltOrCtrl = event.altKey || event.ctrlKey;
+    const isArrow = event.code === 'ArrowUp' || event.code === 'ArrowDown';
+    const isEnter = event.key === 'Enter' 
+
+      if (!isAltOrCtrl && isEnter) {
+        input.value = this.words[this.current]
+      }
+      if (!isAltOrCtrl && isArrow) {
+        const direction = event.code === 'ArrowDown' ? 1 : -1;
+        const nextIndex = this.current + direction;
+
+        if (nextIndex >= 0 && nextIndex < this.words.length) {
+          this.current = nextIndex
+        }
+      }
+
+      if (isAltOrCtrl && isArrow) {
+        event.preventDefault();
+
+        const inputs = Array.from(document.querySelectorAll('input'))
+          .filter(el => el.offsetParent !== null && !el.disabled);
+
+        const current = document.activeElement;
+        const index = inputs.indexOf(current);
+        if (index === -1) return;
+
+        const direction = event.code === 'ArrowDown' ? 1 : -1;
+        const nextIndex = index + direction;
+
+        if (nextIndex >= 0 && nextIndex < inputs.length) {
+          inputs[nextIndex].focus();
+        }
+      }
+        if (event.ctrlKey && event.key === 'Enter') {
+            let prefix = input.getAttribute('s');
+            let suffix = input.getAttribute('e');
+            prefix = this.normalizePunctuation(prefix, true);
+            suffix = this.normalizePunctuation(suffix, false);
+
+            input.value = prefix + input.value.trim() + suffix;
+          }
+        });
+        
+
+  input.addEventListener('blur', () => {
+    const value = input.value;
+	  localStorage.setItem(&quot;10_c_&quot;  + listId, value);
+	  this.translations = [];
+	  this.words = [];
+  });
+  
+
+        input.addEventListener('focus', () => {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+          input.focus();
+
+          fetch('/words/static/'+key+'.json').then((response)=>
+            response.json()
+          ).then((data)=>{
+            this.translations = data.translation;
+            this.words = data.words;
+            this.current =0;
+          })
+        });
+      }
+    });
+    },
+}
+" id="content"><div x-show="words.length > 0" id="suggestions">
+<template x-for="(word, i) in words">
+  <div x-show="i < current + 10 && i >= current"
+      x-bind:class="i == current ? 'selected' : ''"
+      x-text="word"></div>
+</template>
+</div>
+<h1><span i="размышление">Размышление <input list="43_1_1" s=''  e='' type="text" value="ფიქრი"></span><a class="hidden" href="/words/static/размышление.json">размышление</a>
+<br><span i="о">о <input list="43_1_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти <input list="43_1_3" s=''  e='' type="text" value="სიკვდილის შესახებ"></span><a class="hidden" href="/words/static/смерти.json">смерти</a></h1>
+<p><span i="удел">Удел <input list="43_1_4" s=''  e='' type="text" value="ხვედრო"></span><a class="hidden" href="/words/static/удел.json">удел</a>
+<br><span i="всех">всех <input list="43_1_5" s=''  e='' type="text" value="ყველა"></span><a class="hidden" href="/words/static/всех.json">всех</a>
+<br><span i="человеков">человеков <input list="43_1_6" s=''  e='' type="text" value="ადამიანისა"></span><a class="hidden" href="/words/static/человеков.json">человеков</a>
+<br><span i="на">на <input list="43_1_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="земле">земле, <input list="43_1_8" s=''  e=',' type="text" value="დედამიწაზე,"></span><a class="hidden" href="/words/static/земле.json">земле</a>
+<br><span i="удел">удел <input list="43_1_9" s=''  e='' type="text" value="ხვედრი"></span><a class="hidden" href="/words/static/удел.json">удел</a>
+<br><span i="неизбежный">неизбежный <input list="43_1_10" s=''  e='' type="text" value="გარდაუვალი"></span><a class="hidden" href="/words/static/неизбежный.json">неизбежный</a>
+<br><span i="ни">ни <input list="43_1_11" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="для">для <input list="43_1_12" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="кого">кого <input list="43_1_13" s=''  e='' type="text" value="არავისათვის"></span><a class="hidden" href="/words/static/кого.json">кого</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="смерть">смерть. <input list="43_1_15" s=''  e='.' type="text" value="სიკვდილია."></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="мы">Мы <input list="43_1_16" s=''  e='' type="text" value="ჩვენ"></span><a class="hidden" href="/words/static/мы.json">мы</a>
+<br><span i="страшимся">страшимся <input list="43_1_17" s=''  e='' type="text" value="ვშიშობთ"></span><a class="hidden" href="/words/static/страшимся.json">страшимся</a>
+<br><span i="ее">ее, <input list="43_1_18" s=''  e=',' type="text" value="მისადმი,"></span><a class="hidden" href="/words/static/ее.json">ее</a>
+<br><span i="как">как <input list="43_1_19" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="лютейшего">лютейшего <input list="43_1_20" s=''  e='' type="text" value="ულმობელესი"></span><a class="hidden" href="/words/static/лютейшего.json">лютейшего</a>
+<br><span i="врага">врага, <input list="43_1_21" s=''  e=',' type="text" value="მტრისადმი,"></span><a class="hidden" href="/words/static/врага.json">врага</a>
+<br><span i="мы">мы <input list="43_1_22" s=''  e='' type="text" value="ჩვენ"></span><a class="hidden" href="/words/static/мы.json">мы</a>
+<br><span i="горько">горько <input list="43_1_23" s=''  e='' type="text" value="მწარედ"></span><a class="hidden" href="/words/static/горько.json">горько</a>
+<br><span i="оплакиваем">оплакиваем <input list="43_1_24" s=''  e='' type="text" value="დავტირით"></span><a class="hidden" href="/words/static/оплакиваем.json">оплакиваем</a>
+<br><span i="похищаемых">похищаемых <input list="43_1_25" s=''  e='' type="text" value="მოტაცებულებს"></span><a class="hidden" href="/words/static/похищаемых.json">похищаемых</a>
+<br><span i="ею">ею, <input list="43_1_26" s=''  e=',' type="text" value="მის მიერ,"></span><a class="hidden" href="/words/static/ею.json">ею</a>
+<br><span i="а">а <input list="43_1_27" s=''  e='' type="text" value="ხოლო"></span><a class="hidden" href="/words/static/а.json">а</a>
+<br><span i="проводим">проводим <input list="43_1_28" s=''  e='' type="text" value="ვატარებთ"></span><a class="hidden" href="/words/static/проводим.json">проводим</a>
+<br><span i="жизнь">жизнь <input list="43_1_29" s=''  e='' type="text" value="ცხოვრებას"></span><a class="hidden" href="/words/static/жизнь.json">жизнь</a>
+<br><span i="так">так, <input list="43_1_30" s=''  e=',' type="text" value="ისე,"></span><a class="hidden" href="/words/static/так.json">так</a>
+<br><span i="как">как <input list="43_1_31" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="бы">бы <input list="43_1_32" s=''  e='' type="text" value="თითქოს"></span><a class="hidden" href="/words/static/бы.json">бы</a>
+<br><span i="смерти">смерти <input list="43_1_33" s=''  e='' type="text" value="სიკვდილი"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="вовсе">вовсе <input list="43_1_34" s=''  e='' type="text" value="საერთოდ"></span><a class="hidden" href="/words/static/вовсе.json">вовсе</a>
+<br><span i="не">не <input list="43_1_35" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="было">было, <input list="43_1_36" s=''  e=',' type="text" value="ყოფილიყოს,"></span><a class="hidden" href="/words/static/было.json">было</a>
+<br><span i="как">как <input list="43_1_37" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="бы">бы <input list="43_1_38" s=''  e='' type="text" value="თითქოს"></span><a class="hidden" href="/words/static/бы.json">бы</a>
+<br><span i="мы">мы <input list="43_1_39" s=''  e='' type="text" value="ჩვენ"></span><a class="hidden" href="/words/static/мы.json">мы</a>
+<br><span i="были">были <input list="43_1_40" s=''  e='' type="text" value="ვიყოთ"></span><a class="hidden" href="/words/static/были.json">были</a>
+<br><span i="вечны">вечны <input list="43_1_41" s=''  e='' type="text" value="მარადიულნი"></span><a class="hidden" href="/words/static/вечны.json">вечны</a>
+<br><span i="на">на <input list="43_1_42" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="земле">земле. <input list="43_1_43" s=''  e='.' type="text" value="დედამიწაზე."></span><a class="hidden" href="/words/static/земле.json">земле</a></p>
+<p><span i="гроб">Гроб <input list="43_2_1" s=''  e='' type="text" value="სამარევ"></span><a class="hidden" href="/words/static/гроб.json">гроб</a>
+<br><span i="мой">мой! <input list="43_2_2" s=''  e='!' type="text" value="ჩემო!"></span><a class="hidden" href="/words/static/мой.json">мой</a>
+<br><span i="отчего">отчего <input list="43_2_3" s=''  e='' type="text" value="რატომ"></span><a class="hidden" href="/words/static/отчего.json">отчего</a>
+<br><span i="я">я <input list="43_2_4" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="забываю">забываю <input list="43_2_5" s=''  e='' type="text" value="გივიწყებ"></span><a class="hidden" href="/words/static/забываю.json">забываю</a>
+<br><span i="тебя">тебя? <input list="43_2_6" s=''  e='?' type="text" value="შენ?"></span><a class="hidden" href="/words/static/тебя.json">тебя</a>
+<br><span i="ты">Ты <input list="43_2_7" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/ты.json">ты</a>
+<br><span i="ждешь">ждешь <input list="43_2_8" s=''  e='' type="text" value="მელოდები"></span><a class="hidden" href="/words/static/ждешь.json">ждешь</a>
+<br><span i="меня">меня, <input list="43_2_9" s=''  e=',' type="text" value="მე,"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="ждешь">ждешь, <input list="43_2_10" s=''  e=',' type="text" value="მელოდები,"></span><a class="hidden" href="/words/static/ждешь.json">ждешь</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="и">и <input list="43_2_12" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="я">я <input list="43_2_13" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="наверно">наверно <input list="43_2_14" s=''  e='' type="text" value="უდავოდ"></span><a class="hidden" href="/words/static/наверно.json">наверно</a>
+<br><span i="буду">буду <input list="43_2_15" s=''  e='' type="text" value="ვიქნები"></span><a class="hidden" href="/words/static/буду.json">буду</a>
+<br><span i="твоим">твоим <input list="43_2_16" s=''  e='' type="text" value="შენი"></span><a class="hidden" href="/words/static/твоим.json">твоим</a>
+<br><span i="жителем">жителем: <input list="43_2_17" s=''  e=':' type="text" value="მცხოვრები:"></span><a class="hidden" href="/words/static/жителем.json">жителем</a>
+<br><span i="отчего">отчего <input list="43_2_18" s=''  e='' type="text" value="რატომ"></span><a class="hidden" href="/words/static/отчего.json">отчего</a>
+<br><span i="ж">ж <input list="43_2_19" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/ж.json">ж</a>
+<br><span i="я">я <input list="43_2_20" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="тебя">тебя <input list="43_2_21" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/тебя.json">тебя</a>
+<br><span i="забываю">забываю, <input list="43_2_22" s=''  e=',' type="text" value="გივიწყებ,"></span><a class="hidden" href="/words/static/забываю.json">забываю</a>
+<br><span i="и">и <input list="43_2_23" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="веду">веду <input list="43_2_24" s=''  e='' type="text" value="ვიქცევი"></span><a class="hidden" href="/words/static/веду.json">веду</a>
+<br><span i="себя">себя <input list="43_2_25" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/себя.json">себя</a>
+<br><span i="так">так, <input list="43_2_26" s=''  e=',' type="text" value="ისე,"></span><a class="hidden" href="/words/static/так.json">так</a>
+<br><span i="как">как <input list="43_2_27" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="бы">бы <input list="43_2_28" s=''  e='' type="text" value="თითქოს"></span><a class="hidden" href="/words/static/бы.json">бы</a>
+<br><span i="гроб">гроб <input list="43_2_29" s=''  e='' type="text" value="სამარე"></span><a class="hidden" href="/words/static/гроб.json">гроб</a>
+<br><span i="был">был <input list="43_2_30" s=''  e='' type="text" value="ყოფილიყოს"></span><a class="hidden" href="/words/static/был.json">был</a>
+<br><span i="жребием">жребием <input list="43_2_31" s=''  e='' type="text" value="ხვედრი"></span><a class="hidden" href="/words/static/жребием.json">жребием</a>
+<br><span i="только">только <input list="43_2_32" s=''  e='' type="text" value="მხოლოდ"></span><a class="hidden" href="/words/static/только.json">только</a>
+<br><span i="других">других <input list="43_2_33" s=''  e='' type="text" value="სხვა"></span><a class="hidden" href="/words/static/других.json">других</a>
+<br><span i="человеков">человеков, <input list="43_2_34" s=''  e=',' type="text" value="ადამიანთა,"></span><a class="hidden" href="/words/static/человеков.json">человеков</a>
+<br><span i="отнюдь">отнюдь <input list="43_2_35" s=''  e='' type="text" value="სრულადაც"></span><a class="hidden" href="/words/static/отнюдь.json">отнюдь</a>
+<br><span i="не">не <input list="43_2_36" s=''  e='' type="text" value="არა"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="моим">моим? <input list="43_2_37" s=''  e='?' type="text" value="ჩემი?"></span><a class="hidden" href="/words/static/моим.json">моим</a></p>
+<p><span i="грех">Грех <input list="43_3_1" s=''  e='' type="text" value="ცოდვამ"></span><a class="hidden" href="/words/static/грех.json">грех</a>
+<br><span i="отнял">отнял <input list="43_3_2" s=''  e='' type="text" value="წამართვა"></span><a class="hidden" href="/words/static/отнял.json">отнял</a>
+<br><span i="и">и <input list="43_3_3" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="отнимает">отнимает <input list="43_3_4" s=''  e='' type="text" value="მართმევს"></span><a class="hidden" href="/words/static/отнимает.json">отнимает</a>
+<br><span i="у">у <input list="43_3_5" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/у.json">у</a>
+<br><span i="меня">меня <input list="43_3_6" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="познание">познание <input list="43_3_7" s=''  e='' type="text" value="შემეცნებას"></span><a class="hidden" href="/words/static/познание.json">познание</a>
+<br><span i="и">и <input list="43_3_8" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="ощущение">ощущение <input list="43_3_9" s=''  e='' type="text" value="შეგრძნებას"></span><a class="hidden" href="/words/static/ощущение.json">ощущение</a>
+<br><span i="всякой">всякой <input list="43_3_10" s=''  e='' type="text" value="ყოველგვარი"></span><a class="hidden" href="/words/static/всякой.json">всякой</a>
+<br><span i="истины">истины: <input list="43_3_11" s=''  e=':' type="text" value="ჭეშმარიტებისა:"></span><a class="hidden" href="/words/static/истины.json">истины</a>
+<br><span i="он">он <input list="43_3_12" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/он.json">он</a>
+<br><span i="похищает">похищает <input list="43_3_13" s=''  e='' type="text" value="მტაცებს"></span><a class="hidden" href="/words/static/похищает.json">похищает</a>
+<br><span i="у">у <input list="43_3_14" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/у.json">у</a>
+<br><span i="меня">меня, <input list="43_3_15" s=''  e=',' type="text" value="მე,"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="изглаждает">изглаждает <input list="43_3_16" s=''  e='' type="text" value="ამოშლის"></span><a class="hidden" href="/words/static/изглаждает.json">изглаждает</a>
+<br><span i="из">из <input list="43_3_17" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/из.json">из</a>
+<br><span i="моей">моей <input list="43_3_18" s=''  e='' type="text" value="ჩემი"></span><a class="hidden" href="/words/static/моей.json">моей</a>
+<br><span i="мысли">мысли <input list="43_3_19" s=''  e='' type="text" value="ფიქრებიდან"></span><a class="hidden" href="/words/static/мысли.json">мысли</a>
+<br><span i="воспоминание">воспоминание <input list="43_3_20" s=''  e='' type="text" value="მოგონებებს"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="о">о <input list="43_3_21" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти, <input list="43_3_22" s=''  e=',' type="text" value="სიკვდილის შესახებ,"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="об">об <input list="43_3_23" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/об.json">об</a>
+<br><span i="этом">этом <input list="43_3_24" s=''  e='' type="text" value="ამ"></span><a class="hidden" href="/words/static/этом.json">этом</a>
+<br><span i="событии">событии, <input list="43_3_25" s=''  e=',' type="text" value="მოვლენაზე,"></span><a class="hidden" href="/words/static/событии.json">событии</a>
+<br><span i="столько">столько <input list="43_3_26" s=''  e='' type="text" value="ამდენად"></span><a class="hidden" href="/words/static/столько.json">столько</a>
+<br><span i="для">для <input list="43_3_27" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="меня">меня <input list="43_3_28" s=''  e='' type="text" value="ჩემთვის"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="важном">важном, <input list="43_3_29" s=''  e=',' type="text" value="მნიშვნელოვანზე,"></span><a class="hidden" href="/words/static/важном.json">важном</a>
+<br><span i="осязательно-верном">осязательно-верном. <input list="43_3_30" s=''  e='.' type="text" value="შეხებითად-უტყუარზე."></span><a class="hidden" href="/words/static/осязательно-верном.json">осязательно-верном</a></p>
+<p><span i="чтоб">Чтоб <input list="43_4_1" s=''  e='' type="text" value="რათა"></span><a class="hidden" href="/words/static/чтоб.json">чтоб</a>
+<br><span i="помнить">помнить <input list="43_4_2" s=''  e='' type="text" value="გვახსოვდეს"></span><a class="hidden" href="/words/static/помнить.json">помнить</a>
+<br><span i="смерть">смерть, <input list="43_4_3" s=''  e=',' type="text" value="სიკვდილი,"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="надо">надо <input list="43_4_4" s=''  e='' type="text" value="უნდა"></span><a class="hidden" href="/words/static/надо.json">надо</a>
+<br><span i="вести">вести <input list="43_4_5" s=''  e='' type="text" value="გავატაროთ"></span><a class="hidden" href="/words/static/вести.json">вести</a>
+<br><span i="жизнь">жизнь <input list="43_4_6" s=''  e='' type="text" value="ცხოვრება"></span><a class="hidden" href="/words/static/жизнь.json">жизнь</a>
+<br><span i="сообразно">сообразно <input list="43_4_7" s=''  e='' type="text" value="შესაბამისად"></span><a class="hidden" href="/words/static/сообразно.json">сообразно</a>
+<br><span i="заповедям">заповедям <input list="43_4_8" s=''  e='' type="text" value="მცნებებისა"></span><a class="hidden" href="/words/static/заповедям.json">заповедям</a>
+<br><span i="христовым">Христовым. <input list="43_4_9" s=''  e='.' type="text" value="ქრისტესა."></span><a class="hidden" href="/words/static/христовым.json">христовым</a>
+<br><span i="заповеди">Заповеди <input list="43_4_10" s=''  e='' type="text" value="მცნებები"></span><a class="hidden" href="/words/static/заповеди.json">заповеди</a>
+<br><span i="христовы">Христовы <input list="43_4_11" s=''  e='' type="text" value="ქრისტესნი"></span><a class="hidden" href="/words/static/христовы.json">христовы</a>
+<br><span i="очищают">очищают <input list="43_4_12" s=''  e='' type="text" value="წმენდენ"></span><a class="hidden" href="/words/static/очищают.json">очищают</a>
+<br><span i="ум">ум <input list="43_4_13" s=''  e='' type="text" value="გონებას"></span><a class="hidden" href="/words/static/ум.json">ум</a>
+<br><span i="и">и <input list="43_4_14" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="сердце">сердце, <input list="43_4_15" s=''  e=',' type="text" value="გულს,"></span><a class="hidden" href="/words/static/сердце.json">сердце</a>
+<br><span i="умерщвляют">умерщвляют <input list="43_4_16" s=''  e='' type="text" value="კლავენ"></span><a class="hidden" href="/words/static/умерщвляют.json">умерщвляют</a>
+<br><span i="их">их <input list="43_4_17" s=''  e='' type="text" value="მათ"></span><a class="hidden" href="/words/static/их.json">их</a>
+<br><span i="для">для <input list="43_4_18" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="мира">мира, <input list="43_4_19" s=''  e=',' type="text" value="ამა სოფლისათვის,"></span><a class="hidden" href="/words/static/мира.json">мира</a>
+<br><span i="оживляют">оживляют <input list="43_4_20" s=''  e='' type="text" value="აცოცხლებენ"></span><a class="hidden" href="/words/static/оживляют.json">оживляют</a>
+<br><span i="для">для <input list="43_4_21" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="христа">Христа: <input list="43_4_22" s=''  e=':' type="text" value="ქრისტესათვის:"></span><a class="hidden" href="/words/static/христа.json">христа</a>
+<br><span i="ум">ум, <input list="43_4_23" s=''  e=',' type="text" value="გონება,"></span><a class="hidden" href="/words/static/ум.json">ум</a>
+<br><span i="отрешенный">отрешенный <input list="43_4_24" s=''  e='' type="text" value="განშორებული"></span><a class="hidden" href="/words/static/отрешенный.json">отрешенный</a>
+<br><span i="от">от <input list="43_4_25" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="земных">земных <input list="43_4_26" s=''  e='' type="text" value="მიწიერი"></span><a class="hidden" href="/words/static/земных.json">земных</a>
+<br><span i="пристрастий">пристрастий, <input list="43_4_27" s=''  e=',' type="text" value="მიდრეკილებებისაგან,"></span><a class="hidden" href="/words/static/пристрастий.json">пристрастий</a>
+<br><span i="начинает">начинает <input list="43_4_28" s=''  e='' type="text" value="იწყებს"></span><a class="hidden" href="/words/static/начинает.json">начинает</a>
+<br><span i="часто">часто <input list="43_4_29" s=''  e='' type="text" value="ხშირად"></span><a class="hidden" href="/words/static/часто.json">часто</a>
+<br><span i="обращать">обращать <input list="43_4_30" s=''  e='' type="text" value="მიაპყროს"></span><a class="hidden" href="/words/static/обращать.json">обращать</a>
+<br><span i="взоры">взоры <input list="43_4_31" s=''  e='' type="text" value="მზერანი"></span><a class="hidden" href="/words/static/взоры.json">взоры</a>
+<br><span i="к">к <input list="43_4_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="таинственному">таинственному <input list="43_4_33" s=''  e='' type="text" value="საიდუმლოებრივ"></span><a class="hidden" href="/words/static/таинственному.json">таинственному</a>
+<br><span i="переходу">переходу <input list="43_4_34" s=''  e='' type="text" value="გადასვლას"></span><a class="hidden" href="/words/static/переходу.json">переходу</a>
+<br><span i="своему">своему <input list="43_4_35" s=''  e='' type="text" value="თავისას"></span><a class="hidden" href="/words/static/своему.json">своему</a>
+<br><span i="в">в <input list="43_4_36" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="вечность">вечность <input list="43_4_37" s=''  e='' type="text" value="მარადისობაში"></span><a class="hidden" href="/words/static/вечность.json">вечность</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="к">к <input list="43_4_39" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="смерти">смерти; <input list="43_4_40" s=''  e=';' type="text" value="სიკვდილში;"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="очищенное">очищенное <input list="43_4_41" s=''  e='' type="text" value="განწმენდილი"></span><a class="hidden" href="/words/static/очищенное.json">очищенное</a>
+<br><span i="сердце">сердце <input list="43_4_42" s=''  e='' type="text" value="გული"></span><a class="hidden" href="/words/static/сердце.json">сердце</a>
+<br><span i="начинает">начинает <input list="43_4_43" s=''  e='' type="text" value="იწყებს"></span><a class="hidden" href="/words/static/начинает.json">начинает</a>
+<br><span i="предчувствовать">предчувствовать <input list="43_4_44" s=''  e='' type="text" value="წინათგრძნობას"></span><a class="hidden" href="/words/static/предчувствовать.json">предчувствовать</a>
+<br><span i="ее">ее. <input list="43_4_45" s=''  e='.' type="text" value="მისსას."></span><a class="hidden" href="/words/static/ее.json">ее</a></p>
+<p><span i="отрешенные">Отрешенные <input list="43_5_1" s=''  e='' type="text" value="განშორებულნი"></span><a class="hidden" href="/words/static/отрешенные.json">отрешенные</a>
+<br><span i="от">от <input list="43_5_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="мира">мира <input list="43_5_3" s=''  e='' type="text" value="ამა სოფლისაგან"></span><a class="hidden" href="/words/static/мира.json">мира</a>
+<br><span i="ум">ум <input list="43_5_4" s=''  e='' type="text" value="გონება"></span><a class="hidden" href="/words/static/ум.json">ум</a>
+<br><span i="и">и <input list="43_5_5" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="сердце">сердце <input list="43_5_6" s=''  e='' type="text" value="გული"></span><a class="hidden" href="/words/static/сердце.json">сердце</a>
+<br><span i="стремятся">стремятся <input list="43_5_7" s=''  e='' type="text" value="ისწრაფიან"></span><a class="hidden" href="/words/static/стремятся.json">стремятся</a>
+<br><span i="в">в <input list="43_5_8" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="вечность">вечность. <input list="43_5_9" s=''  e='.' type="text" value="მარადისობისაკენ."></span><a class="hidden" href="/words/static/вечность.json">вечность</a>
+<br><span i="возлюбив">Возлюбив <input list="43_5_10" s=''  e='' type="text" value="შეყვარებით"></span><a class="hidden" href="/words/static/возлюбив.json">возлюбив</a>
+<br><span i="христа">Христа, <input list="43_5_11" s=''  e=',' type="text" value="ქრისტესი,"></span><a class="hidden" href="/words/static/христа.json">христа</a>
+<br><span i="они">они <input list="43_5_12" s=''  e='' type="text" value="მათ"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="неутолимо">неутолимо <input list="43_5_13" s=''  e='' type="text" value="დაუცხრომელად"></span><a class="hidden" href="/words/static/неутолимо.json">неутолимо</a>
+<br><span i="жаждут">жаждут <input list="43_5_14" s=''  e='' type="text" value="სწყურიათ"></span><a class="hidden" href="/words/static/жаждут.json">жаждут</a>
+<br><span i="предстать">предстать <input list="43_5_15" s=''  e='' type="text" value="წარუდგნენ"></span><a class="hidden" href="/words/static/предстать.json">предстать</a>
+<br><span i="ему">Ему, <input list="43_5_16" s=''  e=',' type="text" value="მას,"></span><a class="hidden" href="/words/static/ему.json">ему</a>
+<br><span i="хотя">хотя <input list="43_5_17" s=''  e='' type="text" value="თუმც"></span><a class="hidden" href="/words/static/хотя.json">хотя</a>
+<br><span i="и">и <input list="43_5_18" s=''  e='' type="text" value="კიდეც"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="трепещут">трепещут <input list="43_5_19" s=''  e='' type="text" value="ძრწიან"></span><a class="hidden" href="/words/static/трепещут.json">трепещут</a>
+<br><span i="смертного">смертного <input list="43_5_20" s=''  e='' type="text" value="სიკვდილის"></span><a class="hidden" href="/words/static/смертного.json">смертного</a>
+<br><span i="часа">часа, <input list="43_5_21" s=''  e=',' type="text" value="საათზე,"></span><a class="hidden" href="/words/static/часа.json">часа</a>
+<br><span i="созерцая">созерцая <input list="43_5_22" s=''  e='' type="text" value="ჭვრეტით"></span><a class="hidden" href="/words/static/созерцая.json">созерцая</a>
+<br><span i="величие">величие <input list="43_5_23" s=''  e='' type="text" value="დიდებულებისა"></span><a class="hidden" href="/words/static/величие.json">величие</a>
+<br><span i="божие">Божие <input list="43_5_24" s=''  e='' type="text" value="ღვთისა"></span><a class="hidden" href="/words/static/божие.json">божие</a>
+<br><span i="и">и <input list="43_5_25" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="свои">свои <input list="43_5_26" s=''  e='' type="text" value="თავიანთი"></span><a class="hidden" href="/words/static/свои.json">свои</a>
+<br><span i="ничтожество">ничтожество <input list="43_5_27" s=''  e='' type="text" value="არარაობისა"></span><a class="hidden" href="/words/static/ничтожество.json">ничтожество</a>
+<br><span i="и">и <input list="43_5_28" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="греховность">греховность. <input list="43_5_29" s=''  e='.' type="text" value="ცოდვილობისა."></span><a class="hidden" href="/words/static/греховность.json">греховность</a>
+<br><span i="смерть">Смерть <input list="43_5_30" s=''  e='' type="text" value="სიკვდილი"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="представляется">представляется <input list="43_5_31" s=''  e='' type="text" value="წარმოუდგება"></span><a class="hidden" href="/words/static/представляется.json">представляется</a>
+<br><span i="для">для <input list="43_5_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="них">них <input list="43_5_33" s=''  e='' type="text" value="მათ"></span><a class="hidden" href="/words/static/них.json">них</a>
+<br><span i="вместе">вместе <input list="43_5_34" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/вместе.json">вместе</a>
+<br><span i="и">и <input list="43_5_35" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="подвигом">подвигом <input list="43_5_36" s=''  e='' type="text" value="ღვაწლად"></span><a class="hidden" href="/words/static/подвигом.json">подвигом</a>
+<br><span i="страшным">страшным, <input list="43_5_37" s=''  e=',' type="text" value="საშინლად,"></span><a class="hidden" href="/words/static/страшным.json">страшным</a>
+<br><span i="и">и <input list="43_5_38" s=''  e='' type="text" value="ისე"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="вожделенным">вожделенным <input list="43_5_39" s=''  e='' type="text" value="სანუკვარ"></span><a class="hidden" href="/words/static/вожделенным.json">вожделенным</a>
+<br><span i="избавлением">избавлением <input list="43_5_40" s=''  e='' type="text" value="განთავისუფლებად"></span><a class="hidden" href="/words/static/избавлением.json">избавлением</a>
+<br><span i="из">из <input list="43_5_41" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/из.json">из</a>
+<br><span i="земного">земного <input list="43_5_42" s=''  e='' type="text" value="მიწიერი"></span><a class="hidden" href="/words/static/земного.json">земного</a>
+<br><span i="плена">плена. <input list="43_5_43" s=''  e='.' type="text" value="ტყვეობიდან."></span><a class="hidden" href="/words/static/плена.json">плена</a></p>
+<p><span i="если">Если <input list="43_6_1" s=''  e='' type="text" value="თუკი"></span><a class="hidden" href="/words/static/если.json">если</a>
+<br><span i="мы">мы <input list="43_6_2" s=''  e='' type="text" value="ჩვენ"></span><a class="hidden" href="/words/static/мы.json">мы</a>
+<br><span i="не">не <input list="43_6_3" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="способны">способны <input list="43_6_4" s=''  e='' type="text" value="ვართ შემძლებელნი"></span><a class="hidden" href="/words/static/способны.json">способны</a>
+<br><span i="желать">желать <input list="43_6_5" s=''  e='' type="text" value="ვისურვოთ"></span><a class="hidden" href="/words/static/желать.json">желать</a>
+<br><span i="смерти">смерти <input list="43_6_6" s=''  e='' type="text" value="სიკვდილი"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="по">по <input list="43_6_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/по.json">по</a>
+<br><span i="хладности">хладности <input list="43_6_8" s=''  e='' type="text" value="სიცივის გამო"></span><a class="hidden" href="/words/static/хладности.json">хладности</a>
+<br><span i="нашей">нашей <input list="43_6_9" s=''  e='' type="text" value="ჩვენი"></span><a class="hidden" href="/words/static/нашей.json">нашей</a>
+<br><span i="к">к <input list="43_6_10" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="христу">Христу <input list="43_6_11" s=''  e='' type="text" value="ქრისტესადმი"></span><a class="hidden" href="/words/static/христу.json">христу</a>
+<br><span i="и">и <input list="43_6_12" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="по">по <input list="43_6_13" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/по.json">по</a>
+<br><span i="любви">любви <input list="43_6_14" s=''  e='' type="text" value="სიყვარულის გამო"></span><a class="hidden" href="/words/static/любви.json">любви</a>
+<br><span i="к">к <input list="43_6_15" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="тлению">тлению: <input list="43_6_16" s=''  e=':' type="text" value="ხრწნისადმი:"></span><a class="hidden" href="/words/static/тлению.json">тлению</a>
+<br><span i="то">то, <input list="43_6_17" s=''  e=',' type="text" value="მაშინ,"></span><a class="hidden" href="/words/static/то.json">то</a>
+<br><span i="по">по <input list="43_6_18" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/по.json">по</a>
+<br><span i="крайней">крайней <input list="43_6_19" s=''  e='' type="text" value="უკიდურეს"></span><a class="hidden" href="/words/static/крайней.json">крайней</a>
+<br><span i="мере">мере, <input list="43_6_20" s=''  e=',' type="text" value="შემთხვევაში,"></span><a class="hidden" href="/words/static/мере.json">мере</a>
+<br><span i="будем">будем <input list="43_6_21" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/будем.json">будем</a>
+<br><span i="употреблять">употреблять <input list="43_6_22" s=''  e='' type="text" value="გამოვიყენოთ"></span><a class="hidden" href="/words/static/употреблять.json">употреблять</a>
+<br><span i="воспоминание">воспоминание <input list="43_6_23" s=''  e='' type="text" value="მოგონებანი"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="о">о <input list="43_6_24" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти, <input list="43_6_25" s=''  e=',' type="text" value="სიკვდილის შესახებ,"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="как">как <input list="43_6_26" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="горькое">горькое <input list="43_6_27" s=''  e='' type="text" value="მწარე"></span><a class="hidden" href="/words/static/горькое.json">горькое</a>
+<br><span i="врачевство">врачевство <input list="43_6_28" s=''  e='' type="text" value="კურნება"></span><a class="hidden" href="/words/static/врачевство.json">врачевство</a>
+<br><span i="против">против <input list="43_6_29" s=''  e='' type="text" value="წინააღმდეგ"></span><a class="hidden" href="/words/static/против.json">против</a>
+<br><span i="нашей">нашей <input list="43_6_30" s=''  e='' type="text" value="ჩვენი"></span><a class="hidden" href="/words/static/нашей.json">нашей</a>
+<br><span i="греховности">греховности: <input list="43_6_31" s=''  e=':' type="text" value="ცოდვილობისა:"></span><a class="hidden" href="/words/static/греховности.json">греховности</a>
+<br><span i="потому">потому <input list="43_6_32" s=''  e='' type="text" value="იმიტომ"></span><a class="hidden" href="/words/static/потому.json">потому</a>
+<br><span i="что">что <input list="43_6_33" s=''  e='' type="text" value="რომ"></span><a class="hidden" href="/words/static/что.json">что</a>
+<br><span i="смертная">«смертная <input list="43_6_34" s='«'  e='' type="text" value="„სიკვდილის"></span><a class="hidden" href="/words/static/смертная.json">смертная</a>
+<br><span i="память">память» <input list="43_6_35" s=''  e='»' type="text" value="ხსოვნა“"></span><a class="hidden" href="/words/static/память.json">память</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="так">так <input list="43_6_37" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/так.json">так</a>
+<br><span i="святые">святые <input list="43_6_38" s=''  e='' type="text" value="წმინდა"></span><a class="hidden" href="/words/static/святые.json">святые</a>
+<br><span i="отцы">Отцы <input list="43_6_39" s=''  e='' type="text" value="მამები"></span><a class="hidden" href="/words/static/отцы.json">отцы</a>
+<br><span i="называют">называют <input list="43_6_40" s=''  e='' type="text" value="უწოდებენ"></span><a class="hidden" href="/words/static/называют.json">называют</a>
+<br><span i="это">это <input list="43_6_41" s=''  e='' type="text" value="ამ"></span><a class="hidden" href="/words/static/это.json">это</a>
+<br><span i="воспоминание">воспоминание <input list="43_6_42" s=''  e='' type="text" value="ხსოვნას"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="усвоившись">усвоившись <input list="43_6_44" s=''  e='' type="text" value="ათვისებული"></span><a class="hidden" href="/words/static/усвоившись.json">усвоившись</a>
+<br><span i="душе">душе, <input list="43_6_45" s=''  e=',' type="text" value="სულისაგან,"></span><a class="hidden" href="/words/static/душе.json">душе</a>
+<br><span i="рассекает">рассекает <input list="43_6_46" s=''  e='' type="text" value="კვეთს"></span><a class="hidden" href="/words/static/рассекает.json">рассекает</a>
+<br><span i="дружбу">дружбу <input list="43_6_47" s=''  e='' type="text" value="მეგობრობას"></span><a class="hidden" href="/words/static/дружбу.json">дружбу</a>
+<br><span i="ее">ее <input list="43_6_48" s=''  e='' type="text" value="მისსას"></span><a class="hidden" href="/words/static/ее.json">ее</a>
+<br><span i="с">с <input list="43_6_49" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="грехом">грехом, <input list="43_6_50" s=''  e=',' type="text" value="ცოდვასთან,"></span><a class="hidden" href="/words/static/грехом.json">грехом</a>
+<br><span i="со">со <input list="43_6_51" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/со.json">со</a>
+<br><span i="всеми">всеми <input list="43_6_52" s=''  e='' type="text" value="ყველა"></span><a class="hidden" href="/words/static/всеми.json">всеми</a>
+<br><span i="наслаждениями">наслаждениями <input list="43_6_53" s=''  e='' type="text" value="სიამოვნებებთან"></span><a class="hidden" href="/words/static/наслаждениями.json">наслаждениями</a>
+<br><span i="греховными">греховными. <input list="43_6_54" s=''  e='.' type="text" value="ცოდვიანებთან."></span><a class="hidden" href="/words/static/греховными.json">греховными</a></p>
+<p><span i="только">Только <input list="43_7_1" s=''  e='' type="text" value="მხოლოდ"></span><a class="hidden" href="/words/static/только.json">только</a>
+<br><span i="тот">тот, <input list="43_7_2" s=''  e=',' type="text" value="ის,"></span><a class="hidden" href="/words/static/тот.json">тот</a>
+<br><span i="кто">кто <input list="43_7_3" s=''  e='' type="text" value="ვინც"></span><a class="hidden" href="/words/static/кто.json">кто</a>
+<br><span i="сроднился">сроднился <input list="43_7_4" s=''  e='' type="text" value="დაენათესავა"></span><a class="hidden" href="/words/static/сроднился.json">сроднился</a>
+<br><span i="с">с <input list="43_7_5" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="мыслью">мыслью <input list="43_7_6" s=''  e='' type="text" value="აზრს"></span><a class="hidden" href="/words/static/мыслью.json">мыслью</a>
+<br><span i="о">о <input list="43_7_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="конце">конце <input list="43_7_8" s=''  e='' type="text" value="აღსასრულზე"></span><a class="hidden" href="/words/static/конце.json">конце</a>
+<br><span i="своем">своем, <input list="43_7_9" s=''  e=',' type="text" value="თავისაზე,"></span><a class="hidden" href="/words/static/своем.json">своем</a>
+<br><span i="сказал">сказал <input list="43_7_10" s=''  e='' type="text" value="თქვა"></span><a class="hidden" href="/words/static/сказал.json">сказал</a>
+<br><span i="некоторый">некоторый <input list="43_7_11" s=''  e='' type="text" value="რომელიღაც"></span><a class="hidden" href="/words/static/некоторый.json">некоторый</a>
+<br><span i="преподобный">преподобный <input list="43_7_12" s=''  e='' type="text" value="ღირსმა"></span><a class="hidden" href="/words/static/преподобный.json">преподобный</a>
+<br><span i="отец">Отец, <input list="43_7_13" s=''  e=',' type="text" value="მამამ,"></span><a class="hidden" href="/words/static/отец.json">отец</a>
+<br><span i="может">может <input list="43_7_14" s=''  e='' type="text" value="შეძლებს"></span><a class="hidden" href="/words/static/может.json">может</a>
+<br><span i="положить">положить <input list="43_7_15" s=''  e='' type="text" value="დაუდოს"></span><a class="hidden" href="/words/static/положить.json">положить</a>
+<br><span i="конец">конец <input list="43_7_16" s=''  e='' type="text" value="დასასრული"></span><a class="hidden" href="/words/static/конец.json">конец</a>
+<br><span i="грехам">грехам <input list="43_7_17" s=''  e='' type="text" value="ცოდვებს"></span><a class="hidden" href="/words/static/грехам.json">грехам</a>
+<br><span i="своим">своим” <input list="43_7_18" s=''  e='”' type="text" value="თავისას“"></span><a class="hidden" href="/words/static/своим.json">своим</a>
+<sup><span t href="fn_%s.html"><span i="414">414</span><a class="hidden" href="/words/static/414.json">414</a></span></sup>
+<span i="">.</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="поминай">«Поминай <input list="43_7_21" s='«'  e='' type="text" value="„გახსოვდეს"></span><a class="hidden" href="/words/static/поминай.json">поминай</a>
+<br><span i="последняя">последняя <input list="43_7_22" s=''  e='' type="text" value="უკუანაჲსკნელი"></span><a class="hidden" href="/words/static/последняя.json">последняя</a>
+<br><span i="твоя">твоя, <input list="43_7_23" s=''  e=',' type="text" value="შენი,"></span><a class="hidden" href="/words/static/твоя.json">твоя</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="говорит">говорит <input list="43_7_25" s=''  e='' type="text" value="ამბობს"></span><a class="hidden" href="/words/static/говорит.json">говорит</a>
+<br><span i="писание">Писание, <input list="43_7_26" s=''  e=',' type="text" value="წერილი,"></span><a class="hidden" href="/words/static/писание.json">писание</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="и">и <input list="43_7_28" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="во">во <input list="43_7_29" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/во.json">во</a>
+<br><span i="веки">веки <input list="43_7_30" s=''  e='' type="text" value="საუკუნოდ"></span><a class="hidden" href="/words/static/веки.json">веки</a>
+<br><span i="не">не <input list="43_7_31" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="согрешиши">согрешиши» <input list="43_7_32" s=''  e='»' type="text" value="შესცოდებ“"></span><a class="hidden" href="/words/static/согрешиши.json">согрешиши</a>
+<br><span i="">(</span><a class="hidden" href="/words/static/.json"></a>
+<span b href="Sir.7:39"><span i="сир.7:39">Сир.7:39 <input list="43_7_34" s=''  e='' type="text" value="სირ. 7:39"></span><a class="hidden" href="/words/static/сир.7:39.json">сир.7:39</a></span>
+<span i="">).</span><a class="hidden" href="/words/static/.json"></a></p>
+<p><span i="вставай">Вставай <input list="43_8_1" s=''  e='' type="text" value="ადექი"></span><a class="hidden" href="/words/static/вставай.json">вставай</a>
+<br><span i="с">с <input list="43_8_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="одра">одра <input list="43_8_3" s=''  e='' type="text" value="სარეცელიდან"></span><a class="hidden" href="/words/static/одра.json">одра</a>
+<br><span i="твоего">твоего, <input list="43_8_4" s=''  e=',' type="text" value="შენი,"></span><a class="hidden" href="/words/static/твоего.json">твоего</a>
+<br><span i="как">как <input list="43_8_5" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="воскресающий">воскресающий <input list="43_8_6" s=''  e='' type="text" value="აღდგომილი"></span><a class="hidden" href="/words/static/воскресающий.json">воскресающий</a>
+<br><span i="из">из <input list="43_8_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/из.json">из</a>
+<br><span i="мертвых">мертвых; <input list="43_8_8" s=''  e=';' type="text" value="მკვდართაგან;"></span><a class="hidden" href="/words/static/мертвых.json">мертвых</a>
+<br><span i="ложись">ложись <input list="43_8_9" s=''  e='' type="text" value="დაწექი"></span><a class="hidden" href="/words/static/ложись.json">ложись</a>
+<br><span i="на">на <input list="43_8_10" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="одр">одр <input list="43_8_11" s=''  e='' type="text" value="სარეცელზე"></span><a class="hidden" href="/words/static/одр.json">одр</a>
+<br><span i="твой">твой, <input list="43_8_12" s=''  e=',' type="text" value="შენსა,"></span><a class="hidden" href="/words/static/твой.json">твой</a>
+<br><span i="как">как <input list="43_8_13" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="бы">бы <input list="43_8_14" s=''  e='' type="text" value="თითქოს"></span><a class="hidden" href="/words/static/бы.json">бы</a>
+<br><span i="в">в <input list="43_8_15" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="гроб">гроб: <input list="43_8_16" s=''  e=':' type="text" value="საფლავში:"></span><a class="hidden" href="/words/static/гроб.json">гроб</a>
+<br><span i="сон">сон <input list="43_8_17" s=''  e='' type="text" value="ძილი"></span><a class="hidden" href="/words/static/сон.json">сон</a>
+<br><span i="есть">есть <input list="43_8_18" s=''  e='' type="text" value="არის"></span><a class="hidden" href="/words/static/есть.json">есть</a>
+<br><span i="изображение">изображение <input list="43_8_19" s=''  e='' type="text" value="გამოსახულება"></span><a class="hidden" href="/words/static/изображение.json">изображение</a>
+<br><span i="смерти">смерти, <input list="43_8_20" s=''  e=',' type="text" value="სიკვდილისა,"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="а">а <input list="43_8_21" s=''  e='' type="text" value="ხოლო"></span><a class="hidden" href="/words/static/а.json">а</a>
+<br><span i="темнота">темнота <input list="43_8_22" s=''  e='' type="text" value="სიბნელე"></span><a class="hidden" href="/words/static/темнота.json">темнота</a>
+<br><span i="ночи">ночи <input list="43_8_23" s=''  e='' type="text" value="ღამისა"></span><a class="hidden" href="/words/static/ночи.json">ночи</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="предвестница">предвестница <input list="43_8_25" s=''  e='' type="text" value="არის მომასწავებელი"></span><a class="hidden" href="/words/static/предвестница.json">предвестница</a>
+<br><span i="темноты">темноты <input list="43_8_26" s=''  e='' type="text" value="სიბნელისა"></span><a class="hidden" href="/words/static/темноты.json">темноты</a>
+<br><span i="могильной">могильной, <input list="43_8_27" s=''  e=',' type="text" value="სამარისა,"></span><a class="hidden" href="/words/static/могильной.json">могильной</a>
+<br><span i="после">после <input list="43_8_28" s=''  e='' type="text" value="შემდეგ"></span><a class="hidden" href="/words/static/после.json">после</a>
+<br><span i="которой">которой <input list="43_8_29" s=''  e='' type="text" value="რომლისაც"></span><a class="hidden" href="/words/static/которой.json">которой</a>
+<br><span i="воссияет">воссияет <input list="43_8_30" s=''  e='' type="text" value="აღმობრწყინდება"></span><a class="hidden" href="/words/static/воссияет.json">воссияет</a>
+<br><span i="радостный">радостный <input list="43_8_31" s=''  e='' type="text" value="სასიხარულო"></span><a class="hidden" href="/words/static/радостный.json">радостный</a>
+<br><span i="для">для <input list="43_8_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="рабов">рабов <input list="43_8_33" s=''  e='' type="text" value="მონებისათვის"></span><a class="hidden" href="/words/static/рабов.json">рабов</a>
+<br><span i="христовых">Христовых <input list="43_8_34" s=''  e='' type="text" value="ქრისტესი"></span><a class="hidden" href="/words/static/христовых.json">христовых</a>
+<br><span i="и">и <input list="43_8_35" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="страшный">страшный <input list="43_8_36" s=''  e='' type="text" value="საშინელი"></span><a class="hidden" href="/words/static/страшный.json">страшный</a>
+<br><span i="для">для <input list="43_8_37" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="врагов">врагов <input list="43_8_38" s=''  e='' type="text" value="მტერთათვის"></span><a class="hidden" href="/words/static/врагов.json">врагов</a>
+<br><span i="его">Его <input list="43_8_39" s=''  e='' type="text" value="მისი"></span><a class="hidden" href="/words/static/его.json">его</a>
+<br><span i="свет">свет <input list="43_8_40" s=''  e='' type="text" value="სინათლე"></span><a class="hidden" href="/words/static/свет.json">свет</a>
+<br><span i="воскресения">воскресения. <input list="43_8_41" s=''  e='.' type="text" value="აღდგომისა."></span><a class="hidden" href="/words/static/воскресения.json">воскресения</a></p>
+<p><span i="густым">Густым <input list="43_9_1" s=''  e='' type="text" value="სქელი"></span><a class="hidden" href="/words/static/густым.json">густым</a>
+<br><span i="облаком">облаком, <input list="43_9_2" s=''  e=',' type="text" value="ღრუბლით,"></span><a class="hidden" href="/words/static/облаком.json">облаком</a>
+<br><span i="хотя">хотя <input list="43_9_3" s=''  e='' type="text" value="თუმც"></span><a class="hidden" href="/words/static/хотя.json">хотя</a>
+<br><span i="оно">оно <input list="43_9_4" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/оно.json">оно</a>
+<br><span i="состоит">состоит <input list="43_9_5" s=''  e='' type="text" value="შედგება"></span><a class="hidden" href="/words/static/состоит.json">состоит</a>
+<br><span i="из">из <input list="43_9_6" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/из.json">из</a>
+<br><span i="одних">одних <input list="43_9_7" s=''  e='' type="text" value="მხოლოდ"></span><a class="hidden" href="/words/static/одних.json">одних</a>
+<br><span i="тонких">тонких <input list="43_9_8" s=''  e='' type="text" value="ფაქიზი"></span><a class="hidden" href="/words/static/тонких.json">тонких</a>
+<br><span i="паров">паров, <input list="43_9_9" s=''  e=',' type="text" value="ორთქლისაგან,"></span><a class="hidden" href="/words/static/паров.json">паров</a>
+<br><span i="закрывается">закрывается <input list="43_9_10" s=''  e='' type="text" value="იფარება"></span><a class="hidden" href="/words/static/закрывается.json">закрывается</a>
+<br><span i="свет">свет <input list="43_9_11" s=''  e='' type="text" value="სინათლე"></span><a class="hidden" href="/words/static/свет.json">свет</a>
+<br><span i="солнца">солнца, <input list="43_9_12" s=''  e=',' type="text" value="მზისა,"></span><a class="hidden" href="/words/static/солнца.json">солнца</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="и">и <input list="43_9_14" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="телесными">телесными <input list="43_9_15" s=''  e='' type="text" value="ხორციელი"></span><a class="hidden" href="/words/static/телесными.json">телесными</a>
+<br><span i="наслаждениями">наслаждениями, <input list="43_9_16" s=''  e=',' type="text" value="სიამოვნებათა,"></span><a class="hidden" href="/words/static/наслаждениями.json">наслаждениями</a>
+<br><span i="рассеянностью">рассеянностью, <input list="43_9_17" s=''  e=',' type="text" value="გაფანტულობით,"></span><a class="hidden" href="/words/static/рассеянностью.json">рассеянностью</a>
+<br><span i="ничтожными">ничтожными <input list="43_9_18" s=''  e='' type="text" value="უმნიშვნელო"></span><a class="hidden" href="/words/static/ничтожными.json">ничтожными</a>
+<br><span i="попечениями">попечениями <input list="43_9_19" s=''  e='' type="text" value="საზრუნავებით"></span><a class="hidden" href="/words/static/попечениями.json">попечениями</a>
+<br><span i="земными">земными <input list="43_9_20" s=''  e='' type="text" value="მიწიერთა"></span><a class="hidden" href="/words/static/земными.json">земными</a>
+<br><span i="закрывается">закрывается <input list="43_9_21" s=''  e='' type="text" value="იფარება"></span><a class="hidden" href="/words/static/закрывается.json">закрывается</a>
+<br><span i="от">от <input list="43_9_22" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="взоров">взоров <input list="43_9_23" s=''  e='' type="text" value="მზერისაგან"></span><a class="hidden" href="/words/static/взоров.json">взоров</a>
+<br><span i="души">души <input list="43_9_24" s=''  e='' type="text" value="სულისა"></span><a class="hidden" href="/words/static/души.json">души</a>
+<br><span i="величественная">величественная <input list="43_9_25" s=''  e='' type="text" value="დიდებული"></span><a class="hidden" href="/words/static/величественная.json">величественная</a>
+<br><span i="вечность">вечность. <input list="43_9_26" s=''  e='.' type="text" value="მარადისობა."></span><a class="hidden" href="/words/static/вечность.json">вечность</a></p>
+<p><span i="тщетно">Тщетно <input list="43_10_1" s=''  e='' type="text" value="ამაოდ"></span><a class="hidden" href="/words/static/тщетно.json">тщетно</a>
+<br><span i="сияет">сияет <input list="43_10_2" s=''  e='' type="text" value="ბრწყინავს"></span><a class="hidden" href="/words/static/сияет.json">сияет</a>
+<br><span i="солнце">солнце <input list="43_10_3" s=''  e='' type="text" value="მზე"></span><a class="hidden" href="/words/static/солнце.json">солнце</a>
+<br><span i="с">с <input list="43_10_4" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="чистого">чистого <input list="43_10_5" s=''  e='' type="text" value="სუფთა"></span><a class="hidden" href="/words/static/чистого.json">чистого</a>
+<br><span i="неба">неба <input list="43_10_6" s=''  e='' type="text" value="ციდან"></span><a class="hidden" href="/words/static/неба.json">неба</a>
+<br><span i="для">для <input list="43_10_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="очей">очей, <input list="43_10_8" s=''  e=',' type="text" value="თვალებისათვის,"></span><a class="hidden" href="/words/static/очей.json">очей</a>
+<br><span i="пораженных">пораженных <input list="43_10_9" s=''  e='' type="text" value="დაზიანებულთა"></span><a class="hidden" href="/words/static/пораженных.json">пораженных</a>
+<br><span i="слепотою">слепотою, <input list="43_10_10" s=''  e=',' type="text" value="სიბრმავით,"></span><a class="hidden" href="/words/static/слепотою.json">слепотою</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="и">и <input list="43_10_12" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="вечность">вечность <input list="43_10_13" s=''  e='' type="text" value="მარადისობა"></span><a class="hidden" href="/words/static/вечность.json">вечность</a>
+<br><span i="как">как <input list="43_10_14" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="бы">бы <input list="43_10_15" s=''  e='' type="text" value="თითქოს"></span><a class="hidden" href="/words/static/бы.json">бы</a>
+<br><span i="не">не <input list="43_10_16" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="существует">существует <input list="43_10_17" s=''  e='' type="text" value="არსებობს"></span><a class="hidden" href="/words/static/существует.json">существует</a>
+<br><span i="для">для <input list="43_10_18" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="сердца">сердца, <input list="43_10_19" s=''  e=',' type="text" value="გულისათვის,"></span><a class="hidden" href="/words/static/сердца.json">сердца</a>
+<br><span i="обладаемого">обладаемого <input list="43_10_20" s=''  e='' type="text" value="შეპყრობილით"></span><a class="hidden" href="/words/static/обладаемого.json">обладаемого</a>
+<br><span i="пристрастием">пристрастием <input list="43_10_21" s=''  e='' type="text" value="თვალღებით"></span><a class="hidden" href="/words/static/пристрастием.json">пристрастием</a>
+<br><span i="к">к <input list="43_10_22" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="земле">земле, <input list="43_10_23" s=''  e=',' type="text" value="მიწისადმი,"></span><a class="hidden" href="/words/static/земле.json">земле</a>
+<br><span i="к">к <input list="43_10_24" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="ее">ее <input list="43_10_25" s=''  e='' type="text" value="მისი"></span><a class="hidden" href="/words/static/ее.json">ее</a>
+<br><span i="великому">великому, <input list="43_10_26" s=''  e=',' type="text" value="დიადისადმი,"></span><a class="hidden" href="/words/static/великому.json">великому</a>
+<br><span i="к">к <input list="43_10_27" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="ее">ее <input list="43_10_28" s=''  e='' type="text" value="მისი"></span><a class="hidden" href="/words/static/ее.json">ее</a>
+<br><span i="славному">славному, <input list="43_10_29" s=''  e=',' type="text" value="დიდებულისადმი,"></span><a class="hidden" href="/words/static/славному.json">славному</a>
+<br><span i="к">к <input list="43_10_30" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="ее">ее <input list="43_10_31" s=''  e='' type="text" value="მისი"></span><a class="hidden" href="/words/static/ее.json">ее</a>
+<br><span i="сладостному">сладостному. <input list="43_10_32" s=''  e='.' type="text" value="საამოსადმი."></span><a class="hidden" href="/words/static/сладостному.json">сладостному</a>
+<br><span i="смерть">«Смерть <input list="43_10_33" s='«'  e='' type="text" value="„სიკუდილი"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="грешников">грешников <input list="43_10_34" s=''  e='' type="text" value="ცოდვილთა"></span><a class="hidden" href="/words/static/грешников.json">грешников</a>
+<br><span i="люта">люта» <input list="43_10_35" s=''  e='»' type="text" value="ბოროტ არს“"></span><a class="hidden" href="/words/static/люта.json">люта</a>
+<br><span i="">(</span><a class="hidden" href="/words/static/.json"></a>
+<span b href="Ps.33:22"><span i="пс.33:22">Пс.33:22 <input list="43_10_37" s=''  e='' type="text" value="ფს. 33:22"></span><a class="hidden" href="/words/static/пс.33:22.json">пс.33:22</a></span>
+<span i="">):</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="приходит">приходит <input list="43_10_39" s=''  e='' type="text" value="მოდის"></span><a class="hidden" href="/words/static/приходит.json">приходит</a>
+<br><span i="к">к <input list="43_10_40" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="ним">ним <input list="43_10_41" s=''  e='' type="text" value="მათთან"></span><a class="hidden" href="/words/static/ним.json">ним</a>
+<br><span i="в">в <input list="43_10_42" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="то">то <input list="43_10_43" s=''  e='' type="text" value="იმ"></span><a class="hidden" href="/words/static/то.json">то</a>
+<br><span i="время">время, <input list="43_10_44" s=''  e=',' type="text" value="დროს,"></span><a class="hidden" href="/words/static/время.json">время</a>
+<br><span i="как">как <input list="43_10_45" s=''  e='' type="text" value="როდესაც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="они">они <input list="43_10_46" s=''  e='' type="text" value="ისინი"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="совсем">совсем <input list="43_10_47" s=''  e='' type="text" value="საერთოდაც"></span><a class="hidden" href="/words/static/совсем.json">совсем</a>
+<br><span i="не">не <input list="43_10_48" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="ожидают">ожидают <input list="43_10_49" s=''  e='' type="text" value="ელიან"></span><a class="hidden" href="/words/static/ожидают.json">ожидают</a>
+<br><span i="ее">ее; <input list="43_10_50" s=''  e=';' type="text" value="მას;"></span><a class="hidden" href="/words/static/ее.json">ее</a>
+<br><span i="приходит">приходит <input list="43_10_51" s=''  e='' type="text" value="მოდის"></span><a class="hidden" href="/words/static/приходит.json">приходит</a>
+<br><span i="к">к <input list="43_10_52" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="ним">ним, <input list="43_10_53" s=''  e=',' type="text" value="მათთან,"></span><a class="hidden" href="/words/static/ним.json">ним</a>
+<br><span i="а">а <input list="43_10_54" s=''  e='' type="text" value="ხოლო"></span><a class="hidden" href="/words/static/а.json">а</a>
+<br><span i="они">они <input list="43_10_55" s=''  e='' type="text" value="მათ"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="еще">еще <input list="43_10_56" s=''  e='' type="text" value="კიდევ"></span><a class="hidden" href="/words/static/еще.json">еще</a>
+<br><span i="не">не <input list="43_10_57" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="сделали">сделали <input list="43_10_58" s=''  e='' type="text" value="გაუკეთებიათ"></span><a class="hidden" href="/words/static/сделали.json">сделали</a>
+<br><span i="никакого">никакого <input list="43_10_59" s=''  e='' type="text" value="არავითარი"></span><a class="hidden" href="/words/static/никакого.json">никакого</a>
+<br><span i="приготовления">приготовления <input list="43_10_60" s=''  e='' type="text" value="მომზადება"></span><a class="hidden" href="/words/static/приготовления.json">приготовления</a>
+<br><span i="ни">ни <input list="43_10_61" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="к">к <input list="43_10_62" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="ней">ней, <input list="43_10_63" s=''  e=',' type="text" value="მისდამი,"></span><a class="hidden" href="/words/static/ней.json">ней</a>
+<br><span i="ни">ни <input list="43_10_64" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="к">к <input list="43_10_65" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="вечности">вечности, <input list="43_10_66" s=''  e=',' type="text" value="მარადისობისადმი,"></span><a class="hidden" href="/words/static/вечности.json">вечности</a>
+<br><span i="даже">даже <input list="43_10_67" s=''  e='' type="text" value="თვით"></span><a class="hidden" href="/words/static/даже.json">даже</a>
+<br><span i="не">не <input list="43_10_68" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="стяжали">стяжали <input list="43_10_69" s=''  e='' type="text" value="მოუხვეჭავთ"></span><a class="hidden" href="/words/static/стяжали.json">стяжали</a>
+<br><span i="никакого">никакого <input list="43_10_70" s=''  e='' type="text" value="არავითარი"></span><a class="hidden" href="/words/static/никакого.json">никакого</a>
+<br><span i="ясного">ясного <input list="43_10_71" s=''  e='' type="text" value="აშკარა"></span><a class="hidden" href="/words/static/ясного.json">ясного</a>
+<br><span i="понятия">понятия <input list="43_10_72" s=''  e='' type="text" value="წარმოდგენა"></span><a class="hidden" href="/words/static/понятия.json">понятия</a>
+<br><span i="ни">ни <input list="43_10_73" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="о">о <input list="43_10_74" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="том">том, <input list="43_10_75" s=''  e=',' type="text" value="იმაზე,"></span><a class="hidden" href="/words/static/том.json">том</a>
+<br><span i="ни">ни <input list="43_10_76" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="о">о <input list="43_10_77" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="другом">другом <input list="43_10_78" s=''  e='' type="text" value="მეორე"></span><a class="hidden" href="/words/static/другом.json">другом</a>
+<br><span i="предмете">предмете. <input list="43_10_79" s=''  e='.' type="text" value="საგანზე."></span><a class="hidden" href="/words/static/предмете.json">предмете</a>
+<br><span i="и">И <input list="43_10_80" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="восхищает">восхищает <input list="43_10_81" s=''  e='' type="text" value="წარიტაცებს"></span><a class="hidden" href="/words/static/восхищает.json">восхищает</a>
+<br><span i="смерть">смерть <input list="43_10_82" s=''  e='' type="text" value="სიკვდილი"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="неготовых">неготовых <input list="43_10_83" s=''  e='' type="text" value="მოუმზადებელ"></span><a class="hidden" href="/words/static/неготовых.json">неготовых</a>
+<br><span i="грешников">грешников <input list="43_10_84" s=''  e='' type="text" value="ცოდვილებს"></span><a class="hidden" href="/words/static/грешников.json">грешников</a>
+<br><span i="с">с <input list="43_10_85" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="лица">лица <input list="43_10_86" s=''  e='' type="text" value="პირისაგან"></span><a class="hidden" href="/words/static/лица.json">лица</a>
+<br><span i="земли">земли, <input list="43_10_87" s=''  e=',' type="text" value="მიწისა,"></span><a class="hidden" href="/words/static/земли.json">земли</a>
+<br><span i="на">на <input list="43_10_88" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="которой">которой <input list="43_10_89" s=''  e='' type="text" value="რომელზეც"></span><a class="hidden" href="/words/static/которой.json">которой</a>
+<br><span i="они">они <input list="43_10_90" s=''  e='' type="text" value="ისინი"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="лишь">лишь <input list="43_10_91" s=''  e='' type="text" value="მხოლოდ"></span><a class="hidden" href="/words/static/лишь.json">лишь</a>
+<br><span i="прогневляли">прогневляли <input list="43_10_92" s=''  e='' type="text" value="არისხებდნენ"></span><a class="hidden" href="/words/static/прогневляли.json">прогневляли</a>
+<br><span i="бога">Бога, <input list="43_10_93" s=''  e=',' type="text" value="ღმერთს,"></span><a class="hidden" href="/words/static/бога.json">бога</a>
+<br><span i="передает">передает <input list="43_10_94" s=''  e='' type="text" value="მისცემს"></span><a class="hidden" href="/words/static/передает.json">передает</a>
+<br><span i="их">их <input list="43_10_95" s=''  e='' type="text" value="მათ"></span><a class="hidden" href="/words/static/их.json">их</a>
+<br><span i="навечно">навечно <input list="43_10_96" s=''  e='' type="text" value="სამარადისოდ"></span><a class="hidden" href="/words/static/навечно.json">навечно</a>
+<br><span i="в">в <input list="43_10_97" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="темницы">темницы <input list="43_10_98" s=''  e='' type="text" value="დილეგებს"></span><a class="hidden" href="/words/static/темницы.json">темницы</a>
+<br><span i="ада">ада. <input list="43_10_99" s=''  e='.' type="text" value="ჯოჯოხეთისას."></span><a class="hidden" href="/words/static/ада.json">ада</a></p>
+<p><span i="хочешь">Хочешь <input list="43_11_1" s=''  e='' type="text" value="გსურს"></span><a class="hidden" href="/words/static/хочешь.json">хочешь</a>
+<br><span i="ли">ли <input list="43_11_2" s=''  e='' type="text" value="კი"></span><a class="hidden" href="/words/static/ли.json">ли</a>
+<br><span i="помнить">помнить <input list="43_11_3" s=''  e='' type="text" value="გახსოვდეს"></span><a class="hidden" href="/words/static/помнить.json">помнить</a>
+<br><span i="смерть">смерть? <input list="43_11_4" s=''  e='?' type="text" value="სიკვდილი?"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="сохраняй">Сохраняй <input list="43_11_5" s=''  e='' type="text" value="დაიცავი"></span><a class="hidden" href="/words/static/сохраняй.json">сохраняй</a>
+<br><span i="строгую">строгую <input list="43_11_6" s=''  e='' type="text" value="მკაცრი"></span><a class="hidden" href="/words/static/строгую.json">строгую</a>
+<br><span i="умеренность">умеренность <input list="43_11_7" s=''  e='' type="text" value="ზომიერება"></span><a class="hidden" href="/words/static/умеренность.json">умеренность</a>
+<br><span i="в">в <input list="43_11_8" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="пище">пище, <input list="43_11_9" s=''  e=',' type="text" value="საკვებში,"></span><a class="hidden" href="/words/static/пище.json">пище</a>
+<br><span i="одежде">одежде, <input list="43_11_10" s=''  e=',' type="text" value="ტანსაცმელში,"></span><a class="hidden" href="/words/static/одежде.json">одежде</a>
+<br><span i="во">во <input list="43_11_11" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/во.json">во</a>
+<br><span i="всех">всех <input list="43_11_12" s=''  e='' type="text" value="ყველა"></span><a class="hidden" href="/words/static/всех.json">всех</a>
+<br><span i="домашних">домашних <input list="43_11_13" s=''  e='' type="text" value="სახლის"></span><a class="hidden" href="/words/static/домашних.json">домашних</a>
+<br><span i="принадлежностях">принадлежностях; <input list="43_11_14" s=''  e=';' type="text" value="საგნებისადმი;"></span><a class="hidden" href="/words/static/принадлежностях.json">принадлежностях</a>
+<br><span i="наблюдай">наблюдай, <input list="43_11_15" s=''  e=',' type="text" value="თვალი ადევნე,"></span><a class="hidden" href="/words/static/наблюдай.json">наблюдай</a>
+<br><span i="чтоб">чтоб <input list="43_11_16" s=''  e='' type="text" value="რომ"></span><a class="hidden" href="/words/static/чтоб.json">чтоб</a>
+<br><span i="предметы">предметы <input list="43_11_17" s=''  e='' type="text" value="საგნები"></span><a class="hidden" href="/words/static/предметы.json">предметы</a>
+<br><span i="нужды">нужды <input list="43_11_18" s=''  e='' type="text" value="საჭიროებისანი"></span><a class="hidden" href="/words/static/нужды.json">нужды</a>
+<br><span i="не">не <input list="43_11_19" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="переходили">переходили <input list="43_11_20" s=''  e='' type="text" value="გადავიდნენ"></span><a class="hidden" href="/words/static/переходили.json">переходили</a>
+<br><span i="в">в <input list="43_11_21" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="предметы">предметы <input list="43_11_22" s=''  e='' type="text" value="საგნებში"></span><a class="hidden" href="/words/static/предметы.json">предметы</a>
+<br><span i="роскоши">роскоши, <input list="43_11_23" s=''  e=',' type="text" value="ფუფუნებისა,"></span><a class="hidden" href="/words/static/роскоши.json">роскоши</a>
+<br><span i="поучайся">поучайся <input list="43_11_24" s=''  e='' type="text" value="დაისწავლე"></span><a class="hidden" href="/words/static/поучайся.json">поучайся</a>
+<br><span i="в">в <input list="43_11_25" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="законе">Законе <input list="43_11_26" s=''  e='' type="text" value="კანონი"></span><a class="hidden" href="/words/static/законе.json">законе</a>
+<br><span i="божием">Божием <input list="43_11_27" s=''  e='' type="text" value="ღვთისა"></span><a class="hidden" href="/words/static/божием.json">божием</a>
+<br><span i="день">день <input list="43_11_28" s=''  e='' type="text" value="დღე"></span><a class="hidden" href="/words/static/день.json">день</a>
+<br><span i="и">и <input list="43_11_29" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="ночь">ночь, <input list="43_11_30" s=''  e=',' type="text" value="ღამე,"></span><a class="hidden" href="/words/static/ночь.json">ночь</a>
+<br><span i="или">или <input list="43_11_31" s=''  e='' type="text" value="ანდა"></span><a class="hidden" href="/words/static/или.json">или</a>
+<br><span i="по">по <input list="43_11_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/по.json">по</a>
+<br><span i="возможности">возможности <input list="43_11_33" s=''  e='' type="text" value="შეძლებისდაგვარად"></span><a class="hidden" href="/words/static/возможности.json">возможности</a>
+<br><span i="часто">часто <input list="43_11_34" s=''  e='' type="text" value="ხშირად"></span><a class="hidden" href="/words/static/часто.json">часто</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="и">и <input list="43_11_36" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="воспомнится">воспомнится <input list="43_11_37" s=''  e='' type="text" value="გეხსომება"></span><a class="hidden" href="/words/static/воспомнится.json">воспомнится</a>
+<br><span i="тебе">тебе <input list="43_11_38" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/тебе.json">тебе</a>
+<br><span i="смерть">смерть. <input list="43_11_39" s=''  e='.' type="text" value="სიკვდილი."></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="воспоминание">Воспоминание <input list="43_11_40" s=''  e='' type="text" value="ხსოვნა"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="о">о <input list="43_11_41" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="ней">ней <input list="43_11_42" s=''  e='' type="text" value="მასზე"></span><a class="hidden" href="/words/static/ней.json">ней</a>
+<br><span i="соединится">соединится <input list="43_11_43" s=''  e='' type="text" value="შეუერთდება"></span><a class="hidden" href="/words/static/соединится.json">соединится</a>
+<br><span i="с">с <input list="43_11_44" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="потоками">потоками <input list="43_11_45" s=''  e='' type="text" value="ნაკადებს"></span><a class="hidden" href="/words/static/потоками.json">потоками</a>
+<br><span i="слез">слез, <input list="43_11_46" s=''  e=',' type="text" value="ცრემლთას,"></span><a class="hidden" href="/words/static/слез.json">слез</a>
+<br><span i="с">с <input list="43_11_47" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="раскаянием">раскаянием <input list="43_11_48" s=''  e='' type="text" value="შენანებას"></span><a class="hidden" href="/words/static/раскаянием.json">раскаянием</a>
+<br><span i="во">во <input list="43_11_49" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/во.json">во</a>
+<br><span i="грехах">грехах, <input list="43_11_50" s=''  e=',' type="text" value="ცოდვებში,"></span><a class="hidden" href="/words/static/грехах.json">грехах</a>
+<br><span i="с">с <input list="43_11_51" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="намерением">намерением <input list="43_11_52" s=''  e='' type="text" value="განზრახვასთან"></span><a class="hidden" href="/words/static/намерением.json">намерением</a>
+<br><span i="исправления">исправления, <input list="43_11_53" s=''  e=',' type="text" value="გამოსწორებისა,"></span><a class="hidden" href="/words/static/исправления.json">исправления</a>
+<br><span i="с">с <input list="43_11_54" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="усердными">усердными <input list="43_11_55" s=''  e='' type="text" value="გულმოდგინე"></span><a class="hidden" href="/words/static/усердными.json">усердными</a>
+<br><span i="и">и <input list="43_11_56" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="многими">многими <input list="43_11_57" s=''  e='' type="text" value="ბევრ"></span><a class="hidden" href="/words/static/многими.json">многими</a>
+<br><span i="молитвами">молитвами. <input list="43_11_58" s=''  e='.' type="text" value="ლოცვებს."></span><a class="hidden" href="/words/static/молитвами.json">молитвами</a></p>
+<p><span i="кто">Кто <input list="43_12_1" s=''  e='' type="text" value="ვინ"></span><a class="hidden" href="/words/static/кто.json">кто</a>
+<br><span i="из">из <input list="43_12_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/из.json">из</a>
+<br><span i="человеков">человеков <input list="43_12_3" s=''  e='' type="text" value="ადამიანთაგან"></span><a class="hidden" href="/words/static/человеков.json">человеков</a>
+<br><span i="остался">остался <input list="43_12_4" s=''  e='' type="text" value="დარჩენილა"></span><a class="hidden" href="/words/static/остался.json">остался</a>
+<br><span i="навсегда">навсегда <input list="43_12_5" s=''  e='' type="text" value="სამუდამოდ"></span><a class="hidden" href="/words/static/навсегда.json">навсегда</a>
+<br><span i="жить">жить <input list="43_12_6" s=''  e='' type="text" value="საცხოვრებლად"></span><a class="hidden" href="/words/static/жить.json">жить</a>
+<br><span i="на">на <input list="43_12_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="земле">земле? <input list="43_12_8" s=''  e='?' type="text" value="დედამიწაზე?"></span><a class="hidden" href="/words/static/земле.json">земле</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="никто">никто. <input list="43_12_10" s=''  e='.' type="text" value="არავინ."></span><a class="hidden" href="/words/static/никто.json">никто</a>
+<br><span i="и">И <input list="43_12_11" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="я">я <input list="43_12_12" s=''  e='' type="text" value="მეც"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="пойду">пойду <input list="43_12_13" s=''  e='' type="text" value="წავალ"></span><a class="hidden" href="/words/static/пойду.json">пойду</a>
+<br><span i="во">во <input list="43_12_14" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/во.json">во</a>
+<br><span i="след">след <input list="43_12_15" s=''  e='' type="text" value="კვალდაკვალ"></span><a class="hidden" href="/words/static/след.json">след</a>
+<br><span i="отцов">отцов, <input list="43_12_16" s=''  e=',' type="text" value="მამებისა,"></span><a class="hidden" href="/words/static/отцов.json">отцов</a>
+<br><span i="праотцов">праотцов, <input list="43_12_17" s=''  e=',' type="text" value="წინაპართა,"></span><a class="hidden" href="/words/static/праотцов.json">праотцов</a>
+<br><span i="братий">братий <input list="43_12_18" s=''  e='' type="text" value="ძმებისა"></span><a class="hidden" href="/words/static/братий.json">братий</a>
+<br><span i="и">и <input list="43_12_19" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="всех">всех <input list="43_12_20" s=''  e='' type="text" value="ყველა"></span><a class="hidden" href="/words/static/всех.json">всех</a>
+<br><span i="ближних">ближних <input list="43_12_21" s=''  e='' type="text" value="მოყვასისა"></span><a class="hidden" href="/words/static/ближних.json">ближних</a>
+<br><span i="моих">моих. <input list="43_12_22" s=''  e='.' type="text" value="ჩემისა."></span><a class="hidden" href="/words/static/моих.json">моих</a>
+<br><span i="тело">Тело <input list="43_12_23" s=''  e='' type="text" value="სხეული"></span><a class="hidden" href="/words/static/тело.json">тело</a>
+<br><span i="мое">мое <input list="43_12_24" s=''  e='' type="text" value="ჩემი"></span><a class="hidden" href="/words/static/мое.json">мое</a>
+<br><span i="уединится">уединится <input list="43_12_25" s=''  e='' type="text" value="განმარტოვდება"></span><a class="hidden" href="/words/static/уединится.json">уединится</a>
+<br><span i="в">в <input list="43_12_26" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="мрачную">мрачную <input list="43_12_27" s=''  e='' type="text" value="ბნელ"></span><a class="hidden" href="/words/static/мрачную.json">мрачную</a>
+<br><span i="могилу">могилу, <input list="43_12_28" s=''  e=',' type="text" value="სამარეში,"></span><a class="hidden" href="/words/static/могилу.json">могилу</a>
+<br><span i="а">а <input list="43_12_29" s=''  e='' type="text" value="ხოლო"></span><a class="hidden" href="/words/static/а.json">а</a>
+<br><span i="участь">участь <input list="43_12_30" s=''  e='' type="text" value="ხვედრი"></span><a class="hidden" href="/words/static/участь.json">участь</a>
+<br><span i="души">души <input list="43_12_31" s=''  e='' type="text" value="სულისა"></span><a class="hidden" href="/words/static/души.json">души</a>
+<br><span i="моей">моей <input list="43_12_32" s=''  e='' type="text" value="ჩემისა"></span><a class="hidden" href="/words/static/моей.json">моей</a>
+<br><span i="покроется">покроется <input list="43_12_33" s=''  e='' type="text" value="დაიფარება"></span><a class="hidden" href="/words/static/покроется.json">покроется</a>
+<br><span i="для">для <input list="43_12_34" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="оставшихся">оставшихся <input list="43_12_35" s=''  e='' type="text" value="დარჩენილ"></span><a class="hidden" href="/words/static/оставшихся.json">оставшихся</a>
+<br><span i="жителей">жителей <input list="43_12_36" s=''  e='' type="text" value="მცხოვრებთათვის"></span><a class="hidden" href="/words/static/жителей.json">жителей</a>
+<br><span i="земли">земли <input list="43_12_37" s=''  e='' type="text" value="დედამიწისა"></span><a class="hidden" href="/words/static/земли.json">земли</a>
+<br><span i="непроницаемою">непроницаемою <input list="43_12_38" s=''  e='' type="text" value="შეუღწეველ"></span><a class="hidden" href="/words/static/непроницаемою.json">непроницаемою</a>
+<br><span i="таинственностью">таинственностью. <input list="43_12_39" s=''  e='.' type="text" value="საიდუმლოებად."></span><a class="hidden" href="/words/static/таинственностью.json">таинственностью</a></p>
+<p><span i="поплачут">Поплачут <input list="43_13_1" s=''  e='' type="text" value="იტირებენ"></span><a class="hidden" href="/words/static/поплачут.json">поплачут</a>
+<br><span i="о">о <input list="43_13_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="мне">мне <input list="43_13_3" s=''  e='' type="text" value="ჩემზე"></span><a class="hidden" href="/words/static/мне.json">мне</a>
+<br><span i="сродники">сродники <input list="43_13_4" s=''  e='' type="text" value="თანამემამულენი"></span><a class="hidden" href="/words/static/сродники.json">сродники</a>
+<br><span i="и">и <input list="43_13_5" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="друзья">друзья; <input list="43_13_6" s=''  e=';' type="text" value="მეგობრები;"></span><a class="hidden" href="/words/static/друзья.json">друзья</a>
+<br><span i="может">может <input list="43_13_7" s=''  e='' type="text" value="შესაძლოა"></span><a class="hidden" href="/words/static/может.json">может</a>
+<br><span i="быть">быть <input list="43_13_8" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/быть.json">быть</a>
+<br><span i="поплачут">поплачут <input list="43_13_9" s=''  e='' type="text" value="იტირებენ"></span><a class="hidden" href="/words/static/поплачут.json">поплачут</a>
+<br><span i="горько">горько; <input list="43_13_10" s=''  e=';' type="text" value="მწარედ;"></span><a class="hidden" href="/words/static/горько.json">горько</a>
+<br><span i="и">и <input list="43_13_11" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="потом">потом <input list="43_13_12" s=''  e='' type="text" value="შემდეგ"></span><a class="hidden" href="/words/static/потом.json">потом</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="забудут">забудут. <input list="43_13_14" s=''  e='.' type="text" value="დამივიწყებენ."></span><a class="hidden" href="/words/static/забудут.json">забудут</a>
+<br><span i="так">Так <input list="43_13_15" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/так.json">так</a>
+<br><span i="оплаканы">оплаканы <input list="43_13_16" s=''  e='' type="text" value="დატირებულნი არიან"></span><a class="hidden" href="/words/static/оплаканы.json">оплаканы</a>
+<br><span i="и">и <input list="43_13_17" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="забыты">забыты <input list="43_13_18" s=''  e='' type="text" value="დავიწყებულნი"></span><a class="hidden" href="/words/static/забыты.json">забыты</a>
+<br><span i="бесчисленные">бесчисленные <input list="43_13_19" s=''  e='' type="text" value="აურაცხელი"></span><a class="hidden" href="/words/static/бесчисленные.json">бесчисленные</a>
+<br><span i="тысячи">тысячи <input list="43_13_20" s=''  e='' type="text" value="ათასობით"></span><a class="hidden" href="/words/static/тысячи.json">тысячи</a>
+<br><span i="человеков">человеков. <input list="43_13_21" s=''  e='.' type="text" value="ადამიანი."></span><a class="hidden" href="/words/static/человеков.json">человеков</a>
+<br><span i="сочтены">Сочтены <input list="43_13_22" s=''  e='' type="text" value="აღრაცხილნი არიან"></span><a class="hidden" href="/words/static/сочтены.json">сочтены</a>
+<br><span i="они">они, <input list="43_13_23" s=''  e=',' type="text" value="ისინი,"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="и">и <input list="43_13_24" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="помнятся">помнятся <input list="43_13_25" s=''  e='' type="text" value="მოიხსენებიან"></span><a class="hidden" href="/words/static/помнятся.json">помнятся</a>
+<br><span i="одним">одним <input list="43_13_26" s=''  e='' type="text" value="მხოლოდ"></span><a class="hidden" href="/words/static/одним.json">одним</a>
+<br><span i="всесовершенным">всесовершенным <input list="43_13_27" s=''  e='' type="text" value="ყოვლადსრულყოფილი"></span><a class="hidden" href="/words/static/всесовершенным.json">всесовершенным</a>
+<br><span i="богом">Богом. <input list="43_13_28" s=''  e='.' type="text" value="ღვთის მიერ."></span><a class="hidden" href="/words/static/богом.json">богом</a></p>
+<p><span i="едва">Едва <input list="43_14_1" s=''  e='' type="text" value="როგორც კი"></span><a class="hidden" href="/words/static/едва.json">едва</a>
+<br><span i="я">я <input list="43_14_2" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="родился">родился, <input list="43_14_3" s=''  e=',' type="text" value="დავიბადე,"></span><a class="hidden" href="/words/static/родился.json">родился</a>
+<br><span i="едва">едва <input list="43_14_4" s=''  e='' type="text" value="როგორც კი"></span><a class="hidden" href="/words/static/едва.json">едва</a>
+<br><span i="я">я <input list="43_14_5" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="зачался">зачался, <input list="43_14_6" s=''  e=',' type="text" value="ჩავისახე,"></span><a class="hidden" href="/words/static/зачался.json">зачался</a>
+<br><span i="как">как <input list="43_14_7" s=''  e='' type="text" value="რომ"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="смерть">смерть <input list="43_14_8" s=''  e='' type="text" value="სიკვდილმა"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="наложила">наложила <input list="43_14_9" s=''  e='' type="text" value="დამადო"></span><a class="hidden" href="/words/static/наложила.json">наложила</a>
+<br><span i="на">на <input list="43_14_10" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="меня">меня <input list="43_14_11" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="печать">печать <input list="43_14_12" s=''  e='' type="text" value="ბეჭედი"></span><a class="hidden" href="/words/static/печать.json">печать</a>
+<br><span i="свою">свою. <input list="43_14_13" s=''  e='.' type="text" value="თავისი."></span><a class="hidden" href="/words/static/свою.json">свою</a>
+<br><span i="он">“Он <input list="43_14_14" s='“'  e='' type="text" value="„იგი"></span><a class="hidden" href="/words/static/он.json">он</a>
+<br><span i="мой">мой”, <input list="43_14_15" s=''  e='”,' type="text" value="ჩემია“,"></span><a class="hidden" href="/words/static/мой.json">мой</a>
+<br><span i="сказала">сказала <input list="43_14_16" s=''  e='' type="text" value="თქვა"></span><a class="hidden" href="/words/static/сказала.json">сказала</a>
+<br><span i="она">она, <input list="43_14_17" s=''  e=',' type="text" value="მან,"></span><a class="hidden" href="/words/static/она.json">она</a>
+<br><span i="и">и <input list="43_14_18" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="немедленно">немедленно <input list="43_14_19" s=''  e='' type="text" value="დაუყოვნებლივ"></span><a class="hidden" href="/words/static/немедленно.json">немедленно</a>
+<br><span i="приготовила">приготовила <input list="43_14_20" s=''  e='' type="text" value="მოამზადა"></span><a class="hidden" href="/words/static/приготовила.json">приготовила</a>
+<br><span i="на">на <input list="43_14_21" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="меня">меня <input list="43_14_22" s=''  e='' type="text" value="ჩემთვის"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="косу">косу. <input list="43_14_23" s=''  e='.' type="text" value="ცელი."></span><a class="hidden" href="/words/static/косу.json">косу</a>
+<br><span i="с">С <input list="43_14_24" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="самого">самого <input list="43_14_25" s=''  e='' type="text" value="თავად"></span><a class="hidden" href="/words/static/самого.json">самого</a>
+<br><span i="начала">начала <input list="43_14_26" s=''  e='' type="text" value="საწყისიდან"></span><a class="hidden" href="/words/static/начала.json">начала</a>
+<br><span i="бытия">бытия <input list="43_14_27" s=''  e='' type="text" value="არსებობისა"></span><a class="hidden" href="/words/static/бытия.json">бытия</a>
+<br><span i="моего">моего <input list="43_14_28" s=''  e='' type="text" value="ჩემისა"></span><a class="hidden" href="/words/static/моего.json">моего</a>
+<br><span i="она">она <input list="43_14_29" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/она.json">она</a>
+<br><span i="замахивается">замахивается <input list="43_14_30" s=''  e='' type="text" value="იქნევს"></span><a class="hidden" href="/words/static/замахивается.json">замахивается</a>
+<br><span i="этою">этою <input list="43_14_31" s=''  e='' type="text" value="ამ"></span><a class="hidden" href="/words/static/этою.json">этою</a>
+<br><span i="косою">косою. <input list="43_14_32" s=''  e='.' type="text" value="ცელს."></span><a class="hidden" href="/words/static/косою.json">косою</a>
+<br><span i="ежеминутно">Ежеминутно <input list="43_14_33" s=''  e='' type="text" value="ყოველწუთიერად"></span><a class="hidden" href="/words/static/ежеминутно.json">ежеминутно</a>
+<br><span i="я">я <input list="43_14_34" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="могу">могу <input list="43_14_35" s=''  e='' type="text" value="შესაძლოა"></span><a class="hidden" href="/words/static/могу.json">могу</a>
+<br><span i="сделаться">сделаться <input list="43_14_36" s=''  e='' type="text" value="გავხდე"></span><a class="hidden" href="/words/static/сделаться.json">сделаться</a>
+<br><span i="жертвою">жертвою <input list="43_14_37" s=''  e='' type="text" value="მსხვერპლი"></span><a class="hidden" href="/words/static/жертвою.json">жертвою</a>
+<br><span i="смерти">смерти! <input list="43_14_38" s=''  e='!' type="text" value="სიკვდილისა!"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="были">Были <input list="43_14_39" s=''  e='' type="text" value="იყო"></span><a class="hidden" href="/words/static/были.json">были</a>
+<br><span i="многие">многие <input list="43_14_40" s=''  e='' type="text" value="ბევრი"></span><a class="hidden" href="/words/static/многие.json">многие</a>
+<br><span i="промахи">промахи; <input list="43_14_41" s=''  e=';' type="text" value="აცილებანი:"></span><a class="hidden" href="/words/static/промахи.json">промахи</a>
+<br><span i="но">но <input list="43_14_42" s=''  e='' type="text" value="მაგრამ"></span><a class="hidden" href="/words/static/но.json">но</a>
+<br><span i="верный">верный <input list="43_14_43" s=''  e='' type="text" value="ზუსტი"></span><a class="hidden" href="/words/static/верный.json">верный</a>
+<br><span i="взмах">взмах <input list="43_14_44" s=''  e='' type="text" value="მოქნევა"></span><a class="hidden" href="/words/static/взмах.json">взмах</a>
+<br><span i="и">и <input list="43_14_45" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="удар">удар <input list="43_14_46" s=''  e='' type="text" value="დარტყმა"></span><a class="hidden" href="/words/static/удар.json">удар</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="неминуемы">неминуемы. <input list="43_14_48" s=''  e='.' type="text" value="გარდაუვალია."></span><a class="hidden" href="/words/static/неминуемы.json">неминуемы</a></p>
+<p><span i="с">С <input list="43_15_1" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="холодною">холодною <input list="43_15_2" s=''  e='' type="text" value="ცივი"></span><a class="hidden" href="/words/static/холодною.json">холодною</a>
+<br><span i="улыбкою">улыбкою <input list="43_15_3" s=''  e='' type="text" value="ღიმილით"></span><a class="hidden" href="/words/static/улыбкою.json">улыбкою</a>
+<br><span i="презрения">презрения <input list="43_15_4" s=''  e='' type="text" value="არად ჩაგდებისა"></span><a class="hidden" href="/words/static/презрения.json">презрения</a>
+<br><span i="смотрит">смотрит <input list="43_15_5" s=''  e='' type="text" value="უყურებს"></span><a class="hidden" href="/words/static/смотрит.json">смотрит</a>
+<br><span i="смерть">смерть <input list="43_15_6" s=''  e='' type="text" value="სიკვდილი"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="на">на <input list="43_15_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="земные">земные <input list="43_15_8" s=''  e='' type="text" value="მიწიერ"></span><a class="hidden" href="/words/static/земные.json">земные</a>
+<br><span i="дела">дела <input list="43_15_9" s=''  e='' type="text" value="საქმეებს"></span><a class="hidden" href="/words/static/дела.json">дела</a>
+<br><span i="человеческие">человеческие. <input list="43_15_10" s=''  e='.' type="text" value="ადამიანურებს."></span><a class="hidden" href="/words/static/человеческие.json">человеческие</a>
+<br><span i="зодчий">Зодчий <input list="43_15_11" s=''  e='' type="text" value="ხუროთმოძღვარი"></span><a class="hidden" href="/words/static/зодчий.json">зодчий</a>
+<br><span i="строит">строит <input list="43_15_12" s=''  e='' type="text" value="აშენებს"></span><a class="hidden" href="/words/static/строит.json">строит</a>
+<br><span i="колоссальное">колоссальное <input list="43_15_13" s=''  e='' type="text" value="კოლოსალურ"></span><a class="hidden" href="/words/static/колоссальное.json">колоссальное</a>
+<br><span i="здание">здание, <input list="43_15_14" s=''  e=',' type="text" value="შენობას,"></span><a class="hidden" href="/words/static/здание.json">здание</a>
+<br><span i="живописец">живописец <input list="43_15_15" s=''  e='' type="text" value="ფერმწერს"></span><a class="hidden" href="/words/static/живописец.json">живописец</a>
+<br><span i="не">не <input list="43_15_16" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="кончил">кончил <input list="43_15_17" s=''  e='' type="text" value="დაუსრულებია"></span><a class="hidden" href="/words/static/кончил.json">кончил</a>
+<br><span i="изящной">изящной <input list="43_15_18" s=''  e='' type="text" value="მოხდენილი"></span><a class="hidden" href="/words/static/изящной.json">изящной</a>
+<br><span i="картины">картины <input list="43_15_19" s=''  e='' type="text" value="ნახატი"></span><a class="hidden" href="/words/static/картины.json">картины</a>
+<br><span i="своей">своей, <input list="43_15_20" s=''  e=',' type="text" value="თავისი,"></span><a class="hidden" href="/words/static/своей.json">своей</a>
+<br><span i="гений">гений <input list="43_15_21" s=''  e='' type="text" value="გენიოსმა"></span><a class="hidden" href="/words/static/гений.json">гений</a>
+<br><span i="составил">составил <input list="43_15_22" s=''  e='' type="text" value="შეადგინა"></span><a class="hidden" href="/words/static/составил.json">составил</a>
+<br><span i="гигантские">гигантские <input list="43_15_23" s=''  e='' type="text" value="გიგანტური"></span><a class="hidden" href="/words/static/гигантские.json">гигантские</a>
+<br><span i="планы">планы, <input list="43_15_24" s=''  e=',' type="text" value="გეგმები,"></span><a class="hidden" href="/words/static/планы.json">планы</a>
+<br><span i="хочет">хочет <input list="43_15_25" s=''  e='' type="text" value="სურს"></span><a class="hidden" href="/words/static/хочет.json">хочет</a>
+<br><span i="привести">привести <input list="43_15_26" s=''  e='' type="text" value="მოიყვანოს"></span><a class="hidden" href="/words/static/привести.json">привести</a>
+<br><span i="их">их <input list="43_15_27" s=''  e='' type="text" value="ისინი"></span><a class="hidden" href="/words/static/их.json">их</a>
+<br><span i="в">в <input list="43_15_28" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="исполнение">исполнение; <input list="43_15_29" s=''  e=';' type="text" value="მოქმედებაში;"></span><a class="hidden" href="/words/static/исполнение.json">исполнение</a>
+<br><span i="приходит">приходит <input list="43_15_30" s=''  e='' type="text" value="მოდის"></span><a class="hidden" href="/words/static/приходит.json">приходит</a>
+<br><span i="нежданная">нежданная <input list="43_15_31" s=''  e='' type="text" value="მოულოდნელი"></span><a class="hidden" href="/words/static/нежданная.json">нежданная</a>
+<br><span i="и">и <input list="43_15_32" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="неумолимая">неумолимая <input list="43_15_33" s=''  e='' type="text" value="ულმობელი"></span><a class="hidden" href="/words/static/неумолимая.json">неумолимая</a>
+<br><span i="смерть">смерть, <input list="43_15_34" s=''  e=',' type="text" value="სიკვდილი,"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="славного">славного <input list="43_15_35" s=''  e='' type="text" value="დიადს"></span><a class="hidden" href="/words/static/славного.json">славного</a>
+<br><span i="земли">земли <input list="43_15_36" s=''  e='' type="text" value="მიწიერს"></span><a class="hidden" href="/words/static/земли.json">земли</a>
+<br><span i="и">и <input list="43_15_37" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="все">все <input list="43_15_38" s=''  e='' type="text" value="ყველა"></span><a class="hidden" href="/words/static/все.json">все</a>
+<br><span i="замыслы">замыслы <input list="43_15_39" s=''  e='' type="text" value="განზრახვებს"></span><a class="hidden" href="/words/static/замыслы.json">замыслы</a>
+<br><span i="его">его <input list="43_15_40" s=''  e='' type="text" value="მისსას"></span><a class="hidden" href="/words/static/его.json">его</a>
+<br><span i="повергает">повергает <input list="43_15_41" s=''  e='' type="text" value="დაამხობს"></span><a class="hidden" href="/words/static/повергает.json">повергает</a>
+<br><span i="в">в <input list="43_15_42" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="ничтожество">ничтожество. <input list="43_15_43" s=''  e='.' type="text" value="არარაობაში."></span><a class="hidden" href="/words/static/ничтожество.json">ничтожество</a></p>
+<p><span i="пред">Пред <input list="43_16_1" s=''  e='' type="text" value="წინაშე"></span><a class="hidden" href="/words/static/пред.json">пред</a>
+<br><span i="одним">одним <input list="43_16_2" s=''  e='' type="text" value="მხოლოდ"></span><a class="hidden" href="/words/static/одним.json">одним</a>
+<br><span i="рабом">рабом <input list="43_16_3" s=''  e='' type="text" value="მონისა"></span><a class="hidden" href="/words/static/рабом.json">рабом</a>
+<br><span i="христовым">Христовым <input list="43_16_4" s=''  e='' type="text" value="ქრისტესი"></span><a class="hidden" href="/words/static/христовым.json">христовым</a>
+<br><span i="благоговеет">благоговеет <input list="43_16_5" s=''  e='' type="text" value="მოწიწებულია"></span><a class="hidden" href="/words/static/благоговеет.json">благоговеет</a>
+<br><span i="суровая">суровая <input list="43_16_6" s=''  e='' type="text" value="მწყალო"></span><a class="hidden" href="/words/static/суровая.json">суровая</a>
+<br><span i="смерть">смерть, <input list="43_16_7" s=''  e=',' type="text" value="სიკვდილი,"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="побежденная">побежденная <input list="43_16_8" s=''  e='' type="text" value="დამარცხებული"></span><a class="hidden" href="/words/static/побежденная.json">побежденная</a>
+<br><span i="христом">Христом, <input list="43_16_9" s=''  e=',' type="text" value="ქრისტეს მიერ,"></span><a class="hidden" href="/words/static/христом.json">христом</a>
+<br><span i="она">она <input list="43_16_10" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/она.json">она</a>
+<br><span i="уважает">уважает <input list="43_16_11" s=''  e='' type="text" value="აფასებს"></span><a class="hidden" href="/words/static/уважает.json">уважает</a>
+<br><span i="только">только <input list="43_16_12" s=''  e='' type="text" value="მხოლოდ"></span><a class="hidden" href="/words/static/только.json">только</a>
+<br><span i="одну">одну <input list="43_16_13" s=''  e='' type="text" value="ერთადერთ"></span><a class="hidden" href="/words/static/одну.json">одну</a>
+<br><span i="жизнь">жизнь <input list="43_16_14" s=''  e='' type="text" value="ცხოვრებას"></span><a class="hidden" href="/words/static/жизнь.json">жизнь</a>
+<br><span i="во">во <input list="43_16_15" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/во.json">во</a>
+<br><span i="христе">Христе. <input list="43_16_16" s=''  e='.' type="text" value="ქრისტეში."></span><a class="hidden" href="/words/static/христе.json">христе</a>
+<br><span i="часто">Часто <input list="43_16_17" s=''  e='' type="text" value="ხშირად"></span><a class="hidden" href="/words/static/часто.json">часто</a>
+<br><span i="небесный">небесный <input list="43_16_18" s=''  e='' type="text" value="ზეციერი"></span><a class="hidden" href="/words/static/небесный.json">небесный</a>
+<br><span i="вестник">вестник <input list="43_16_19" s=''  e='' type="text" value="მაცნე"></span><a class="hidden" href="/words/static/вестник.json">вестник</a>
+<br><span i="возвещает">возвещает <input list="43_16_20" s=''  e='' type="text" value="ატყობინებს"></span><a class="hidden" href="/words/static/возвещает.json">возвещает</a>
+<br><span i="служителям">служителям <input list="43_16_21" s=''  e='' type="text" value="მომსახურეთ"></span><a class="hidden" href="/words/static/служителям.json">служителям</a>
+<br><span i="истины">Истины <input list="43_16_22" s=''  e='' type="text" value="ჭეშმარიტებისა"></span><a class="hidden" href="/words/static/истины.json">истины</a>
+<br><span i="о">о <input list="43_16_23" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="скором">скором <input list="43_16_24" s=''  e='' type="text" value="სწრაფი"></span><a class="hidden" href="/words/static/скором.json">скором</a>
+<br><span i="переселении">переселении <input list="43_16_25" s=''  e='' type="text" value="გადასახლების შესახებ"></span><a class="hidden" href="/words/static/переселении.json">переселении</a>
+<br><span i="их">их <input list="43_16_26" s=''  e='' type="text" value="მათი"></span><a class="hidden" href="/words/static/их.json">их</a>
+<br><span i="в">в <input list="43_16_27" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="вечность">вечность <input list="43_16_28" s=''  e='' type="text" value="მარადისობაში"></span><a class="hidden" href="/words/static/вечность.json">вечность</a>
+<br><span i="и">и <input list="43_16_29" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="о">о <input list="43_16_30" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="блаженстве">блаженстве <input list="43_16_31" s=''  e='' type="text" value="ნეტარების შესახებ"></span><a class="hidden" href="/words/static/блаженстве.json">блаженстве</a>
+<br><span i="в">в <input list="43_16_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="ней">ней. <input list="43_16_33" s=''  e='.' type="text" value="მასში."></span><a class="hidden" href="/words/static/ней.json">ней</a>
+<br><span i="приготовленные">Приготовленные <input list="43_16_34" s=''  e='' type="text" value="მომზადებულნი"></span><a class="hidden" href="/words/static/приготовленные.json">приготовленные</a>
+<br><span i="к">к <input list="43_16_35" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="смерти">смерти <input list="43_16_36" s=''  e='' type="text" value="სიკვდილისათვის"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="жизнью">жизнью, <input list="43_16_37" s=''  e=',' type="text" value="სიცოცხლით,"></span><a class="hidden" href="/words/static/жизнью.json">жизнью</a>
+<br><span i="утешаемые">утешаемые <input list="43_16_38" s=''  e='' type="text" value="ნანუგეშებნი"></span><a class="hidden" href="/words/static/утешаемые.json">утешаемые</a>
+<br><span i="и">и <input list="43_16_39" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="свидетельством">свидетельством <input list="43_16_40" s=''  e='' type="text" value="მოწმობითაც"></span><a class="hidden" href="/words/static/свидетельством.json">свидетельством</a>
+<br><span i="совести">совести <input list="43_16_41" s=''  e='' type="text" value="სინდისისა"></span><a class="hidden" href="/words/static/совести.json">совести</a>
+<br><span i="и">и <input list="43_16_42" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="обетованием">обетованием <input list="43_16_43" s=''  e='' type="text" value="აღთქმულით"></span><a class="hidden" href="/words/static/обетованием.json">обетованием</a>
+<br><span i="свыше">Свыше, <input list="43_16_44" s=''  e=',' type="text" value="ზეციდან,"></span><a class="hidden" href="/words/static/свыше.json">свыше</a>
+<br><span i="тихо">тихо, <input list="43_16_45" s=''  e=',' type="text" value="ჩუმად"></span><a class="hidden" href="/words/static/тихо.json">тихо</a>
+<br><span i="с">с <input list="43_16_46" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="улыбкою">улыбкою <input list="43_16_47" s=''  e='' type="text" value="სიცილით"></span><a class="hidden" href="/words/static/улыбкою.json">улыбкою</a>
+<br><span i="на">на <input list="43_16_48" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="устах">устах, <input list="43_16_49" s=''  e=',' type="text" value="ბაგეებზე,"></span><a class="hidden" href="/words/static/устах.json">устах</a>
+<br><span i="засыпают">засыпают <input list="43_16_50" s=''  e='' type="text" value="იძინებენ"></span><a class="hidden" href="/words/static/засыпают.json">засыпают</a>
+<br><span i="они">они <input list="43_16_51" s=''  e='' type="text" value="ისინი"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="продолжительным">продолжительным <input list="43_16_52" s=''  e='' type="text" value="ხანგრძლივი"></span><a class="hidden" href="/words/static/продолжительным.json">продолжительным</a>
+<br><span i="сном">сном <input list="43_16_53" s=''  e='' type="text" value="ძილით"></span><a class="hidden" href="/words/static/сном.json">сном</a>
+<br><span i="смертным">смертным. <input list="43_16_54" s=''  e='.' type="text" value="სიკვდილისა."></span><a class="hidden" href="/words/static/смертным.json">смертным</a></p>
+<p><span i="видел">Видел <input list="43_17_1" s=''  e='' type="text" value="უნახავს"></span><a class="hidden" href="/words/static/видел.json">видел</a>
+<br><span i="ли">ли <input list="43_17_2" s=''  e='' type="text" value="კი"></span><a class="hidden" href="/words/static/ли.json">ли</a>
+<br><span i="кто">кто <input list="43_17_3" s=''  e='' type="text" value="ვინმეს"></span><a class="hidden" href="/words/static/кто.json">кто</a>
+<br><span i="тело">тело <input list="43_17_4" s=''  e='' type="text" value="სხეული"></span><a class="hidden" href="/words/static/тело.json">тело</a>
+<br><span i="праведника">праведника, <input list="43_17_5" s=''  e=',' type="text" value="მართლისა,"></span><a class="hidden" href="/words/static/праведника.json">праведника</a>
+<br><span i="оставленное">оставленное <input list="43_17_6" s=''  e='' type="text" value="მიტობებული"></span><a class="hidden" href="/words/static/оставленное.json">оставленное</a>
+<br><span i="душою">душою? <input list="43_17_7" s=''  e='?' type="text" value="სულისაგან?"></span><a class="hidden" href="/words/static/душою.json">душою</a>
+<br><span i="нет">Нет <input list="43_17_8" s=''  e='' type="text" value="არაა"></span><a class="hidden" href="/words/static/нет.json">нет</a>
+<br><span i="от">от <input list="43_17_9" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="него">него <input list="43_17_10" s=''  e='' type="text" value="მისგან"></span><a class="hidden" href="/words/static/него.json">него</a>
+<br><span i="зловония">зловония, <input list="43_17_11" s=''  e=',' type="text" value="სიმყრალე,"></span><a class="hidden" href="/words/static/зловония.json">зловония</a>
+<br><span i="не">не <input list="43_17_12" s=''  e='' type="text" value="არაა"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="страшно">страшно <input list="43_17_13" s=''  e='' type="text" value="საშიში"></span><a class="hidden" href="/words/static/страшно.json">страшно</a>
+<br><span i="приближение">приближение <input list="43_17_14" s=''  e='' type="text" value="მიახლოება"></span><a class="hidden" href="/words/static/приближение.json">приближение</a>
+<br><span i="к">к <input list="43_17_15" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="нему">нему; <input list="43_17_16" s=''  e=';' type="text" value="მისდამი;"></span><a class="hidden" href="/words/static/нему.json">нему</a>
+<br><span i="при">при <input list="43_17_17" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/при.json">при</a>
+<br><span i="погребении">погребении <input list="43_17_18" s=''  e='' type="text" value="დაკრძალვისას"></span><a class="hidden" href="/words/static/погребении.json">погребении</a>
+<br><span i="его">его <input list="43_17_19" s=''  e='' type="text" value="მისი"></span><a class="hidden" href="/words/static/его.json">его</a>
+<br><span i="печаль">печаль <input list="43_17_20" s=''  e='' type="text" value="დამწუხრება"></span><a class="hidden" href="/words/static/печаль.json">печаль</a>
+<br><span i="растворена">растворена <input list="43_17_21" s=''  e='' type="text" value="გაზავებულია"></span><a class="hidden" href="/words/static/растворена.json">растворена</a>
+<br><span i="какою-то">какою-то <input list="43_17_22" s=''  e='' type="text" value="როგორი ღაც"></span><a class="hidden" href="/words/static/какою-то.json">какою-то</a>
+<br><span i="непостижимою">непостижимою <input list="43_17_23" s=''  e='' type="text" value="მიუწვდომელი"></span><a class="hidden" href="/words/static/непостижимою.json">непостижимою</a>
+<br><span i="радостью">радостью. <input list="43_17_24" s=''  e='.' type="text" value="სიხარულით."></span><a class="hidden" href="/words/static/радостью.json">радостью</a>
+<br><span i="черты">Черты <input list="43_17_25" s=''  e='' type="text" value="ნაკვთები"></span><a class="hidden" href="/words/static/черты.json">черты</a>
+<br><span i="лица">лица, <input list="43_17_26" s=''  e=',' type="text" value="სახისა,"></span><a class="hidden" href="/words/static/лица.json">лица</a>
+<br><span i="застывшие">застывшие <input list="43_17_27" s=''  e='' type="text" value="გაშეშებულნი"></span><a class="hidden" href="/words/static/застывшие.json">застывшие</a>
+<br><span i="такими">такими, <input list="43_17_28" s=''  e=',' type="text" value="ასეთად,"></span><a class="hidden" href="/words/static/такими.json">такими</a>
+<br><span i="какими">какими <input list="43_17_29" s=''  e='' type="text" value="როგორიც"></span><a class="hidden" href="/words/static/какими.json">какими</a>
+<br><span i="они">они <input list="43_17_30" s=''  e='' type="text" value="ისინი"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="изобразились">изобразились <input list="43_17_31" s=''  e='' type="text" value="გამოისახნენ"></span><a class="hidden" href="/words/static/изобразились.json">изобразились</a>
+<br><span i="в">в <input list="43_17_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="минуты">минуты <input list="43_17_33" s=''  e='' type="text" value="წუთებში"></span><a class="hidden" href="/words/static/минуты.json">минуты</a>
+<br><span i="исшествия">исшествия <input list="43_17_34" s=''  e='' type="text" value="გასვლისა"></span><a class="hidden" href="/words/static/исшествия.json">исшествия</a>
+<br><span i="души">души, <input list="43_17_35" s=''  e=',' type="text" value="სულისა,"></span><a class="hidden" href="/words/static/души.json">души</a>
+<br><span i="иногда">иногда <input list="43_17_36" s=''  e='' type="text" value="ზოგჯერ"></span><a class="hidden" href="/words/static/иногда.json">иногда</a>
+<br><span i="почивают">почивают <input list="43_17_37" s=''  e='' type="text" value="განისვენებენ"></span><a class="hidden" href="/words/static/почивают.json">почивают</a>
+<br><span i="в">в <input list="43_17_38" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="глубочайшем">глубочайшем <input list="43_17_39" s=''  e='' type="text" value="უღრმეს"></span><a class="hidden" href="/words/static/глубочайшем.json">глубочайшем</a>
+<br><span i="спокойствии">спокойствии, <input list="43_17_40" s=''  e=',' type="text" value="სიწყნარეში,"></span><a class="hidden" href="/words/static/спокойствии.json">спокойствии</a>
+<br><span i="а">а <input list="43_17_41" s=''  e='' type="text" value="ხოლო"></span><a class="hidden" href="/words/static/а.json">а</a>
+<br><span i="иногда">иногда <input list="43_17_42" s=''  e='' type="text" value="ზოგჯერ"></span><a class="hidden" href="/words/static/иногда.json">иногда</a>
+<br><span i="светит">светит <input list="43_17_43" s=''  e='' type="text" value="ანათებს"></span><a class="hidden" href="/words/static/светит.json">светит</a>
+<br><span i="в">в <input list="43_17_44" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="них">них <input list="43_17_45" s=''  e='' type="text" value="მათში"></span><a class="hidden" href="/words/static/них.json">них</a>
+<br><span i="радость">радость <input list="43_17_46" s=''  e='' type="text" value="სიხარული"></span><a class="hidden" href="/words/static/радость.json">радость</a>
+<br><span i="усладительных">усладительных <input list="43_17_47" s=''  e='' type="text" value="დამატკბობელი"></span><a class="hidden" href="/words/static/усладительных.json">усладительных</a>
+<br><span i="встречи">встречи <input list="43_17_48" s=''  e='' type="text" value="შეხვედრისა"></span><a class="hidden" href="/words/static/встречи.json">встречи</a>
+<br><span i="и">и <input list="43_17_49" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="целования">целования <input list="43_17_50" s=''  e='' type="text" value="კოცნისა"></span><a class="hidden" href="/words/static/целования.json">целования</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="конечно">конечно <input list="43_17_52" s=''  e='' type="text" value="რა თქმა უნდა"></span><a class="hidden" href="/words/static/конечно.json">конечно</a>
+<br><span i="с">с <input list="43_17_53" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="ангелами">Ангелами <input list="43_17_54" s=''  e='' type="text" value="ანგელოზებთან"></span><a class="hidden" href="/words/static/ангелами.json">ангелами</a>
+<br><span i="и">и <input list="43_17_55" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="с">с <input list="43_17_56" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="ликами">ликами <input list="43_17_57" s=''  e='' type="text" value="პირებთან"></span><a class="hidden" href="/words/static/ликами.json">ликами</a>
+<br><span i="святых">святых, <input list="43_17_58" s=''  e=',' type="text" value="წმინდანებისა,"></span><a class="hidden" href="/words/static/святых.json">святых</a>
+<br><span i="которые">которые <input list="43_17_59" s=''  e='' type="text" value="რომლებიც"></span><a class="hidden" href="/words/static/которые.json">которые</a>
+<br><span i="посылаются">посылаются <input list="43_17_60" s=''  e='' type="text" value="გამოიგზავნებიან"></span><a class="hidden" href="/words/static/посылаются.json">посылаются</a>
+<br><span i="с">с <input list="43_17_61" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="неба">неба <input list="43_17_62" s=''  e='' type="text" value="ზეციდან"></span><a class="hidden" href="/words/static/неба.json">неба</a>
+<br><span i="за">за <input list="43_17_63" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/за.json">за</a>
+<br><span i="душами">душами <input list="43_17_64" s=''  e='' type="text" value="სულებისათვის"></span><a class="hidden" href="/words/static/душами.json">душами</a>
+<br><span i="праведников">праведников. <input list="43_17_65" s=''  e='.' type="text" value="მართლებისა."></span><a class="hidden" href="/words/static/праведников.json">праведников</a></p>
+<p><span i="воспомнись">Воспомнись <input list="43_18_1" s=''  e='' type="text" value="მომეხსენე"></span><a class="hidden" href="/words/static/воспомнись.json">воспомнись</a>
+<br><span i="мне">мне <input list="43_18_2" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/мне.json">мне</a>
+<br><span i="смерть">смерть <input list="43_18_3" s=''  e='' type="text" value="სიკვდილო"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="моя">моя! <input list="43_18_4" s=''  e='!' type="text" value="ჩემო!"></span><a class="hidden" href="/words/static/моя.json">моя</a>
+<br><span i="приди">приди <input list="43_18_5" s=''  e='' type="text" value="მოდი"></span><a class="hidden" href="/words/static/приди.json">приди</a>
+<br><span i="ко">ко <input list="43_18_6" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/ко.json">ко</a>
+<br><span i="мне">мне <input list="43_18_7" s=''  e='' type="text" value="ჩემთან"></span><a class="hidden" href="/words/static/мне.json">мне</a>
+<br><span i="горькое">горькое, <input list="43_18_8" s=''  e=',' type="text" value="მწარევ,"></span><a class="hidden" href="/words/static/горькое.json">горькое</a>
+<br><span i="но">но <input list="43_18_9" s=''  e='' type="text" value="მაგრამ"></span><a class="hidden" href="/words/static/но.json">но</a>
+<br><span i="вполне">вполне <input list="43_18_10" s=''  e='' type="text" value="საკმაოდ"></span><a class="hidden" href="/words/static/вполне.json">вполне</a>
+<br><span i="справедливое">справедливое <input list="43_18_11" s=''  e='' type="text" value="სამართლიანო"></span><a class="hidden" href="/words/static/справедливое.json">справедливое</a>
+<br><span i="и">и <input list="43_18_12" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="полезное">полезное <input list="43_18_13" s=''  e='' type="text" value="სასარგებლო"></span><a class="hidden" href="/words/static/полезное.json">полезное</a>
+<br><span i="воспоминание">воспоминание! <input list="43_18_14" s=''  e='!' type="text" value="ხსოვნავ!"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="отторгни">отторгни <input list="43_18_15" s=''  e='' type="text" value="განმაშორე"></span><a class="hidden" href="/words/static/отторгни.json">отторгни</a>
+<br><span i="меня">меня <input list="43_18_16" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="от">от <input list="43_18_17" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="греха">греха! <input list="43_18_18" s=''  e='!' type="text" value="ცოდვისაგან!"></span><a class="hidden" href="/words/static/греха.json">греха</a>
+<br><span i="наставь">наставь <input list="43_18_19" s=''  e='' type="text" value="დამმოძღვრე"></span><a class="hidden" href="/words/static/наставь.json">наставь</a>
+<br><span i="на">на <input list="43_18_20" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="путь">путь <input list="43_18_21" s=''  e='' type="text" value="გზაზე"></span><a class="hidden" href="/words/static/путь.json">путь</a>
+<br><span i="христов">Христов! <input list="43_18_22" s=''  e='!' type="text" value="ქრისტესი!"></span><a class="hidden" href="/words/static/христов.json">христов</a>
+<br><span i="пусть">Пусть <input list="43_18_23" s=''  e='' type="text" value="დაე"></span><a class="hidden" href="/words/static/пусть.json">пусть</a>
+<br><span i="от">от <input list="43_18_24" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="воспоминания">воспоминания <input list="43_18_25" s=''  e='' type="text" value="ხსოვნისაგან"></span><a class="hidden" href="/words/static/воспоминания.json">воспоминания</a>
+<br><span i="о">о <input list="43_18_26" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти <input list="43_18_27" s=''  e='' type="text" value="სიკვდილის შესახებ"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="расслабнут">расслабнут <input list="43_18_28" s=''  e='' type="text" value="დასუსტდეს"></span><a class="hidden" href="/words/static/расслабнут.json">расслабнут</a>
+<br><span i="руки">руки <input list="43_18_29" s=''  e='' type="text" value="ხელები"></span><a class="hidden" href="/words/static/руки.json">руки</a>
+<br><span i="мои">мои <input list="43_18_30" s=''  e='' type="text" value="ჩემნი"></span><a class="hidden" href="/words/static/мои.json">мои</a>
+<br><span i="ко">ко <input list="43_18_31" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/ко.json">ко</a>
+<br><span i="всякому">всякому <input list="43_18_32" s=''  e='' type="text" value="ყოველგვარი"></span><a class="hidden" href="/words/static/всякому.json">всякому</a>
+<br><span i="пустому">пустому, <input list="43_18_33" s=''  e=',' type="text" value="ფუჭისადმი,"></span><a class="hidden" href="/words/static/пустому.json">пустому</a>
+<br><span i="суетному">суетному, <input list="43_18_34" s=''  e=',' type="text" value="ამაოსადმი,"></span><a class="hidden" href="/words/static/суетному.json">суетному</a>
+<br><span i="греховному">греховному <input list="43_18_35" s=''  e='' type="text" value="ცოდვილი"></span><a class="hidden" href="/words/static/греховному.json">греховному</a>
+<br><span i="начинанию">начинанию. <input list="43_18_36" s=''  e='.' type="text" value="წამოწყებისადმი."></span><a class="hidden" href="/words/static/начинанию.json">начинанию</a></p>
+<p><span i="воспомнись">Воспомнись <input list="43_19_1" s=''  e='' type="text" value="მომეხსენე"></span><a class="hidden" href="/words/static/воспомнись.json">воспомнись</a>
+<br><span i="мне">мне <input list="43_19_2" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/мне.json">мне</a>
+<br><span i="смерть">смерть <input list="43_19_3" s=''  e='' type="text" value="სიკვდილო"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="моя">моя! <input list="43_19_4" s=''  e='!' type="text" value="ჩემო!"></span><a class="hidden" href="/words/static/моя.json">моя</a>
+<br><span i="и">и <input list="43_19_5" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="убежат">убежат <input list="43_19_6" s=''  e='' type="text" value="გაიქცევა"></span><a class="hidden" href="/words/static/убежат.json">убежат</a>
+<br><span i="от">от <input list="43_19_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="меня">меня <input list="43_19_8" s=''  e='' type="text" value="ჩემგან"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="пленяющие">пленяющие <input list="43_19_9" s=''  e='' type="text" value="დამამონებელი"></span><a class="hidden" href="/words/static/пленяющие.json">пленяющие</a>
+<br><span i="меня">меня <input list="43_19_10" s=''  e='' type="text" value="ჩემი"></span><a class="hidden" href="/words/static/меня.json">меня</a>
+<br><span i="тщеславие">тщеславие <input list="43_19_11" s=''  e='' type="text" value="პატივმოყვარეობა"></span><a class="hidden" href="/words/static/тщеславие.json">тщеславие</a>
+<br><span i="и">и <input list="43_19_12" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="сластолюбие">сластолюбие. <input list="43_19_13" s=''  e='.' type="text" value="სიამეთმოყვარეობა."></span><a class="hidden" href="/words/static/сластолюбие.json">сластолюбие</a>
+<br><span i="я">Я <input list="43_19_14" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="устраню">устраню <input list="43_19_15" s=''  e='' type="text" value="განვდევნი"></span><a class="hidden" href="/words/static/устраню.json">устраню</a>
+<br><span i="с">с <input list="43_19_16" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="трапезы">трапезы <input list="43_19_17" s=''  e='' type="text" value="ტრაპეზიდან"></span><a class="hidden" href="/words/static/трапезы.json">трапезы</a>
+<br><span i="моей">моей <input list="43_19_18" s=''  e='' type="text" value="ჩემი"></span><a class="hidden" href="/words/static/моей.json">моей</a>
+<br><span i="дымящиеся">дымящиеся <input list="43_19_19" s=''  e='' type="text" value="ორთქლმოდებულ"></span><a class="hidden" href="/words/static/дымящиеся.json">дымящиеся</a>
+<br><span i="роскошные">роскошные <input list="43_19_20" s=''  e='' type="text" value="მდიდრულ"></span><a class="hidden" href="/words/static/роскошные.json">роскошные</a>
+<br><span i="брашна">брашна, <input list="43_19_21" s=''  e=',' type="text" value="საკვებს,"></span><a class="hidden" href="/words/static/брашна.json">брашна</a>
+<br><span i="сниму">сниму <input list="43_19_22" s=''  e='' type="text" value="გავიხდი"></span><a class="hidden" href="/words/static/сниму.json">сниму</a>
+<br><span i="с">с <input list="43_19_23" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="себя">себя <input list="43_19_24" s=''  e='' type="text" value="თავიდან"></span><a class="hidden" href="/words/static/себя.json">себя</a>
+<br><span i="одежды">одежды <input list="43_19_25" s=''  e='' type="text" value="ტანსაცმელს"></span><a class="hidden" href="/words/static/одежды.json">одежды</a>
+<br><span i="пышныя">пышныя, <input list="43_19_26" s=''  e=',' type="text" value="ფაფუკს,"></span><a class="hidden" href="/words/static/пышныя.json">пышныя</a>
+<br><span i="оденусь">оденусь <input list="43_19_27" s=''  e='' type="text" value="შევიმოსები"></span><a class="hidden" href="/words/static/оденусь.json">оденусь</a>
+<br><span i="в">в <input list="43_19_28" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="одежды">одежды <input list="43_19_29" s=''  e='' type="text" value="ტანსაცმელში"></span><a class="hidden" href="/words/static/одежды.json">одежды</a>
+<br><span i="плача">плача, <input list="43_19_30" s=''  e=',' type="text" value="გლოვისა,"></span><a class="hidden" href="/words/static/плача.json">плача</a>
+<br><span i="заживо">заживо <input list="43_19_31" s=''  e='' type="text" value="ცოცხლად"></span><a class="hidden" href="/words/static/заживо.json">заживо</a>
+<br><span i="оплачу">оплачу <input list="43_19_32" s=''  e='' type="text" value="დავიტირებ"></span><a class="hidden" href="/words/static/оплачу.json">оплачу</a>
+<br><span i="себя">себя <input list="43_19_33" s=''  e='' type="text" value="თავს"></span><a class="hidden" href="/words/static/себя.json">себя</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="нареченного">нареченного <input list="43_19_35" s=''  e='' type="text" value="წოდებულს"></span><a class="hidden" href="/words/static/нареченного.json">нареченного</a>
+<br><span i="мертвеца">мертвеца <input list="43_19_36" s=''  e='' type="text" value="მკვდრად"></span><a class="hidden" href="/words/static/мертвеца.json">мертвеца</a>
+<br><span i="от">от <input list="43_19_37" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/от.json">от</a>
+<br><span i="рождения">рождения <input list="43_19_38" s=''  e='' type="text" value="შობიდან"></span><a class="hidden" href="/words/static/рождения.json">рождения</a>
+<br><span i="моего">моего. <input list="43_19_39" s=''  e='.' type="text" value="ჩემისა."></span><a class="hidden" href="/words/static/моего.json">моего</a></p>
+<p><span i="так">“Так! <input list="43_20_1" s='“'  e='!' type="text" value="„ასე!"></span><a class="hidden" href="/words/static/так.json">так</a>
+<br><span i="помяни">помяни <input list="43_20_2" s=''  e='' type="text" value="დაიხსომე"></span><a class="hidden" href="/words/static/помяни.json">помяни</a>
+<br><span i="и">и <input list="43_20_3" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="оплачь">оплачь <input list="43_20_4" s=''  e='' type="text" value="დაიტირე"></span><a class="hidden" href="/words/static/оплачь.json">оплачь</a>
+<br><span i="сам">сам <input list="43_20_5" s=''  e='' type="text" value="თავად"></span><a class="hidden" href="/words/static/сам.json">сам</a>
+<br><span i="себя">себя <input list="43_20_6" s=''  e='' type="text" value="თავი"></span><a class="hidden" href="/words/static/себя.json">себя</a>
+<br><span i="заживо">заживо, <input list="43_20_7" s=''  e=',' type="text" value="ცოცხლად,"></span><a class="hidden" href="/words/static/заживо.json">заживо</a>
+<br><span i="говорит">говорит <input list="43_20_8" s=''  e='' type="text" value="ამბობს"></span><a class="hidden" href="/words/static/говорит.json">говорит</a>
+<br><span i="память">«память <input list="43_20_9" s='«'  e='' type="text" value="„ხსოვნა"></span><a class="hidden" href="/words/static/память.json">память</a>
+<br><span i="смертная">смертная»: <input list="43_20_10" s=''  e='»:' type="text" value="სიკვდილისა“:"></span><a class="hidden" href="/words/static/смертная.json">смертная</a>
+<br><span i="я">я <input list="43_20_11" s=''  e='' type="text" value="მე"></span><a class="hidden" href="/words/static/я.json">я</a>
+<br><span i="пришла">пришла <input list="43_20_12" s=''  e='' type="text" value="მოვედი"></span><a class="hidden" href="/words/static/пришла.json">пришла</a>
+<br><span i="огорчить">огорчить <input list="43_20_13" s=''  e='' type="text" value="დაგამწუხრო"></span><a class="hidden" href="/words/static/огорчить.json">огорчить</a>
+<br><span i="тебя">тебя <input list="43_20_14" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/тебя.json">тебя</a>
+<br><span i="благодетельно">благодетельно, <input list="43_20_15" s=''  e=',' type="text" value="სასარგებლოდ,"></span><a class="hidden" href="/words/static/благодетельно.json">благодетельно</a>
+<br><span i="и">и <input list="43_20_16" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="привела">привела <input list="43_20_17" s=''  e='' type="text" value="მოვიყვანე"></span><a class="hidden" href="/words/static/привела.json">привела</a>
+<br><span i="с">с <input list="43_20_18" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="собою">собою <input list="43_20_19" s=''  e='' type="text" value="ჩემთან ერთად"></span><a class="hidden" href="/words/static/собою.json">собою</a>
+<br><span i="сонм">сонм <input list="43_20_20" s=''  e='' type="text" value="გუნდი"></span><a class="hidden" href="/words/static/сонм.json">сонм</a>
+<br><span i="мыслей">мыслей, <input list="43_20_21" s=''  e=',' type="text" value="აზრებისა,"></span><a class="hidden" href="/words/static/мыслей.json">мыслей</a>
+<br><span i="самых">самых <input list="43_20_22" s=''  e='' type="text" value="ძალზედ"></span><a class="hidden" href="/words/static/самых.json">самых</a>
+<br><span i="душеполезных">душеполезных. <input list="43_20_23" s=''  e='.' type="text" value="სულის სასარგებლონი."></span><a class="hidden" href="/words/static/душеполезных.json">душеполезных</a>
+<br><span i="продай">Продай <input list="43_20_24" s=''  e='' type="text" value="გაყიდე"></span><a class="hidden" href="/words/static/продай.json">продай</a>
+<br><span i="излишества">излишества <input list="43_20_25" s=''  e='' type="text" value="მოჭარბებული"></span><a class="hidden" href="/words/static/излишества.json">излишества</a>
+<br><span i="твои">твои, <input list="43_20_26" s=''  e=',' type="text" value="შენი,"></span><a class="hidden" href="/words/static/твои.json">твои</a>
+<br><span i="и">и <input list="43_20_27" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="цену">цену <input list="43_20_28" s=''  e='' type="text" value="ღირებულება"></span><a class="hidden" href="/words/static/цену.json">цену</a>
+<br><span i="их">их <input list="43_20_29" s=''  e='' type="text" value="მათი"></span><a class="hidden" href="/words/static/их.json">их</a>
+<br><span i="раздай">раздай <input list="43_20_30" s=''  e='' type="text" value="მიეცი"></span><a class="hidden" href="/words/static/раздай.json">раздай</a>
+<br><span i="нищим">нищим, <input list="43_20_31" s=''  e=',' type="text" value="გლახაკებს,"></span><a class="hidden" href="/words/static/нищим.json">нищим</a>
+<br><span i="предпошли">предпошли <input list="43_20_32" s=''  e='' type="text" value="გააგზავნე"></span><a class="hidden" href="/words/static/предпошли.json">предпошли</a>
+<br><span i="на">на <input list="43_20_33" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="небо">небо <input list="43_20_34" s=''  e='' type="text" value="ზეცაში"></span><a class="hidden" href="/words/static/небо.json">небо</a>
+<br><span i="сокровища">сокровища <input list="43_20_35" s=''  e='' type="text" value="საგანძურნი"></span><a class="hidden" href="/words/static/сокровища.json">сокровища</a>
+<br><span i="твои">твои, <input list="43_20_36" s=''  e=',' type="text" value="შენნი,"></span><a class="hidden" href="/words/static/твои.json">твои</a>
+<br><span i="по">по <input list="43_20_37" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/по.json">по</a>
+<br><span i="завещанию">завещанию <input list="43_20_38" s=''  e='' type="text" value="ანდერძის მიხედვით"></span><a class="hidden" href="/words/static/завещанию.json">завещанию</a>
+<br><span i="спасителя">Спасителя: <input list="43_20_39" s=''  e=':' type="text" value="მხსნელისა:"></span><a class="hidden" href="/words/static/спасителя.json">спасителя</a>
+<br><span i="они">они <input list="43_20_40" s=''  e='' type="text" value="ისინი"></span><a class="hidden" href="/words/static/они.json">они</a>
+<br><span i="встретят">встретят <input list="43_20_41" s=''  e='' type="text" value="შეხვდებიან"></span><a class="hidden" href="/words/static/встретят.json">встретят</a>
+<br><span i="там">там <input list="43_20_42" s=''  e='' type="text" value="თავად"></span><a class="hidden" href="/words/static/там.json">там</a>
+<br><span i="своего">своего <input list="43_20_43" s=''  e='' type="text" value="საკუთარ"></span><a class="hidden" href="/words/static/своего.json">своего</a>
+<br><span i="владельца">владельца, <input list="43_20_44" s=''  e=',' type="text" value="მფლობელს,"></span><a class="hidden" href="/words/static/владельца.json">владельца</a>
+<br><span i="усугубясь">усугубясь <input list="43_20_45" s=''  e='' type="text" value="გამრავლებით"></span><a class="hidden" href="/words/static/усугубясь.json">усугубясь</a>
+<br><span i="сторично">сторично. <input list="43_20_46" s=''  e='.' type="text" value="ათასჯერ."></span><a class="hidden" href="/words/static/сторично.json">сторично</a>
+<br><span i="пролей">Пролей <input list="43_20_47" s=''  e='' type="text" value="დაღვარე"></span><a class="hidden" href="/words/static/пролей.json">пролей</a>
+<br><span i="о">о <input list="43_20_48" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="себе">себе <input list="43_20_49" s=''  e='' type="text" value="შენზე"></span><a class="hidden" href="/words/static/себе.json">себе</a>
+<br><span i="горячие">горячие <input list="43_20_50" s=''  e='' type="text" value="ცხელი"></span><a class="hidden" href="/words/static/горячие.json">горячие</a>
+<br><span i="слезы">слезы <input list="43_20_51" s=''  e='' type="text" value="ცრემლები"></span><a class="hidden" href="/words/static/слезы.json">слезы</a>
+<br><span i="и">и <input list="43_20_52" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="горячие">горячие <input list="43_20_53" s=''  e='' type="text" value="ცხელი"></span><a class="hidden" href="/words/static/горячие.json">горячие</a>
+<br><span i="молитвы">молитвы. <input list="43_20_54" s=''  e='.' type="text" value="ლოცვები."></span><a class="hidden" href="/words/static/молитвы.json">молитвы</a>
+<br><span i="кто">Кто <input list="43_20_55" s=''  e='' type="text" value="ვინ"></span><a class="hidden" href="/words/static/кто.json">кто</a>
+<br><span i="с">с <input list="43_20_56" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="такою">такою <input list="43_20_57" s=''  e='' type="text" value="ასეთი"></span><a class="hidden" href="/words/static/такою.json">такою</a>
+<br><span i="заботливостью">заботливостью <input list="43_20_58" s=''  e='' type="text" value="მზრუნველობით"></span><a class="hidden" href="/words/static/заботливостью.json">заботливостью</a>
+<br><span i="и">и <input list="43_20_59" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="усердием">усердием <input list="43_20_60" s=''  e='' type="text" value="გულმოდგინებით"></span><a class="hidden" href="/words/static/усердием.json">усердием</a>
+<br><span i="помянет">помянет <input list="43_20_61" s=''  e='' type="text" value="გაგიხსენებს"></span><a class="hidden" href="/words/static/помянет.json">помянет</a>
+<br><span i="тебя">тебя <input list="43_20_62" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/тебя.json">тебя</a>
+<br><span i="после">после <input list="43_20_63" s=''  e='' type="text" value="შემდგომად"></span><a class="hidden" href="/words/static/после.json">после</a>
+<br><span i="смерти">смерти, <input list="43_20_64" s=''  e=',' type="text" value="სიკვდილისა,"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="как">как <input list="43_20_65" s=''  e='' type="text" value="როგორც"></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="ты">ты <input list="43_20_66" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/ты.json">ты</a>
+<br><span i="сам">сам <input list="43_20_67" s=''  e='' type="text" value="თავად"></span><a class="hidden" href="/words/static/сам.json">сам</a>
+<br><span i="можешь">можешь <input list="43_20_68" s=''  e='' type="text" value="შეძლებ"></span><a class="hidden" href="/words/static/можешь.json">можешь</a>
+<br><span i="помянуть">помянуть <input list="43_20_69" s=''  e='' type="text" value="მოიხსენო"></span><a class="hidden" href="/words/static/помянуть.json">помянуть</a>
+<br><span i="себя">себя <input list="43_20_70" s=''  e='' type="text" value="თავი"></span><a class="hidden" href="/words/static/себя.json">себя</a>
+<br><span i="до">до <input list="43_20_71" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/до.json">до</a>
+<br><span i="смерти">смерти? <input list="43_20_72" s=''  e='?' type="text" value="სიკვდილამდე?"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="не">Не <input list="43_20_73" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="вверяй">вверяй <input list="43_20_74" s=''  e='' type="text" value="ანდო"></span><a class="hidden" href="/words/static/вверяй.json">вверяй</a>
+<br><span i="спасения">спасения <input list="43_20_75" s=''  e='' type="text" value="ხსნა"></span><a class="hidden" href="/words/static/спасения.json">спасения</a>
+<br><span i="души">души <input list="43_20_76" s=''  e='' type="text" value="სულისა"></span><a class="hidden" href="/words/static/души.json">души</a>
+<br><span i="твоей">твоей <input list="43_20_77" s=''  e='' type="text" value="შენისა"></span><a class="hidden" href="/words/static/твоей.json">твоей</a>
+<br><span i="другим">другим, <input list="43_20_78" s=''  e=',' type="text" value="სხვებს,"></span><a class="hidden" href="/words/static/другим.json">другим</a>
+<br><span i="когда">когда <input list="43_20_79" s=''  e='' type="text" value="როდესაც"></span><a class="hidden" href="/words/static/когда.json">когда</a>
+<br><span i="сам">сам <input list="43_20_80" s=''  e='' type="text" value="თავად"></span><a class="hidden" href="/words/static/сам.json">сам</a>
+<br><span i="можешь">можешь <input list="43_20_81" s=''  e='' type="text" value="შეგიძლია"></span><a class="hidden" href="/words/static/можешь.json">можешь</a>
+<br><span i="совершить">совершить <input list="43_20_82" s=''  e='' type="text" value="აღასრულო"></span><a class="hidden" href="/words/static/совершить.json">совершить</a>
+<br><span i="это">это <input list="43_20_83" s=''  e='' type="text" value="ეს"></span><a class="hidden" href="/words/static/это.json">это</a>
+<br><span i="существенно">существенно <input list="43_20_84" s=''  e='' type="text" value="არსებითად"></span><a class="hidden" href="/words/static/существенно.json">существенно</a>
+<br><span i="необходимое">необходимое <input list="43_20_85" s=''  e='' type="text" value="აუცილებელი"></span><a class="hidden" href="/words/static/необходимое.json">необходимое</a>
+<br><span i="для">для <input list="43_20_86" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="тебя">тебя <input list="43_20_87" s=''  e='' type="text" value="შენთვის"></span><a class="hidden" href="/words/static/тебя.json">тебя</a>
+<br><span i="дело">дело! <input list="43_20_88" s=''  e='!' type="text" value="საქმე!"></span><a class="hidden" href="/words/static/дело.json">дело</a>
+<br><span i="зачем">Зачем <input list="43_20_89" s=''  e='' type="text" value="რატომ"></span><a class="hidden" href="/words/static/зачем.json">зачем</a>
+<br><span i="гоняться">гоняться <input list="43_20_90" s=''  e='' type="text" value="უნდა გამოედევნებოდე"></span><a class="hidden" href="/words/static/гоняться.json">гоняться</a>
+<br><span i="тебе">тебе <input list="43_20_91" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/тебе.json">тебе</a>
+<br><span i="за">за <input list="43_20_92" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/за.json">за</a>
+<br><span i="тлением">тлением, <input list="43_20_93" s=''  e=',' type="text" value="ხრწნილებას,"></span><a class="hidden" href="/words/static/тлением.json">тлением</a>
+<br><span i="когда">когда <input list="43_20_94" s=''  e='' type="text" value="როდესაც"></span><a class="hidden" href="/words/static/когда.json">когда</a>
+<br><span i="смерть">смерть <input list="43_20_95" s=''  e='' type="text" value="სიკვდილი"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="непременно">непременно <input list="43_20_96" s=''  e='' type="text" value="აუცილებლად"></span><a class="hidden" href="/words/static/непременно.json">непременно</a>
+<br><span i="отнимет">отнимет <input list="43_20_97" s=''  e='' type="text" value="წაგართმევს"></span><a class="hidden" href="/words/static/отнимет.json">отнимет</a>
+<br><span i="у">у <input list="43_20_98" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/у.json">у</a>
+<br><span i="тебя">тебя <input list="43_20_99" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/тебя.json">тебя</a>
+<br><span i="все">все <input list="43_20_100" s=''  e='' type="text" value="ყველაფერს"></span><a class="hidden" href="/words/static/все.json">все</a>
+<br><span i="тленное">тленное? <input list="43_20_101" s=''  e='?' type="text" value="ხრწნადს?"></span><a class="hidden" href="/words/static/тленное.json">тленное</a>
+<br><span i="она">Она <input list="43_20_102" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/она.json">она</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="исполнительница">исполнительница <input list="43_20_104" s=''  e='' type="text" value="აღმასრულებელია"></span><a class="hidden" href="/words/static/исполнительница.json">исполнительница</a>
+<br><span i="велений">велений <input list="43_20_105" s=''  e='' type="text" value="ბრძანებისა"></span><a class="hidden" href="/words/static/велений.json">велений</a>
+<br><span i="всесвятого">всесвятого <input list="43_20_106" s=''  e='' type="text" value="ყოვლადწმინდა"></span><a class="hidden" href="/words/static/всесвятого.json">всесвятого</a>
+<br><span i="бога">Бога: <input list="43_20_107" s=''  e=':' type="text" value="ღვთისა:"></span><a class="hidden" href="/words/static/бога.json">бога</a>
+<br><span i="лишь">лишь <input list="43_20_108" s=''  e='' type="text" value="როგორც კი"></span><a class="hidden" href="/words/static/лишь.json">лишь</a>
+<br><span i="услышит">услышит <input list="43_20_109" s=''  e='' type="text" value="გაიგონებს"></span><a class="hidden" href="/words/static/услышит.json">услышит</a>
+<br><span i="повеление">повеление, <input list="43_20_110" s=''  e=',' type="text" value="ბრძანებას,"></span><a class="hidden" href="/words/static/повеление.json">повеление</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="устремляется">устремляется <input list="43_20_112" s=''  e='' type="text" value="მიისწრაფებს"></span><a class="hidden" href="/words/static/устремляется.json">устремляется</a>
+<br><span i="с">с <input list="43_20_113" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="быстротою">быстротою <input list="43_20_114" s=''  e='' type="text" value="სიჩქარით"></span><a class="hidden" href="/words/static/быстротою.json">быстротою</a>
+<br><span i="молнии">молнии <input list="43_20_115" s=''  e='' type="text" value="ელვისა"></span><a class="hidden" href="/words/static/молнии.json">молнии</a>
+<br><span i="к">к <input list="43_20_116" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="исполнению">исполнению. <input list="43_20_117" s=''  e='.' type="text" value="აღსასრულებლად."></span><a class="hidden" href="/words/static/исполнению.json">исполнению</a>
+<br><span i="не">Не <input list="43_20_118" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="устыдится">устыдится <input list="43_20_119" s=''  e='' type="text" value="დაიმორცხვებს"></span><a class="hidden" href="/words/static/устыдится.json">устыдится</a>
+<br><span i="она">она <input list="43_20_120" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/она.json">она</a>
+<br><span i="ни">ни <input list="43_20_121" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="богача">богача, <input list="43_20_122" s=''  e=',' type="text" value="ღვთისას,"></span><a class="hidden" href="/words/static/богача.json">богача</a>
+<br><span i="ни">ни <input list="43_20_123" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="вельможи">вельможи, <input list="43_20_124" s=''  e=',' type="text" value="დიდებულისას,"></span><a class="hidden" href="/words/static/вельможи.json">вельможи</a>
+<br><span i="ни">ни <input list="43_20_125" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="героя">героя, <input list="43_20_126" s=''  e=',' type="text" value="გმირისას,"></span><a class="hidden" href="/words/static/героя.json">героя</a>
+<br><span i="ни">ни <input list="43_20_127" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="гения">гения, <input list="43_20_128" s=''  e=',' type="text" value="გენიოსისას,"></span><a class="hidden" href="/words/static/гения.json">гения</a>
+<br><span i="не">не <input list="43_20_129" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="пощадит">пощадит <input list="43_20_130" s=''  e='' type="text" value="დაინდობს"></span><a class="hidden" href="/words/static/пощадит.json">пощадит</a>
+<br><span i="ни">ни <input list="43_20_131" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="юности">юности, <input list="43_20_132" s=''  e=',' type="text" value="ახალგაზრდობას,"></span><a class="hidden" href="/words/static/юности.json">юности</a>
+<br><span i="ни">ни <input list="43_20_133" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="красоты">красоты, <input list="43_20_134" s=''  e=',' type="text" value="სილამაზეს,"></span><a class="hidden" href="/words/static/красоты.json">красоты</a>
+<br><span i="ни">ни <input list="43_20_135" s=''  e='' type="text" value="არც"></span><a class="hidden" href="/words/static/ни.json">ни</a>
+<br><span i="земного">земного <input list="43_20_136" s=''  e='' type="text" value="მიწიერ"></span><a class="hidden" href="/words/static/земного.json">земного</a>
+<br><span i="счастья">счастья: <input list="43_20_137" s=''  e=':' type="text" value="ბედნიერებას:"></span><a class="hidden" href="/words/static/счастья.json">счастья</a>
+<br><span i="преселяет">преселяет <input list="43_20_138" s=''  e='' type="text" value="გადაასახლებს"></span><a class="hidden" href="/words/static/преселяет.json">преселяет</a>
+<br><span i="человека">человека <input list="43_20_139" s=''  e='' type="text" value="ადამიანს"></span><a class="hidden" href="/words/static/человека.json">человека</a>
+<br><span i="в">в <input list="43_20_140" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="вечность">вечность. <input list="43_20_141" s=''  e='.' type="text" value="მარადისობაში."></span><a class="hidden" href="/words/static/вечность.json">вечность</a>
+<br><span i="и">И <input list="43_20_142" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="вступает">вступает <input list="43_20_143" s=''  e='' type="text" value="შეაბიჯებს"></span><a class="hidden" href="/words/static/вступает.json">вступает</a>
+<br><span i="смертью">смертью <input list="43_20_144" s=''  e='' type="text" value="სიკვდილის მეშვეობით"></span><a class="hidden" href="/words/static/смертью.json">смертью</a>
+<br><span i="раб">раб <input list="43_20_145" s=''  e='' type="text" value="მონა"></span><a class="hidden" href="/words/static/раб.json">раб</a>
+<br><span i="божий">Божий <input list="43_20_146" s=''  e='' type="text" value="ღვთისა"></span><a class="hidden" href="/words/static/божий.json">божий</a>
+<br><span i="в">в <input list="43_20_147" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="блаженство">блаженство <input list="43_20_148" s=''  e='' type="text" value="ნეტარებაში"></span><a class="hidden" href="/words/static/блаженство.json">блаженство</a>
+<br><span i="вечности">вечности, <input list="43_20_149" s=''  e=',' type="text" value="მარადისობისა,"></span><a class="hidden" href="/words/static/вечности.json">вечности</a>
+<br><span i="а">а <input list="43_20_150" s=''  e='' type="text" value="ხოლო"></span><a class="hidden" href="/words/static/а.json">а</a>
+<br><span i="враг">враг <input list="43_20_151" s=''  e='' type="text" value="მტერი"></span><a class="hidden" href="/words/static/враг.json">враг</a>
+<br><span i="божий">Божий <input list="43_20_152" s=''  e='' type="text" value="ღვთისა"></span><a class="hidden" href="/words/static/божий.json">божий</a>
+<br><span i="в">в <input list="43_20_153" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="вечную">вечную <input list="43_20_154" s=''  e='' type="text" value="მარადიულ"></span><a class="hidden" href="/words/static/вечную.json">вечную</a>
+<br><span i="муку">муку”. <input list="43_20_155" s=''  e='”.' type="text" value="სატანჯველში“."></span><a class="hidden" href="/words/static/муку.json">муку</a></p>
+<p><span i="воспоминание">“Воспоминание <input list="43_21_1" s='“'  e='' type="text" value="„ხსოვნა"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="о">о <input list="43_21_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти <input list="43_21_3" s=''  e='' type="text" value="სიკვდილზე"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="дар">дар <input list="43_21_5" s=''  e='' type="text" value="ნიჭია"></span><a class="hidden" href="/words/static/дар.json">дар</a>
+<br><span i="божий">Божий” <input list="43_21_6" s=''  e='”' type="text" value="ღვთისა“"></span><a class="hidden" href="/words/static/божий.json">божий</a>
+<sup><span t href="fn_%s.html"><span i="415">415</span><a class="hidden" href="/words/static/415.json">415</a></span></sup>
+<span i="">,</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="сказали">сказали <input list="43_21_9" s=''  e='' type="text" value="თქვეს"></span><a class="hidden" href="/words/static/сказали.json">сказали</a>
+<br><span i="отцы">Отцы: <input list="43_21_10" s=''  e=':' type="text" value="მამებმა:"></span><a class="hidden" href="/words/static/отцы.json">отцы</a>
+<br><span i="он">он <input list="43_21_11" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/он.json">он</a>
+<br><span i="дается">дается <input list="43_21_12" s=''  e='' type="text" value="მიეცემა"></span><a class="hidden" href="/words/static/дается.json">дается</a>
+<br><span i="исполнителю">исполнителю <input list="43_21_13" s=''  e='' type="text" value="აღმსრულებელს"></span><a class="hidden" href="/words/static/исполнителю.json">исполнителю</a>
+<br><span i="заповедей">заповедей <input list="43_21_14" s=''  e='' type="text" value="მცნებებისას"></span><a class="hidden" href="/words/static/заповедей.json">заповедей</a>
+<br><span i="христовых">Христовых, <input list="43_21_15" s=''  e=',' type="text" value="ქრისტესი,"></span><a class="hidden" href="/words/static/христовых.json">христовых</a>
+<br><span i="чтоб">чтоб <input list="43_21_16" s=''  e='' type="text" value="რათა"></span><a class="hidden" href="/words/static/чтоб.json">чтоб</a>
+<br><span i="усовершить">усовершить <input list="43_21_17" s=''  e='' type="text" value="სრულყოს"></span><a class="hidden" href="/words/static/усовершить.json">усовершить</a>
+<br><span i="его">его <input list="43_21_18" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/его.json">его</a>
+<br><span i="в">в <input list="43_21_19" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="святом">святом <input list="43_21_20" s=''  e='' type="text" value="წმინდა"></span><a class="hidden" href="/words/static/святом.json">святом</a>
+<br><span i="подвиге">подвиге <input list="43_21_21" s=''  e='' type="text" value="ღვაწლში"></span><a class="hidden" href="/words/static/подвиге.json">подвиге</a>
+<br><span i="покаяния">покаяния <input list="43_21_22" s=''  e='' type="text" value="სინანულისა"></span><a class="hidden" href="/words/static/покаяния.json">покаяния</a>
+<br><span i="и">и <input list="43_21_23" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="спасения">спасения. <input list="43_21_24" s=''  e='.' type="text" value="ხსნისა."></span><a class="hidden" href="/words/static/спасения.json">спасения</a></p>
+<p><span i="благодатная">Благодатная <input list="43_22_1" s=''  e='' type="text" value="მადლისმიერი"></span><a class="hidden" href="/words/static/благодатная.json">благодатная</a>
+<br><span i="память">память <input list="43_22_2" s=''  e='' type="text" value="ხსოვნა"></span><a class="hidden" href="/words/static/память.json">память</a>
+<br><span i="смерти">смерти <input list="43_22_3" s=''  e='' type="text" value="სიკვდილისა"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="предшествуется">предшествуется <input list="43_22_4" s=''  e='' type="text" value="წინ გაიძღვება"></span><a class="hidden" href="/words/static/предшествуется.json">предшествуется</a>
+<br><span i="собственным">собственным <input list="43_22_5" s=''  e='' type="text" value="საკუთარი"></span><a class="hidden" href="/words/static/собственным.json">собственным</a>
+<br><span i="старанием">старанием <input list="43_22_6" s=''  e='' type="text" value="მცდელობით"></span><a class="hidden" href="/words/static/старанием.json">старанием</a>
+<br><span i="воспоминать">воспоминать <input list="43_22_7" s=''  e='' type="text" value="გვახსოვდეს"></span><a class="hidden" href="/words/static/воспоминать.json">воспоминать</a>
+<br><span i="о">о <input list="43_22_8" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти. <input list="43_22_9" s=''  e='.' type="text" value="სიკვდილზე."></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="принуждай">Принуждай <input list="43_22_10" s=''  e='' type="text" value="დააძალე"></span><a class="hidden" href="/words/static/принуждай.json">принуждай</a>
+<br><span i="себя">себя <input list="43_22_11" s=''  e='' type="text" value="თავი"></span><a class="hidden" href="/words/static/себя.json">себя</a>
+<br><span i="воспоминать">воспоминать <input list="43_22_12" s=''  e='' type="text" value="გახსოვდეს"></span><a class="hidden" href="/words/static/воспоминать.json">воспоминать</a>
+<br><span i="часто">часто <input list="43_22_13" s=''  e='' type="text" value="ხშირად"></span><a class="hidden" href="/words/static/часто.json">часто</a>
+<br><span i="смерть">смерть, <input list="43_22_14" s=''  e=',' type="text" value="სიკვდილი,"></span><a class="hidden" href="/words/static/смерть.json">смерть</a>
+<br><span i="уверяй">уверяй <input list="43_22_15" s=''  e='' type="text" value="დაარწმუნე"></span><a class="hidden" href="/words/static/уверяй.json">уверяй</a>
+<br><span i="себя">себя <input list="43_22_16" s=''  e='' type="text" value="თავი"></span><a class="hidden" href="/words/static/себя.json">себя</a>
+<br><span i="в">в <input list="43_22_17" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="несомненной">несомненной <input list="43_22_18" s=''  e='' type="text" value="უსათუო"></span><a class="hidden" href="/words/static/несомненной.json">несомненной</a>
+<br><span i="истине">истине, <input list="43_22_19" s=''  e=',' type="text" value="ჭეშმარიტებაში,"></span><a class="hidden" href="/words/static/истине.json">истине</a>
+<br><span i="что">что <input list="43_22_20" s=''  e='' type="text" value="რომ"></span><a class="hidden" href="/words/static/что.json">что</a>
+<br><span i="ты">ты <input list="43_22_21" s=''  e='' type="text" value="შენ"></span><a class="hidden" href="/words/static/ты.json">ты</a>
+<br><span i="непременно">непременно, <input list="43_22_22" s=''  e=',' type="text" value="აუცილებლად,"></span><a class="hidden" href="/words/static/непременно.json">непременно</a>
+<br><span i="неизвестно">неизвестно <input list="43_22_23" s=''  e='' type="text" value="უცნობია"></span><a class="hidden" href="/words/static/неизвестно.json">неизвестно</a>
+<br><span i="когда">когда, <input list="43_22_24" s=''  e=',' type="text" value="როდის,"></span><a class="hidden" href="/words/static/когда.json">когда</a>
+<br><span i="умрешь">умрешь <input list="43_22_25" s=''  e='' type="text" value="მოკვდები"></span><a class="hidden" href="/words/static/умрешь.json">умрешь</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="и">и <input list="43_22_27" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="начнет">начнет <input list="43_22_28" s=''  e='' type="text" value="დაიწყებს"></span><a class="hidden" href="/words/static/начнет.json">начнет</a>
+<br><span i="приходить">приходить <input list="43_22_29" s=''  e='' type="text" value="მოვიდეს"></span><a class="hidden" href="/words/static/приходить.json">приходить</a>
+<br><span i="само">само <input list="43_22_30" s=''  e='' type="text" value="თავის"></span><a class="hidden" href="/words/static/само.json">само</a>
+<br><span i="собою">собою, <input list="43_22_31" s=''  e=',' type="text" value="თავად,"></span><a class="hidden" href="/words/static/собою.json">собою</a>
+<br><span i="являться">являться <input list="43_22_32" s=''  e='' type="text" value="გამოეცხადოს"></span><a class="hidden" href="/words/static/являться.json">являться</a>
+<br><span i="уму">уму <input list="43_22_33" s=''  e='' type="text" value="გონებას"></span><a class="hidden" href="/words/static/уму.json">уму</a>
+<br><span i="твоему">твоему <input list="43_22_34" s=''  e='' type="text" value="შენსას"></span><a class="hidden" href="/words/static/твоему.json">твоему</a>
+<br><span i="воспоминание">воспоминание <input list="43_22_35" s=''  e='' type="text" value="ხსოვნა"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="о">о <input list="43_22_36" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти, <input list="43_22_37" s=''  e=',' type="text" value="სიკვდილზე,"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="воспоминание">воспоминание <input list="43_22_38" s=''  e='' type="text" value="ხსოვნა"></span><a class="hidden" href="/words/static/воспоминание.json">воспоминание</a>
+<br><span i="глубокое">глубокое <input list="43_22_39" s=''  e='' type="text" value="ღრმა"></span><a class="hidden" href="/words/static/глубокое.json">глубокое</a>
+<br><span i="и">и <input list="43_22_40" s=''  e='' type="text" value="და"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="сильное">сильное: <input list="43_22_41" s=''  e=':' type="text" value="ძლიერი:"></span><a class="hidden" href="/words/static/сильное.json">сильное</a>
+<br><span i="оно">оно <input list="43_22_42" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/оно.json">оно</a>
+<br><span i="будет">будет <input list="43_22_43" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/будет.json">будет</a>
+<br><span i="поражать">поражать <input list="43_22_44" s=''  e='' type="text" value="განგმირავს"></span><a class="hidden" href="/words/static/поражать.json">поражать</a>
+<br><span i="смертоносными">смертоносными <input list="43_22_45" s=''  e='' type="text" value="მომაკვდინებელი"></span><a class="hidden" href="/words/static/смертоносными.json">смертоносными</a>
+<br><span i="ударами">ударами <input list="43_22_46" s=''  e='' type="text" value="დარტყმებით"></span><a class="hidden" href="/words/static/ударами.json">ударами</a>
+<br><span i="все">все <input list="43_22_47" s=''  e='' type="text" value="ყველა"></span><a class="hidden" href="/words/static/все.json">все</a>
+<br><span i="твои">твои <input list="43_22_48" s=''  e='' type="text" value="შენს"></span><a class="hidden" href="/words/static/твои.json">твои</a>
+<br><span i="греховные">греховные <input list="43_22_49" s=''  e='' type="text" value="ცოდვიან"></span><a class="hidden" href="/words/static/греховные.json">греховные</a>
+<br><span i="начинания">начинания. <input list="43_22_50" s=''  e='.' type="text" value="წამოწყებებს."></span><a class="hidden" href="/words/static/начинания.json">начинания</a></p>
+<p><span i="чужд">Чужд <input list="43_23_1" s=''  e='' type="text" value="უცხოა"></span><a class="hidden" href="/words/static/чужд.json">чужд</a>
+<br><span i="этого">этого <input list="43_23_2" s=''  e='' type="text" value="ამ"></span><a class="hidden" href="/words/static/этого.json">этого</a>
+<br><span i="духовного">духовного <input list="43_23_3" s=''  e='' type="text" value="სულიერი"></span><a class="hidden" href="/words/static/духовного.json">духовного</a>
+<br><span i="дара">дара <input list="43_23_4" s=''  e='' type="text" value="ნიჭისა"></span><a class="hidden" href="/words/static/дара.json">дара</a>
+<br><span i="грехолюбец">грехолюбец: <input list="43_23_5" s=''  e=':' type="text" value="ცოდვისმოყვარე:"></span><a class="hidden" href="/words/static/грехолюбец.json">грехолюбец</a>
+<br><span i="он">он <input list="43_23_6" s=''  e='' type="text" value="იგი"></span><a class="hidden" href="/words/static/он.json">он</a>
+<br><span i="и">и <input list="43_23_7" s=''  e='' type="text" value="კიდეც"></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="на">на <input list="43_23_8" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="самых">самых <input list="43_23_9" s=''  e='' type="text" value="თვით"></span><a class="hidden" href="/words/static/самых.json">самых</a>
+<br><span i="гробницах">гробницах <input list="43_23_10" s=''  e='' type="text" value="აკლდამაში"></span><a class="hidden" href="/words/static/гробницах.json">гробницах</a>
+<br><span i="не">не <input list="43_23_11" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="престает">престает <input list="43_23_12" s=''  e='' type="text" value="წყვეტს"></span><a class="hidden" href="/words/static/престает.json">престает</a>
+<br><span i="предаваться">предаваться <input list="43_23_13" s=''  e='' type="text" value="მიეცეს"></span><a class="hidden" href="/words/static/предаваться.json">предаваться</a>
+<br><span i="греховным">греховным <input list="43_23_14" s=''  e='' type="text" value="ცოდვიან"></span><a class="hidden" href="/words/static/греховным.json">греховным</a>
+<br><span i="угождениям">угождениям <input list="43_23_15" s=''  e='' type="text" value="ამებას"></span><a class="hidden" href="/words/static/угождениям.json">угождениям</a>
+<br><span i="плоти">плоти, <input list="43_23_16" s=''  e=',' type="text" value="სხეულისას,"></span><a class="hidden" href="/words/static/плоти.json">плоти</a>
+<br><span i="нисколько">нисколько <input list="43_23_17" s=''  e='' type="text" value="არაფრად"></span><a class="hidden" href="/words/static/нисколько.json">нисколько</a>
+<br><span i="не">не <input list="43_23_18" s=''  e='' type="text" value="არ"></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="помня">помня <input list="43_23_19" s=''  e='' type="text" value="ხსოვნით"></span><a class="hidden" href="/words/static/помня.json">помня</a>
+<br><span i="о">о <input list="43_23_20" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="смерти">смерти, <input list="43_23_21" s=''  e=',' type="text" value="სიკვდილის შესახებ,"></span><a class="hidden" href="/words/static/смерти.json">смерти</a>
+<br><span i="предстоящей">предстоящей <input list="43_23_22" s=''  e='' type="text" value="მომლოდინისა"></span><a class="hidden" href="/words/static/предстоящей.json">предстоящей</a>
+<br><span i="ему">ему <input list="43_23_23" s=''  e='' type="text" value="მისი"></span><a class="hidden" href="/words/static/ему.json">ему</a>
+<br><span i="лицом">лицом <input list="43_23_24" s=''  e='' type="text" value="პირისპირ."></span><a class="hidden" href="/words/static/лицом.json">лицом</a>
+<br><span i="к">к <input list="43_23_25" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/к.json">к</a>
+<br><span i="лицу">лицу. <input list="43_23_26" s=''  e='.' type="text" value=""></span><a class="hidden" href="/words/static/лицу.json">лицу</a>
+<br><span i="напротив">Напротив <input list="43_23_27" s=''  e='' type="text" value="საწინააღმდეგოდ"></span><a class="hidden" href="/words/static/напротив.json">напротив</a>
+<br><span i="того">того <input list="43_23_28" s=''  e='' type="text" value="ამისა"></span><a class="hidden" href="/words/static/того.json">того</a>
+<br><span i="служитель">служитель <input list="43_23_29" s=''  e='' type="text" value="მსახური"></span><a class="hidden" href="/words/static/служитель.json">служитель</a>
+<br><span i="христов">Христов, <input list="43_23_30" s=''  e=',' type="text" value="ქრისტესი,"></span><a class="hidden" href="/words/static/христов.json">христов</a>
+<br><span i="и">и <input list="43_23_31" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="в">в <input list="43_23_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="великолепных">великолепных <input list="43_23_33" s=''  e='' type="text" value="ჩიმებულ"></span><a class="hidden" href="/words/static/великолепных.json">великолепных</a>
+<br><span i="чертогах">чертогах, <input list="43_23_34" s=''  e=',' type="text" value="სასახლეებშიც,"></span><a class="hidden" href="/words/static/чертогах.json">чертогах</a>
+<br><span i="вспомнит">вспомнит <input list="43_23_35" s=''  e='' type="text" value="იხსომებს"></span><a class="hidden" href="/words/static/вспомнит.json">вспомнит</a>
+<br><span i="ждущий">ждущий <input list="43_23_36" s=''  e='' type="text" value="მომლოდინე"></span><a class="hidden" href="/words/static/ждущий.json">ждущий</a>
+<br><span i="его">его <input list="43_23_37" s=''  e='' type="text" value="მისდამი"></span><a class="hidden" href="/words/static/его.json">его</a>
+<br><span i="гроб">гроб, <input list="43_23_38" s=''  e=',' type="text" value="სამარეს,"></span><a class="hidden" href="/words/static/гроб.json">гроб</a>
+<br><span i="прольет">прольет <input list="43_23_39" s=''  e='' type="text" value="დაღვრის"></span><a class="hidden" href="/words/static/прольет.json">прольет</a>
+<br><span i="о">о <input list="43_23_40" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="душе">душе <input list="43_23_41" s=''  e='' type="text" value="სულზე"></span><a class="hidden" href="/words/static/душе.json">душе</a>
+<br><span i="своей">своей <input list="43_23_42" s=''  e='' type="text" value="თავისაზე"></span><a class="hidden" href="/words/static/своей.json">своей</a>
+<br><span i="спасительнейшие">спасительнейшие <input list="43_23_43" s=''  e='' type="text" value="უგადამრჩენლეს"></span><a class="hidden" href="/words/static/спасительнейшие.json">спасительнейшие</a>
+<br><span i="слезы">слезы. <input list="43_23_44" s=''  e='.' type="text" value="ცრემლებს."></span><a class="hidden" href="/words/static/слезы.json">слезы</a>
+<br><span i="аминь">Аминь. <input list="43_23_45" s=''  e='.' type="text" value="ამინ."></span><a class="hidden" href="/words/static/аминь.json">аминь</a></p>
+<div x-effect="$el.innerHTML = translations.join('<br>')" id="definition"></div></div><script>
+
+function downloadJSON() {
+  // Get all items from localStorage
+  const storageData = {};
+  for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("10_c_43_")){
+        storageData[key] = localStorage.getItem(key);
+      }
+  }
+
+  // Convert to JSON string
+  const jsonString = JSON.stringify(storageData, null, 2); // 2 spaces for indentation
+
+  // Create blob and download
+  const blob = new Blob([jsonString], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  // Create temporary anchor element
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'localStorage-ascetic-experiences-თავი-43.json'; 
+  document.body.appendChild(a);
+  
+  // Trigger download
+  a.click();
+  
+  // Clean up
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</main>
+ <footer>
+    CC0; 2026 
+Eleos
+. Publick Domain Work: You Can Use These Materials In Any Way You Want.
+  </footer>
+</body></html>

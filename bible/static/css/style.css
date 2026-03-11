@@ -1,0 +1,70 @@
+/* Verse styling with flex row */
+.verse {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid;
+}
+
+/* Verse number and text styling */
+.verse-number {
+  font-weight: bold;
+  min-width: 50px;
+  text-align: right;
+}
+
+.verse-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* Light mode styles */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  .verse {
+    border-bottom-color: #e0e0e0;
+  }
+  .verse-number {
+    color: #2c3e50;
+  }
+  .verse-text {
+    color: #333333;
+  }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+  .verse {
+    border-bottom-color: #444444;
+  }
+  .verse-number {
+    color: lightgreen;
+  }
+  .verse-text {
+    color: #e0e0e0;
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .verse {
+    gap: 10px;
+    padding: 8px;
+  }
+  .verse-number {
+    min-width: 40px;
+    font-size: 0.9em;
+  }
+  .verse-text {
+    font-size: 0.95em;
+  }
+}

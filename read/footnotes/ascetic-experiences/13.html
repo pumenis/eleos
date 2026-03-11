@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+ასკეტური გამოცდილებები ტომი 1 სქოლიო 13
+ - Eleos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/menus/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/bible/static/css/style.css">
+  <link rel="icon" href="/layouts/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/layouts/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/layouts/static/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/layouts/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/layouts/static/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/layouts/static/android-chrome-512x512.png">
+  <link rel="manifest" href="/layouts/static/site.webmanifest">
+</head>
+<body>
+<header>
+<h1>Eleos</h1>
+<nav>
+<ul>
+<li><a href="/">home</a></li>
+<li><a href="/page/translate.html">translate</a></li>
+<li><a href="/page/read.html">read</a></li>
+<li><a href="/page/კითხვა.html">კითხვა</a></li>
+<li><a href="/page/bible.html">bible</a></li>
+<li><a href="/page/contact.html">contact</a></li>
+</ul>
+</nav></header><main>
+
+  <script defer src="/layouts/static/js/alpine.min.js"></script>
+	<a href="/read/contents/ascetic-experiences.html">შინაარსის
+	ცხრილი</a><h1>ასკეტური გამოცდილებები ტომი 1</h1><h2>სქოლიო 13</h2>
+	
+<a href="/read/footnotes/ascetic-experiences/12.html">Previous</a>
+<div x-data="
+{
+  translations: [],
+  words: [],
+  current: 0,
+  init(){
+    document.querySelectorAll('span[i]').forEach(span => {
+      const key = span.getAttribute('i');
+  span.addEventListener('click', event => {
+          fetch('/words/static/'+key +'.json').then((response)=>
+            response.json()
+          ).then((data)=>{
+            this.translations = data.translation;
+          })
+    });
+    });
+  },
+}
+" id="content">
+<h1><span  i="13">13<sup>სქოლიო 13<sup></span></h1>
+<p><span  i="житие">Житие<sup><sup></span>
+ <span  i=""></span>
+<a href=""><span  i="пахомия">Пахомия<sup><sup></span>
+ <span  i="великого">Великого<sup><sup></span></a>
+<span  i="">.</span>
+ <span  i="vies">Vies<sup><sup></span>
+ <span  i="des">des<sup><sup></span>
+ <span  i="peres">Peres<sup><sup></span>
+ <span  i="des">des<sup><sup></span>
+ <span  i="deserts">deserts<sup><sup></span>
+ <span  i="d’orient">d’Orient<sup><sup></span>
+ <span  i="par">par<sup><sup></span>
+ <span  i="le">le<sup><sup></span>
+ <span  i="r">R.<sup><sup></span>
+ <span  i="p">P.<sup><sup></span>
+ <span  i="michel-andre-manin">Michel-Andre-Manin.<sup><sup></span>
+ <span  i="знал">Знал<sup><sup></span>
+ <span  i="евангелие">Евангелие<sup><sup></span>
+ <span  i="наизусть">наизусть<sup><sup></span>
+ <span  i="святой">святой<sup><sup></span>
+ <span  i="тихон">Тихон<sup><sup></span>
+ <span  i="воронежский">Воронежский.<sup><sup></span></p>
+<a href="/read/footnotes/ascetic-experiences/14.html">Next</a>
+<div x-effect="$el.innerHTML = translations.join('<br>')" id="definition"></div></div>
+</main>
+ <footer>
+    CC0; 2026 
+Eleos
+. Publick Domain Work: You Can Use These Materials In Any Way You Want.
+  </footer>
+</body></html>
