@@ -127,27 +127,13 @@
         });
         
 
-input.addEventListener('blur', () => {
-  const listId = input.getAttribute(&quot;list&quot;);
-  const value = input.value;
-  const ids = listId.split(&quot;_&quot;)
-  let prefixsufixre = /^([^-0-9ა-ჰჳჲჵჱჴ]+)?([-0-9ა-ჰჳჲჵჱჴ].*?[-0-9ა-ჰჳჲჵჱჴ]|[-0-9ა-ჰჳჲჵჱჴ])?([^-0-9ა-ჰჳჲჵჱჴ]+)?$/;
-  let matches = value.match(prefixsufixre);
-
-  let prefix = matches ? matches[1] || &quot;&quot; : &quot;&quot;;
-  let item = matches ? matches[2] || &quot;&quot; : &quot;&quot;;
-  let suffix = matches ? matches[3] || &quot;&quot; : &quot;&quot;;
-  fetch(&quot;/translate/post/10&quot;, {
-    method: &quot;POST&quot;,
-    body: 'c' + &quot;\n&quot; +
-      ids[0] + &quot;\n&quot; +
-      ids[1] + &quot;\n&quot; +
-      ids[2] + &quot;\n&quot; +
-      item + &quot;\n&quot; +
-      prefix + &quot;\n&quot; +
-      suffix,
+  input.addEventListener('blur', () => {
+    const value = input.value;
+	  localStorage.setItem(&quot;10_c_&quot;  + listId, value);
+	  this.translations = [];
+	  this.words = [];
   });
-});
+  
 
         input.addEventListener('focus', () => {
           input.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
