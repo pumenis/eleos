@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+ასკეტური გამოცდილებები ტომი 2 166
+ - Eleos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/menus/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/bible/static/css/style.css">
+  <link rel="icon" href="/layouts/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/layouts/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/layouts/static/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/layouts/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/layouts/static/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/layouts/static/android-chrome-512x512.png">
+  <link rel="manifest" href="/layouts/static/site.webmanifest">
+</head>
+<body>
+<header>
+<h1>Eleos</h1>
+<nav>
+<ul>
+<li><a href="/">home</a></li>
+<li><a href="/page/translate.html">translate</a></li>
+<li><a href="/page/read.html">read</a></li>
+<li><a href="/page/კითხვა.html">კითხვა</a></li>
+<li><a href="/page/proper.html">გამართულად წაკითხვა</a></li>
+<li><a href="/page/bible.html">bible</a></li>
+<li><a href="/page/contact.html">contact</a></li>
+</ul>
+</nav></header><main>
+
+  <script defer src="/layouts/static/js/alpine.min.js"></script>
+	<a href="/translate/contents/ascetic-experiences2.html">შინაარსის
+	ცხრილი</a><h1>ასკეტური გამოცდილებები ტომი 2</h1><h2>სათარგმნი ვებ აპლიკაცია 
+	- სქოლიო 166</h2>
+	<p>აპლიკაციაში გადათარგმნილი ტექსტი მხოლოდ თქვენს ბრაუზერში
+    რჩება, ჩვენთვის გამოსაგზავნად ჩამოწერეთ თქვენი ბრაუზერის 
+    <button onclick="downloadJSON()">ლოკალური საცავის json</button> 
+    ფაილი მოცემული თავისათვის და იმეილით გამოგვიგზავნეთ.
+    დიდი მადლობა წინასწარ.
+    თქვენი ნათარგმნი უსასყიდლოდ გახდება ხელმისაწვდომი მთელი 
+    მსოფლიოსათვის წასაკითხად და გამოსაყენებლად ნებისმიერი სახით.
+    </p>
+    <p>თქვენ შეგიძლიათ ჩამოტვირთოთ ფაილი თითოეული წიგნისთვის
+    შესაბამისი წიგნის თავების ჩამონათვალის "content" გვერდიდან
+    ანდა ჩამოტვირთოთ მთელი საიტის მასშტაბით ფაილი საკონტაქტო გვერდიდან</p>
+<a href="mailto:naierchou@proton.me?subject=ascetic-experiences2_თავი-166%20ნათარგმნი%20ლოკალური%20საცავი">
+   naierchou@proton.me</a>
+  <p>[ CTRL + ENTER ] - ჩაწერილი სიტყვისათვის სასვენი ნიშნების დამატება<br>
+     [ TAB ] - შემდეგ უჯრაზე გადასვლა<br>
+     [ SHIFT + TAB ] - წინა უჯრაზე გადასვლა</p>
+	
+<a href="/translate/footnotes/ascetic-experiences2/165.html">Previous</a>
+<div x-data="
+{
+  translations: [],
+  words: [],
+  current: 0,
+  normalizePunctuation(text, isPrefix) {
+    const replacements = isPrefix
+      ? { '&quot;': '„', '«': '„', '“': '„' }
+      : { '&quot;': '“', '»': '“', '”': '“' };
+
+    return Object.entries(replacements).reduce(
+      (acc, [target, replacement]) => acc.replace(target, replacement),
+      text
+    );
+  },
+  init(){
+    document.querySelectorAll('span[i]').forEach(span => {
+      const input = span.querySelector('input');
+      const key = span.getAttribute('i');
+      const lemma = span.getAttribute('l');
+        // Keydown event on the input inside the span
+      if (input) {
+      const listId = input?.getAttribute('list');
+	    let val = localStorage.getItem(listId);
+	    if (val){
+		    input.value = val
+	    }
+  input.addEventListener('keydown', event => {
+
+    const isAltOrCtrl = event.altKey || event.ctrlKey;
+    const isArrow = event.code === 'ArrowUp' || event.code === 'ArrowDown';
+    const isEnter = event.key === 'Enter' 
+
+      if (!isAltOrCtrl && isEnter) {
+        input.value = this.words[this.current]
+      }
+      if (!isAltOrCtrl && isArrow) {
+        const direction = event.code === 'ArrowDown' ? 1 : -1;
+        const nextIndex = this.current + direction;
+
+        if (nextIndex >= 0 && nextIndex < this.words.length) {
+          this.current = nextIndex
+        }
+      }
+
+      if (isAltOrCtrl && isArrow) {
+        event.preventDefault();
+
+        const inputs = Array.from(document.querySelectorAll('input'))
+          .filter(el => el.offsetParent !== null && !el.disabled);
+
+        const current = document.activeElement;
+        const index = inputs.indexOf(current);
+        if (index === -1) return;
+
+        const direction = event.code === 'ArrowDown' ? 1 : -1;
+        const nextIndex = index + direction;
+
+        if (nextIndex >= 0 && nextIndex < inputs.length) {
+          inputs[nextIndex].focus();
+        }
+      }
+        if (event.ctrlKey && event.key === 'Enter') {
+            let prefix = input.getAttribute('s');
+            let suffix = input.getAttribute('e');
+            prefix = this.normalizePunctuation(prefix, true);
+            suffix = this.normalizePunctuation(suffix, false);
+
+            input.value = prefix + input.value.trim() + suffix;
+
+				    localStorage.setItem(&quot;ae2_&quot; + listId, input.value);
+          }
+          if (event.ctrlKey && event.key === 'z' ||
+             event.ctrlKey && event.key === 'ზ') {
+          }
+        });
+        
+
+  input.addEventListener('blur', () => {
+    const value = input.value;
+	  localStorage.setItem(&quot;20_f_&quot;  + listId, value);
+	  this.translations = [];
+	  this.words = [];
+  });
+  
+
+        input.addEventListener('focus', () => {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+          input.focus();
+
+          fetch('/words/static/'+key+'.json').then((response)=>
+            response.json()
+          ).then((data)=>{
+            this.translations = data.translation;
+            this.words = data.words;
+            this.current =0;
+          })
+        });
+      }
+    });
+    },
+}
+" id="content"><div x-show="words.length > 0" id="suggestions">
+<template x-for="(word, i) in words">
+  <div x-show="i < current + 10 && i >= current"
+      x-bind:class="i == current ? 'selected' : ''"
+      x-text="word"></div>
+</template>
+</div>
+<h1><span i="166">166 <input list="166_1_1" s=''  e='' type="text" value="166"></span><a class="hidden" href="/words/static/166.json">166</a></h1>
+<p><span i="опыт">Опыт <input list="166_1_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/опыт.json">опыт</a>
+<br><span i="показывает">показывает, <input list="166_1_3" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/показывает.json">показывает</a>
+<br><span i="что">что <input list="166_1_4" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/что.json">что</a>
+<br><span i="встреча">встреча <input list="166_1_5" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/встреча.json">встреча</a>
+<br><span i="с">с <input list="166_1_6" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="женским">женским <input list="166_1_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/женским.json">женским</a>
+<br><span i="полом">полом, <input list="166_1_8" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/полом.json">полом</a>
+<br><span i="с">с <input list="166_1_9" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="развратным">развратным <input list="166_1_10" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/развратным.json">развратным</a>
+<br><span i="обществом">обществом <input list="166_1_11" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/обществом.json">обществом</a>
+<br><span i="и">и <input list="166_1_12" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="с">с <input list="166_1_13" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="другими">другими <input list="166_1_14" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/другими.json">другими</a>
+<br><span i="соблазнами">соблазнами <input list="166_1_15" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/соблазнами.json">соблазнами</a>
+<br><span i="действуют">действуют <input list="166_1_16" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/действуют.json">действуют</a>
+<br><span i="несравненно">несравненно <input list="166_1_17" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/несравненно.json">несравненно</a>
+<br><span i="сильнее">сильнее <input list="166_1_18" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/сильнее.json">сильнее</a>
+<br><span i="на">на <input list="166_1_19" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="инока">инока, <input list="166_1_20" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/инока.json">инока</a>
+<br><span i="нежели">нежели <input list="166_1_21" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/нежели.json">нежели</a>
+<br><span i="на">на <input list="166_1_22" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="мирянина">мирянина, <input list="166_1_23" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/мирянина.json">мирянина</a>
+<br><span i="всегда">всегда <input list="166_1_24" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/всегда.json">всегда</a>
+<br><span i="вращающегося">вращающегося <input list="166_1_25" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/вращающегося.json">вращающегося</a>
+<br><span i="среди">среди <input list="166_1_26" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/среди.json">среди</a>
+<br><span i="соблазнов">соблазнов. <input list="166_1_27" s=''  e='.' type="text" value=""></span><a class="hidden" href="/words/static/соблазнов.json">соблазнов</a>
+<br><span i="действие">Действие <input list="166_1_28" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/действие.json">действие</a>
+<br><span i="это">это <input list="166_1_29" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/это.json">это</a>
+<br><span i="на">на <input list="166_1_30" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="инока">инока <input list="166_1_31" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/инока.json">инока</a>
+<br><span i="тем">тем <input list="166_1_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/тем.json">тем</a>
+<br><span i="сильнее">сильнее, <input list="166_1_33" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/сильнее.json">сильнее</a>
+<br><span i="чем">чем <input list="166_1_34" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/чем.json">чем</a>
+<br><span i="внимательнее">внимательнее <input list="166_1_35" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/внимательнее.json">внимательнее</a>
+<br><span i="и">и <input list="166_1_36" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="строже">строже <input list="166_1_37" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/строже.json">строже</a>
+<br><span i="его">его <input list="166_1_38" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/его.json">его</a>
+<br><span i="жительство">жительство. <input list="166_1_39" s=''  e='.' type="text" value=""></span><a class="hidden" href="/words/static/жительство.json">жительство</a>
+<br><span i="страсти">Страсти <input list="166_1_40" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/страсти.json">страсти</a>
+<br><span i="в">в <input list="166_1_41" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="нем">нем <input list="166_1_42" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/нем.json">нем</a>
+<br><span i="измучены">измучены <input list="166_1_43" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/измучены.json">измучены</a>
+<br><span i="голодом">голодом <input list="166_1_44" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/голодом.json">голодом</a>
+<br><span i="и">и <input list="166_1_45" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="кидаются">кидаются <input list="166_1_46" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/кидаются.json">кидаются</a>
+<br><span i="с">с <input list="166_1_47" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/с.json">с</a>
+<br><span i="неистовством">неистовством <input list="166_1_48" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/неистовством.json">неистовством</a>
+<br><span i="и">и <input list="166_1_49" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="исступлением">исступлением <input list="166_1_50" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/исступлением.json">исступлением</a>
+<br><span i="на">на <input list="166_1_51" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/на.json">на</a>
+<br><span i="свои">свои <input list="166_1_52" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/свои.json">свои</a>
+<br><span i="предметы">предметы, <input list="166_1_53" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/предметы.json">предметы</a>
+<br><span i="когда">когда <input list="166_1_54" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/когда.json">когда</a>
+<br><span i="не">не <input list="166_1_55" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="будет">будет <input list="166_1_56" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/будет.json">будет</a>
+<br><span i="принята">принята <input list="166_1_57" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/принята.json">принята</a>
+<br><span i="осторожность">осторожность. <input list="166_1_58" s=''  e='.' type="text" value=""></span><a class="hidden" href="/words/static/осторожность.json">осторожность</a>
+<br><span i="если">Если <input list="166_1_59" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/если.json">если</a>
+<br><span i="возбужденная">возбужденная <input list="166_1_60" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/возбужденная.json">возбужденная</a>
+<br><span i="страсть">страсть <input list="166_1_61" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/страсть.json">страсть</a>
+<br><span i="и">и <input list="166_1_62" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/и.json">и</a>
+<br><span i="не">не <input list="166_1_63" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="совершит">совершит <input list="166_1_64" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/совершит.json">совершит</a>
+<br><span i="убийства">убийства, <input list="166_1_65" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/убийства.json">убийства</a>
+<br><span i="то">то <input list="166_1_66" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/то.json">то</a>
+<br><span i="может">может <input list="166_1_67" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/может.json">может</a>
+<br><span i="нанести">нанести <input list="166_1_68" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/нанести.json">нанести</a>
+<br><span i="страшную">страшную <input list="166_1_69" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/страшную.json">страшную</a>
+<br><span i="язву">язву, <input list="166_1_70" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/язву.json">язву</a>
+<br><span i="для">для <input list="166_1_71" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/для.json">для</a>
+<br><span i="врачевания">врачевания <input list="166_1_72" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/врачевания.json">врачевания</a>
+<br><span i="которой">которой <input list="166_1_73" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/которой.json">которой</a>
+<br><span i="потребуются">потребуются <input list="166_1_74" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/потребуются.json">потребуются</a>
+<br><span i="многие">многие <input list="166_1_75" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/многие.json">многие</a>
+<br><span i="годы">годы, <input list="166_1_76" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/годы.json">годы</a>
+<br><span i="кровавые">кровавые <input list="166_1_77" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/кровавые.json">кровавые</a>
+<br><span i="труды">труды, <input list="166_1_78" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/труды.json">труды</a>
+<br><span i="а">а <input list="166_1_79" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/а.json">а</a>
+<br><span i="более">более <input list="166_1_80" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/более.json">более</a>
+<br><span i="всего">всего <input list="166_1_81" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/всего.json">всего</a>
+<br><span i="особеннейшая">особеннейшая <input list="166_1_82" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/особеннейшая.json">особеннейшая</a>
+<br><span i="милость">милость <input list="166_1_83" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/милость.json">милость</a>
+<br><span i="божия">Божия. <input list="166_1_84" s=''  e='.' type="text" value=""></span><a class="hidden" href="/words/static/божия.json">божия</a></p>
+<a href="/translate/footnotes/ascetic-experiences2/167.html">Next</a>
+<div x-effect="$el.innerHTML = translations.join('<br>')" id="definition"></div></div><script>
+
+function downloadJSON() {
+  // Get all items from localStorage
+  const storageData = {};
+  for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("20_f_166_")){
+        storageData[key] = localStorage.getItem(key);
+      }
+  }
+
+  // Convert to JSON string
+  const jsonString = JSON.stringify(storageData, null, 2); // 2 spaces for indentation
+
+  // Create blob and download
+  const blob = new Blob([jsonString], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  // Create temporary anchor element
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'localStorage-ascetic-experiences2-სქოლიო-166.json'; 
+  document.body.appendChild(a);
+  
+  // Trigger download
+  a.click();
+  
+  // Clean up
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</main>
+ <footer>
+    CC0; 2026 
+Eleos
+. Publick Domain Work: You Can Use These Materials In Any Way You Want.
+  </footer>
+</body></html>

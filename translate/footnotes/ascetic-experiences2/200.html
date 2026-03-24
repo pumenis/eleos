@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+ასკეტური გამოცდილებები ტომი 2 200
+ - Eleos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/menus/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/layouts/static/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/bible/static/css/style.css">
+  <link rel="icon" href="/layouts/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/layouts/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/layouts/static/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/layouts/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/layouts/static/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/layouts/static/android-chrome-512x512.png">
+  <link rel="manifest" href="/layouts/static/site.webmanifest">
+</head>
+<body>
+<header>
+<h1>Eleos</h1>
+<nav>
+<ul>
+<li><a href="/">home</a></li>
+<li><a href="/page/translate.html">translate</a></li>
+<li><a href="/page/read.html">read</a></li>
+<li><a href="/page/კითხვა.html">კითხვა</a></li>
+<li><a href="/page/proper.html">გამართულად წაკითხვა</a></li>
+<li><a href="/page/bible.html">bible</a></li>
+<li><a href="/page/contact.html">contact</a></li>
+</ul>
+</nav></header><main>
+
+  <script defer src="/layouts/static/js/alpine.min.js"></script>
+	<a href="/translate/contents/ascetic-experiences2.html">შინაარსის
+	ცხრილი</a><h1>ასკეტური გამოცდილებები ტომი 2</h1><h2>სათარგმნი ვებ აპლიკაცია 
+	- სქოლიო 200</h2>
+	<p>აპლიკაციაში გადათარგმნილი ტექსტი მხოლოდ თქვენს ბრაუზერში
+    რჩება, ჩვენთვის გამოსაგზავნად ჩამოწერეთ თქვენი ბრაუზერის 
+    <button onclick="downloadJSON()">ლოკალური საცავის json</button> 
+    ფაილი მოცემული თავისათვის და იმეილით გამოგვიგზავნეთ.
+    დიდი მადლობა წინასწარ.
+    თქვენი ნათარგმნი უსასყიდლოდ გახდება ხელმისაწვდომი მთელი 
+    მსოფლიოსათვის წასაკითხად და გამოსაყენებლად ნებისმიერი სახით.
+    </p>
+    <p>თქვენ შეგიძლიათ ჩამოტვირთოთ ფაილი თითოეული წიგნისთვის
+    შესაბამისი წიგნის თავების ჩამონათვალის "content" გვერდიდან
+    ანდა ჩამოტვირთოთ მთელი საიტის მასშტაბით ფაილი საკონტაქტო გვერდიდან</p>
+<a href="mailto:naierchou@proton.me?subject=ascetic-experiences2_თავი-200%20ნათარგმნი%20ლოკალური%20საცავი">
+   naierchou@proton.me</a>
+  <p>[ CTRL + ENTER ] - ჩაწერილი სიტყვისათვის სასვენი ნიშნების დამატება<br>
+     [ TAB ] - შემდეგ უჯრაზე გადასვლა<br>
+     [ SHIFT + TAB ] - წინა უჯრაზე გადასვლა</p>
+	
+<a href="/translate/footnotes/ascetic-experiences2/199.html">Previous</a>
+<div x-data="
+{
+  translations: [],
+  words: [],
+  current: 0,
+  normalizePunctuation(text, isPrefix) {
+    const replacements = isPrefix
+      ? { '&quot;': '„', '«': '„', '“': '„' }
+      : { '&quot;': '“', '»': '“', '”': '“' };
+
+    return Object.entries(replacements).reduce(
+      (acc, [target, replacement]) => acc.replace(target, replacement),
+      text
+    );
+  },
+  init(){
+    document.querySelectorAll('span[i]').forEach(span => {
+      const input = span.querySelector('input');
+      const key = span.getAttribute('i');
+      const lemma = span.getAttribute('l');
+        // Keydown event on the input inside the span
+      if (input) {
+      const listId = input?.getAttribute('list');
+	    let val = localStorage.getItem(listId);
+	    if (val){
+		    input.value = val
+	    }
+  input.addEventListener('keydown', event => {
+
+    const isAltOrCtrl = event.altKey || event.ctrlKey;
+    const isArrow = event.code === 'ArrowUp' || event.code === 'ArrowDown';
+    const isEnter = event.key === 'Enter' 
+
+      if (!isAltOrCtrl && isEnter) {
+        input.value = this.words[this.current]
+      }
+      if (!isAltOrCtrl && isArrow) {
+        const direction = event.code === 'ArrowDown' ? 1 : -1;
+        const nextIndex = this.current + direction;
+
+        if (nextIndex >= 0 && nextIndex < this.words.length) {
+          this.current = nextIndex
+        }
+      }
+
+      if (isAltOrCtrl && isArrow) {
+        event.preventDefault();
+
+        const inputs = Array.from(document.querySelectorAll('input'))
+          .filter(el => el.offsetParent !== null && !el.disabled);
+
+        const current = document.activeElement;
+        const index = inputs.indexOf(current);
+        if (index === -1) return;
+
+        const direction = event.code === 'ArrowDown' ? 1 : -1;
+        const nextIndex = index + direction;
+
+        if (nextIndex >= 0 && nextIndex < inputs.length) {
+          inputs[nextIndex].focus();
+        }
+      }
+        if (event.ctrlKey && event.key === 'Enter') {
+            let prefix = input.getAttribute('s');
+            let suffix = input.getAttribute('e');
+            prefix = this.normalizePunctuation(prefix, true);
+            suffix = this.normalizePunctuation(suffix, false);
+
+            input.value = prefix + input.value.trim() + suffix;
+
+				    localStorage.setItem(&quot;ae2_&quot; + listId, input.value);
+          }
+          if (event.ctrlKey && event.key === 'z' ||
+             event.ctrlKey && event.key === 'ზ') {
+          }
+        });
+        
+
+  input.addEventListener('blur', () => {
+    const value = input.value;
+	  localStorage.setItem(&quot;20_f_&quot;  + listId, value);
+	  this.translations = [];
+	  this.words = [];
+  });
+  
+
+        input.addEventListener('focus', () => {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+          input.focus();
+
+          fetch('/words/static/'+key+'.json').then((response)=>
+            response.json()
+          ).then((data)=>{
+            this.translations = data.translation;
+            this.words = data.words;
+            this.current =0;
+          })
+        });
+      }
+    });
+    },
+}
+" id="content"><div x-show="words.length > 0" id="suggestions">
+<template x-for="(word, i) in words">
+  <div x-show="i < current + 10 && i >= current"
+      x-bind:class="i == current ? 'selected' : ''"
+      x-text="word"></div>
+</template>
+</div>
+<h1><span i="200">200 <input list="200_1_1" s=''  e='' type="text" value="200"></span><a class="hidden" href="/words/static/200.json">200</a></h1>
+<p><span i="о">О <input list="200_1_2" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="молитве">молитве <input list="200_1_3" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/молитве.json">молитве</a>
+<br><span i="иисусовой">Иисусовой <input list="200_1_4" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/иисусовой.json">иисусовой</a>
+<br><span i="помещена">помещена <input list="200_1_5" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/помещена.json">помещена</a>
+<br><span i="статья">статья <input list="200_1_6" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/статья.json">статья</a>
+<br><span i="в">в <input list="200_1_7" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="1">1 <input list="200_1_8" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/1.json">1</a>
+<br><span i="части">части <input list="200_1_9" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/части.json">части</a>
+<br><span i="опытов">Опытов: <input list="200_1_10" s=''  e=':' type="text" value=""></span><a class="hidden" href="/words/static/опытов.json">опытов</a>
+<br><span i="как">как <input list="200_1_11" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/как.json">как</a>
+<br><span i="в">в <input list="200_1_12" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="этом">этом <input list="200_1_13" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/этом.json">этом</a>
+<br><span i="слове">слове <input list="200_1_14" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/слове.json">слове</a>
+<br><span i="имеются">имеются <input list="200_1_15" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/имеются.json">имеются</a>
+<br><span i="свои">свои <input list="200_1_16" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/свои.json">свои</a>
+<br><span i="особенности">особенности, <input list="200_1_17" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/особенности.json">особенности</a>
+<br><span i="то">то <input list="200_1_18" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/то.json">то</a>
+<br><span i="не">не <input list="200_1_19" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="сочтено">сочтено <input list="200_1_20" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/сочтено.json">сочтено</a>
+<br><span i="излишним">излишним <input list="200_1_21" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/излишним.json">излишним</a>
+<br><span i="предложение">предложение <input list="200_1_22" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/предложение.json">предложение</a>
+<br><span i="его">его <input list="200_1_23" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/его.json">его</a>
+<br><span i="вниманию">вниманию <input list="200_1_24" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/вниманию.json">вниманию</a>
+<br><span i="боголюбцев">боголюбцев. <input list="200_1_25" s=''  e='.' type="text" value=""></span><a class="hidden" href="/words/static/боголюбцев.json">боголюбцев</a>
+<br><span i="о">О <input list="200_1_26" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/о.json">о</a>
+<br><span i="повторениях">повторениях <input list="200_1_27" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/повторениях.json">повторениях</a>
+<br><span i="же">же, <input list="200_1_28" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/же.json">же</a>
+<br><span i="по">по <input list="200_1_29" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/по.json">по</a>
+<br><span i="необходимости">необходимости <input list="200_1_30" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/необходимости.json">необходимости</a>
+<br><span i="вступивших">вступивших <input list="200_1_31" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/вступивших.json">вступивших</a>
+<br><span i="в">в <input list="200_1_32" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/в.json">в</a>
+<br><span i="него">него <input list="200_1_33" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/него.json">него</a>
+<br><span i="из">из <input list="200_1_34" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/из.json">из</a>
+<br><span i="упомянутой">упомянутой <input list="200_1_35" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/упомянутой.json">упомянутой</a>
+<br><span i="статьи">статьи, <input list="200_1_36" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/статьи.json">статьи</a>
+<br><span i="можно">можно <input list="200_1_37" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/можно.json">можно</a>
+<br><span i="сказать">сказать, <input list="200_1_38" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/сказать.json">сказать</a>
+<br><span i="что">что <input list="200_1_39" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/что.json">что</a>
+<br><span i="повторение">повторение <input list="200_1_40" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/повторение.json">повторение</a>
+<br><span i="столько">столько <input list="200_1_41" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/столько.json">столько</a>
+<br><span i="спасительных">спасительных <input list="200_1_42" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/спасительных.json">спасительных</a>
+<br><span i="истин">истин <input list="200_1_43" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/истин.json">истин</a>
+<br><span i="отнюдь">отнюдь <input list="200_1_44" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/отнюдь.json">отнюдь</a>
+<br><span i="не">не <input list="200_1_45" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/не.json">не</a>
+<br><span i="бесполезно">бесполезно. <input list="200_1_46" s=''  e='.' type="text" value=""></span><a class="hidden" href="/words/static/бесполезно.json">бесполезно</a>
+<br><span i="таяжде">«Таяжде <input list="200_1_47" s='«'  e='' type="text" value=""></span><a class="hidden" href="/words/static/таяжде.json">таяжде</a>
+<br><span i="писати">писати <input list="200_1_48" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/писати.json">писати</a>
+<br><span i="вам">вам», <input list="200_1_49" s=''  e='»,' type="text" value=""></span><a class="hidden" href="/words/static/вам.json">вам</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="говорит">говорит <input list="200_1_51" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/говорит.json">говорит</a>
+<br><span i="апостол">Апостол, <input list="200_1_52" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/апостол.json">апостол</a>
+<br><span i="">–</span><a class="hidden" href="/words/static/.json"></a>
+<br><span i="мне">мне <input list="200_1_54" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/мне.json">мне</a>
+<br><span i="убо">убо <input list="200_1_55" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/убо.json">убо</a>
+<br><span i="неленостно">неленостно, <input list="200_1_56" s=''  e=',' type="text" value=""></span><a class="hidden" href="/words/static/неленостно.json">неленостно</a>
+<br><span i="вам">вам <input list="200_1_57" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/вам.json">вам</a>
+<br><span i="же">же <input list="200_1_58" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/же.json">же</a>
+<br><span i="твердо">твердо» <input list="200_1_59" s=''  e='»' type="text" value=""></span><a class="hidden" href="/words/static/твердо.json">твердо</a>
+<br><span i="">(</span><a class="hidden" href="/words/static/.json"></a>
+<span b href="Phil.3:1"><span i="флп. 3, 1">Флп. 3, 1 <input list="200_1_61" s=''  e='' type="text" value=""></span><a class="hidden" href="/words/static/флп. 3, 1.json">флп. 3, 1</a></span>
+<span i="">).</span><a class="hidden" href="/words/static/.json"></a></p>
+<a href="/translate/footnotes/ascetic-experiences2/201.html">Next</a>
+<div x-effect="$el.innerHTML = translations.join('<br>')" id="definition"></div></div><script>
+
+function downloadJSON() {
+  // Get all items from localStorage
+  const storageData = {};
+  for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("20_f_200_")){
+        storageData[key] = localStorage.getItem(key);
+      }
+  }
+
+  // Convert to JSON string
+  const jsonString = JSON.stringify(storageData, null, 2); // 2 spaces for indentation
+
+  // Create blob and download
+  const blob = new Blob([jsonString], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  // Create temporary anchor element
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'localStorage-ascetic-experiences2-სქოლიო-200.json'; 
+  document.body.appendChild(a);
+  
+  // Trigger download
+  a.click();
+  
+  // Clean up
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</main>
+ <footer>
+    CC0; 2026 
+Eleos
+. Publick Domain Work: You Can Use These Materials In Any Way You Want.
+  </footer>
+</body></html>
