@@ -78,8 +78,8 @@
         // Keydown event on the input inside the span
       if (input) {
       const listId = input?.getAttribute('list');
-	    let val = localStorage.getItem( &quot;10_f_&quot; + listId);
-	    if (val && input.value = ""){
+	    let val = localStorage.getItem( '10_f_' + listId);
+	    if (val && input.value == ''){
 		    input.value = val
 	    }
   input.addEventListener('keydown', event => {
