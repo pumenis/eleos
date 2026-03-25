@@ -78,8 +78,8 @@
         // Keydown event on the input inside the span
       if (input) {
       const listId = input?.getAttribute('list');
-	    let val = localStorage.getItem(listId);
-	    if (val){
+	    let val = localStorage.getItem( "10_f_" + listId);
+	    if (val && input.value = ""){
 		    input.value = val
 	    }
   input.addEventListener('keydown', event => {
@@ -124,11 +124,6 @@
             suffix = this.normalizePunctuation(suffix, false);
 
             input.value = prefix + input.value.trim() + suffix;
-
-				    localStorage.setItem(&quot;ae_&quot; + listId, input.value);
-          }
-          if (event.ctrlKey && event.key === 'z' ||
-             event.ctrlKey && event.key === 'ზ') {
           }
         });
         
